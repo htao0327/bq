@@ -1,5 +1,6 @@
 package com.sy.biquan.adapter;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,18 @@ import com.sy.biquan.R;
 
 public class CFMMAdapter1 extends RecyclerView.Adapter<CFMMAdapter1.MyViewHolder> {
 
+    //私有属性
+    private OnItemClickListener onItemClickListener = null;
 
+    //setter方法
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    //回调接口
+    public interface OnItemClickListener {
+        void onItemClick(View v,  int position);
+    }
     @NonNull
     @Override
     public CFMMAdapter1.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -23,8 +35,16 @@ public class CFMMAdapter1 extends RecyclerView.Adapter<CFMMAdapter1.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+        //实现点击效果
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(v,  position);
+                }
+            }
+        });
     }
 
     @Override

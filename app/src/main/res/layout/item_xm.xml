@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_xm_bg"
+    android:padding="10dp"
+    android:layout_marginBottom="16dp"
+    >
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="139dp"
+        android:src="@drawable/test_img"
+        android:scaleType="fitXY"
+        android:id="@+id/iv_xm_img"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_b_name"
+            android:textSize="20sp"
+            android:textColor="#212121"
+            android:textStyle="bold"
+            android:text="BTC"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#212121"
+            android:text="内容简介："
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            />
+        <TextView
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:textColor="#767676"
+            android:textSize="16sp"
+            android:text="潇潇社区是集数字货币分析，优质项目 推广广，资产风控管理，前端信息挖掘 潇潇社区是集数字货币分析"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            android:text="5000人已浏览"
+            android:layout_gravity="right"
+            />
+    </LinearLayout>
+
+</LinearLayout>

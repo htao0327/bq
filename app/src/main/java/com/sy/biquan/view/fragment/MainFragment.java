@@ -1,6 +1,5 @@
 package com.sy.biquan.view.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -20,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -35,13 +35,21 @@ import com.google.android.material.tabs.TabLayout;
 import com.sy.biquan.Contants;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.CFMMActivity;
+import com.sy.biquan.activity.JBActivity;
+import com.sy.biquan.activity.KTActivity;
 import com.sy.biquan.activity.RemenActivity;
 import com.sy.biquan.activity.SearchActivity;
+import com.sy.biquan.activity.XMActivity;
+import com.sy.biquan.adapter.JBAdapter;
+import com.sy.biquan.adapter.MainMenuAdapter;
+import com.sy.biquan.adapter.MainViewPagerAdapter;
 import com.sy.biquan.bean.MainBean;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.viewutil.ImageCarousel;
 import com.sy.biquan.viewutil.ImageInfo;
+import com.sy.biquan.viewutil.TabLayoutUtil;
+import com.tencent.qcloud.tim.uikit.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,8 +61,21 @@ public class MainFragment extends Fragment {
     private EditText etSearch;
     private View rootView;
 
-    private TabLayout tabLayout;
+    private TabLayout mTabLayout;
     private ViewPager titleViewPager;
+    private List<String> mTabTitles = new ArrayList(){};//{"全部","最新","最热","当前涨幅","预期涨幅"}
+    private List<BaseFragment> mFragments = new ArrayList<>();
+//    private MainViewPagerAdapter mAdapter;
+//    private LayoutInflater mInflater;
+//    private View view1;
+//    private View view2;
+//    private View view3;
+//    private View view4;
+//    private View view5;
+//    private List<View> mViewList = new ArrayList<>();
+
+    private MainMenuAdapter mainMenuAdapter;
+
 
     private TextView tv_cfmm,tv_jb,tv_kt,tv_xm,tv_rm;
     private LinearLayout ll_cfmm,jb,kt,xm,remen;
@@ -65,6 +86,7 @@ public class MainFragment extends Fragment {
     private LinearLayout mLineLayoutDot;
     private ImageCarousel imageCarousel;
     private List<View> dots = new ArrayList<>();//小点
+
 
     // 图片数据，包括图片标题、图片链接、数据、点击要打开的网站（点击打开的网页或一些提示指令）
     private List<ImageInfo> imageInfoList;
@@ -87,6 +109,14 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
+        mTabTitles.add("全新");
+        mTabTitles.add("最新");
+        mTabTitles.add("最热");
+        mTabTitles.add("当前涨幅");
+        mTabTitles.add("预期涨幅");
+        titleViewPager.setAdapter(new JBAdapter(getActivity().getSupportFragmentManager(),mFragments,mTabTitles));
+        TabLayoutUtil.setTabLayoutIndicator(mTabLayout);
+        mTabLayout.setupWithViewPager(titleViewPager);
         etSearch.setFocusable(false);
         etSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,9 +137,25 @@ public class MainFragment extends Fragment {
                 startActivity(new Intent(getActivity(), CFMMActivity.class));
             }
         });
+        xm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), XMActivity.class));
+            }
+        });
+        kt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), KTActivity.class));
+            }
+        });
+        jb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), JBActivity.class));
+            }
+        });
 
-//        getData();
-//        initView();
         initEvent();
         imageStart();
     }
@@ -120,13 +166,15 @@ public class MainFragment extends Fragment {
         mViewPager = rootView.findViewById(R.id.viewPager);
 //        mTvPagerTitle = rootView.findViewById(R.id.tv_pager_title);
         mLineLayoutDot = rootView.findViewById(R.id.lineLayout_dot);
-        tabLayout = rootView.findViewById(R.id.tab_layout);
+        mTabLayout = rootView.findViewById(R.id.tab_layout);
         titleViewPager = rootView.findViewById(R.id.title_view_pager);
         ll_cfmm = rootView.findViewById(R.id.ll_cfmm);
         jb = rootView.findViewById(R.id.ll_jb);
         kt = rootView.findViewById(R.id.ll_kt);
         xm = rootView.findViewById(R.id.ll_xm);
         remen = rootView.findViewById(R.id.ll_remen);
+
+//        mainMenuAdapter = new MainMenuAdapter();
     }
 
 

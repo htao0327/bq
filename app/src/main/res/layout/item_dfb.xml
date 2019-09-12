@@ -15,7 +15,8 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         app:is_circle="true"
-        android:src="@drawable/test_img"
+        android:src="@drawable/img_test"
+        android:scaleType="fitXY"
         />
     <TextView
         android:layout_width="wrap_content"

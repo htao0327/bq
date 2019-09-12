@@ -28,6 +28,10 @@
         <activity android:name=".activity.StartGroupChatActivity"/>
         <activity android:name=".activity.RemenActivity"/>
         <activity android:name=".activity.CFMMActivity"/>
+        <activity android:name=".activity.XMActivity"/>
+        <activity android:name=".activity.KTActivity"/>
+        <activity android:name=".activity.JBActivity"/>
+
     </application>
 
 </manifest>
