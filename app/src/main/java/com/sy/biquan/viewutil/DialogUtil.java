@@ -3,6 +3,7 @@ package com.sy.biquan.viewutil;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
+import com.sy.biquan.chat.ChatActivity;
 
 public class DialogUtil {
     private static AlertDialog dialog;
@@ -18,7 +21,7 @@ public class DialogUtil {
     /**
      * @param activity                    Context
      * @param iconRes                     提示图标
-     * @param title                       提示标题
+     * @param title1                       提示标题
      * @param msg                         提示内容
      * @param positiveText                确认
      * @param negativeText                取消
@@ -74,6 +77,16 @@ public class DialogUtil {
         dialog = builder.create();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);//去掉圆角背景背后的棱角
         dialog.setCanceledOnTouchOutside(cancelableTouchOut);   //失去焦点dismiss
+        dialog.show();
+    }
+
+    public static void showRedEnvelopesDialog(Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = LayoutInflater.from(MyApplication.instance()).inflate(R.layout.red_envelope_dialog, null);
+        builder.setView(view);
+        dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);//去掉圆角背景背后的棱角
+        dialog.setCanceledOnTouchOutside(false);   //失去焦点dismiss
         dialog.show();
     }
 
@@ -136,6 +149,8 @@ public class DialogUtil {
         dialog.setCanceledOnTouchOutside(cancelableTouchOut);   //失去焦点dismiss
         dialog.show();
     }
+
+
 
     public interface AlertDialogBtnClickListener {
         void clickPositive();

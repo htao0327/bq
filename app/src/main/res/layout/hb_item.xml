@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="58dp"
+        android:background="@drawable/hb_message_bg"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        >
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/hb_left"
+            android:scaleType="fitXY"
+            />
+        <TextView
+            android:id="@+id/tv_text"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="日行一赏"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp"
+        android:minHeight="15dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="10dp"
+        android:text="币友打赏"
+        android:textColor="#ff999999"
+        android:textSize="12sp"
+        android:background="#F2F2F2"
+        />
+
+</LinearLayout>

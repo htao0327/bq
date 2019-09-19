@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 
 import com.sy.biquan.Contants;
+import com.sy.biquan.MainActivity;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.FriendProfileActivity;
@@ -66,7 +67,9 @@ public class ChatFragment extends BaseFragment {
         mChatLayout.initDefault();
 
         // TODO 通过api设置ChatLayout各种属性的样例
-        ChatLayoutHelper.customizeChatLayout(getActivity(), mChatLayout);
+        ChatLayoutHelper helper = new ChatLayoutHelper(getActivity());
+        helper.customizeChatLayout(mChatLayout);
+//        ChatLayoutHelper.customizeChatLayout(getActivity(), mChatLayout);
 
         /*
          * 需要聊天的基本信息
@@ -122,6 +125,8 @@ public class ChatFragment extends BaseFragment {
         });
 
         InputLayout inputLayout = mChatLayout.getInputLayout();
+
+//        inputLayout.replaceMoreInput(new CustomInputFragment());
         inputLayout.setBackgroundColor(MyApplication.instance().getResources().getColor(R.color.white));
 
         // 隐藏发送文件
@@ -153,5 +158,7 @@ public class ChatFragment extends BaseFragment {
         super.onDestroy();
         mChatLayout.exitChat();
     }
+
+
 
 }

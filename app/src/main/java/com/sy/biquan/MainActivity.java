@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initData();
         initBottomNavigation();
-        String account = "123";
+        String account = "13173676521";
         String userSig = GenerateTestUserSig.genTestUserSig(account);
         TUIKit.login(account, userSig, new IUIKitCallBack() {
             @Override
@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData(){
         fragments = new ArrayList<>();
-        fragments.add(new MainFragment());
         fragments.add(new ChatFragment());
+        fragments.add(new MainFragment());
         fragments.add(new CustomerServiceFragment());
         fragments.add(new MyTaskFragment());
         fragments.add(new MineFragment());
@@ -91,10 +91,10 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        setFragmentPosition(0);
+                        setFragmentPosition(1);
                         break;
                     case R.id.navigation_chat:
-                        setFragmentPosition(1);
+                        setFragmentPosition(0);
                         break;
                     case R.id.navigation_cus:
                         setFragmentPosition(2);

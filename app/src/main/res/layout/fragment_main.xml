@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     >
@@ -24,12 +24,16 @@
         android:drawableStart="@drawable/search"
         android:drawablePadding="5dp"
         />
-<!--    <ScrollView-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_below="@id/et_search"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        >-->
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv_main"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
         <LinearLayout
             android:layout_below="@id/et_search"
             android:paddingTop="8dp"
@@ -52,7 +56,6 @@
                     android:id="@+id/frameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="134dp"
-
                     >
 
                     <androidx.viewpager.widget.ViewPager
@@ -237,6 +240,7 @@
                 android:background="#F8F8F8"
                 />
             <LinearLayout
+                android:id="@+id/ll_tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -271,7 +275,7 @@
                     android:src="@drawable/right"
                     />
             </LinearLayout>
-            <androidx.viewpager.widget.ViewPager
+            <com.sy.biquan.viewutil.ViewPagerForScrollView
                 android:id="@+id/title_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -280,6 +284,48 @@
                 />
 
         </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:layout_below="@id/et_search"
+        android:id="@+id/ll_tab_layout_disable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        >
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            app:tabMaxWidth="200dp"
+            app:tabMinWidth="20dp"
+            app:tabMode="scrollable"
+            app:tabIndicatorColor="@color/black"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            android:id="@+id/tab_layout_disable"/>
+        <!--                    android:layout_centerVertical="true"-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#999999"
+            android:layout_marginEnd="5dp"
+            android:text="更多"
+            />
+        <ImageView
+            android:id="@+id/img_right_disable"
+            android:layout_width="8dp"
+            android:layout_height="13dp"
+            android:src="@drawable/right"
+            />
+    </LinearLayout>
     <ImageView
         android:id="@+id/iv_more"
         android:layout_width="48dp"
@@ -289,5 +335,4 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         />
-<!--    </ScrollView>-->
 </RelativeLayout>

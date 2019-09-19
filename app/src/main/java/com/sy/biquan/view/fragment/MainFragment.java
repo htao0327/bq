@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +14,14 @@ import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -49,7 +53,9 @@ import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.viewutil.ImageCarousel;
 import com.sy.biquan.viewutil.ImageInfo;
 import com.sy.biquan.viewutil.TabLayoutUtil;
+import com.sy.biquan.viewutil.ViewPagerForScrollView;
 import com.tencent.qcloud.tim.uikit.base.BaseFragment;
+import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,9 +66,11 @@ public class MainFragment extends Fragment {
 
     private EditText etSearch;
     private View rootView;
+    private NestedScrollView mSv;
+    private LinearLayout ll_tab_layout,ll_tab_layout2;
 
-    private TabLayout mTabLayout;
-    private ViewPager titleViewPager;
+    private TabLayout mTabLayout,mTabLayout2;
+    private ViewPagerForScrollView titleViewPager;
     private List<String> mTabTitles = new ArrayList(){};//{"全部","最新","最热","当前涨幅","预期涨幅"}
     private List<BaseFragment> mFragments = new ArrayList<>();
 //    private MainViewPagerAdapter mAdapter;
@@ -96,8 +104,13 @@ public class MainFragment extends Fragment {
     List<MainBean.DataBean.OrderCategoryListBean> orderCategoryListBeanList;//标题列表  最热等
     List<MainBean.DataBean.OrderListBean> orderListBeanList;//最下方默认列表
 
+    int scrollY;
+
     private static final String TAG = "MainActivity";
     private Map<String,Object> params = new HashMap<>();
+
+    public MainFragment() {
+    }
 
     @Nullable
     @Override
@@ -105,6 +118,7 @@ public class MainFragment extends Fragment {
         return rootView = inflater.inflate(R.layout.fragment_main, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -116,8 +130,11 @@ public class MainFragment extends Fragment {
         mTabTitles.add("预期涨幅");
         titleViewPager.setAdapter(new JBAdapter(getActivity().getSupportFragmentManager(),mFragments,mTabTitles));
         TabLayoutUtil.setTabLayoutIndicator(mTabLayout);
+        TabLayoutUtil.setTabLayoutIndicator(mTabLayout2);
         mTabLayout.setupWithViewPager(titleViewPager);
+        mTabLayout2.setupWithViewPager(titleViewPager);
         etSearch.setFocusable(false);
+        getScrollY();
         etSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,27 +173,80 @@ public class MainFragment extends Fragment {
             }
         });
 
+        mSv.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+                if(getTabLayoutY() >= scrollY){
+                    Log.e(TAG,"隐藏"+ll_tab_layout2.getVisibility()+"--scrollY--"+scrollY);
+                    if(ll_tab_layout2.getVisibility() == View.VISIBLE){
+                        ll_tab_layout2.setVisibility(View.GONE);
+                    }
+                }
+                if(getTabLayoutY() < scrollY){
+                    Log.e(TAG,"可以显示了"+ll_tab_layout2.getVisibility()+"--scrollY--"+scrollY);
+                    if (!(ll_tab_layout2.getVisibility() == View.VISIBLE)){
+                        ll_tab_layout2.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+
         initEvent();
         imageStart();
+        getData();
+    }
+
+    private void getScrollY(){
+        final int[] y = new int[1];
+        final int[] y2 = new int[1];
+        mSv.post(new Runnable() {
+            @Override
+            public void run() {
+                int []location=new int[2];
+                int[] location2 = new int[2];
+                mSv.getLocationOnScreen(location);
+                mSv.getLocationInWindow(location2);
+                int x=location[0];//获取当前位置的横坐标
+                y[0] =location[1];//获取当前位置的纵坐标
+                y2[0] = location2[1];
+                Log.e(TAG,"scrollview-OnScreen-Y-->"+ y[0]);
+                Log.e(TAG,"scrollview-InWindow-Y-->"+ y2[0]);
+                scrollY = y[0];
+            }
+        });
+    }
+    private int getTabLayoutY(){
+        int[] location=new int[2];
+        int[] location2 = new int[2];
+        ll_tab_layout.getLocationOnScreen(location);
+        ll_tab_layout.getLocationInWindow(location2);
+        int y2 = location2[1];
+        int x=location[0];//获取当前位置的横坐标
+        int y=location[1];//获取当前位置的纵坐标
+        Log.e(TAG,"TabLayout--Y-->"+y);
+        Log.e(TAG,"TabLayout-InWindow-Y-->"+y2);
+        return y;
     }
 
     private void initView(){
         etSearch = rootView.findViewById(R.id.et_search);
-
+        mSv = rootView.findViewById(R.id.sv_main);
         mViewPager = rootView.findViewById(R.id.viewPager);
 //        mTvPagerTitle = rootView.findViewById(R.id.tv_pager_title);
         mLineLayoutDot = rootView.findViewById(R.id.lineLayout_dot);
         mTabLayout = rootView.findViewById(R.id.tab_layout);
+        mTabLayout2 = rootView.findViewById(R.id.tab_layout_disable);
         titleViewPager = rootView.findViewById(R.id.title_view_pager);
         ll_cfmm = rootView.findViewById(R.id.ll_cfmm);
         jb = rootView.findViewById(R.id.ll_jb);
         kt = rootView.findViewById(R.id.ll_kt);
         xm = rootView.findViewById(R.id.ll_xm);
         remen = rootView.findViewById(R.id.ll_remen);
+        ll_tab_layout = rootView.findViewById(R.id.ll_tab_layout);
+        ll_tab_layout2 = rootView.findViewById(R.id.ll_tab_layout_disable);
 
 //        mainMenuAdapter = new MainMenuAdapter();
     }
-
 
     private void imageStart() {
         //设置图片轮播

@@ -198,7 +198,7 @@ public class Menu {
         });
         mMenuWindow.setWidth(ScreenUtil.getPxByDp(160));
         mMenuWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        mMenuWindow.setBackgroundDrawable(mActivity.getResources().getDrawable(R.drawable.chat_pop_bg_2));
+//        mMenuWindow.setBackgroundDrawable(mActivity.getResources().getDrawable(R.drawable.chat_pop_bg_2));
 
         // 设置pop获取焦点，如果为false点击返回按钮会退出当前Activity，如果pop中有Editor的话，focusable必须要为true
         mMenuWindow.setFocusable(true);

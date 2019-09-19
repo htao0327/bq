@@ -13,12 +13,19 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.sy.biquan.Contants;
 import com.sy.biquan.R;
+import com.sy.biquan.bean.RegisterBean;
+import com.sy.biquan.proxy.HttpCallback;
+import com.sy.biquan.proxy.HttpProxy;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RelativeLayout rlBack;
-    private EditText etPhone,etPwd,etYzm;
+    private EditText etPhone,etPwd,etYzm,etYqm;
     private Button btnGetYzm,btnNext;
     private TextView tvGoToLogin,tvProtocol;
     private String TAG = "RegisterActivity";
@@ -42,7 +49,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                if(checkRegisterBtn()){
+                    btnNext.setBackground(getResources().getDrawable(R.drawable.btn_bg_register_next_click));
+                    btnNext.setEnabled(true);
+                }else {
+                    btnNext.setBackground(getResources().getDrawable(R.drawable.btn_bg_register_next_noclick));
+                    btnNext.setEnabled(false);
+                }
             }
         });
         etYzm.addTextChangedListener(new TextWatcher() {
@@ -58,21 +71,35 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                if(checkRegisterBtn()){
+                    btnNext.setBackground(getResources().getDrawable(R.drawable.btn_bg_register_next_click));
+                    btnNext.setEnabled(true);
+                }else {
+                    btnNext.setBackground(getResources().getDrawable(R.drawable.btn_bg_register_next_noclick));
+                    btnNext.setEnabled(false);
+                }
             }
         });
         etPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                if(checkRegisterBtn()){
+                    btnNext.setBackground(getResources().getDrawable(R.drawable.btn_bg_register_next_click));
+                    btnNext.setEnabled(true);
+                }else {
+                    btnNext.setBackground(getResources().getDrawable(R.drawable.btn_bg_register_next_noclick));
+                    btnNext.setEnabled(false);
+                }
             }
         });
     }
@@ -86,6 +113,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btnNext = findViewById(R.id.btn_register_next);
         tvGoToLogin = findViewById(R.id.tv_register_go_login);
         tvProtocol = findViewById(R.id.tv_register_protocol);
+        etYqm = findViewById(R.id.et_register_yqm);
 
         rlBack.setOnClickListener(this);
         etPhone.setOnClickListener(this);
@@ -110,11 +138,35 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }else if(view == btnGetYzm){
 
         }else if(view == btnNext){
+            Map<String,String> params = new HashMap<>();
+            params.put("phone",etPhone.getText().toString());
+            params.put("password",etPwd.getText().toString());
+            params.put("code",etYzm.getText().toString());
+            params.put("inviteCode",etYqm.getText().toString());
 
+            HttpProxy.obtain().post(Contants.URL + Contants.REGISTER, params, new HttpCallback<RegisterBean>() {
+                @Override
+                public void onFailure(String e) {
+                    Log.e(TAG, "onFailure: " + e);
+                }
+
+                @Override
+                public void onSuccess(RegisterBean registerBean) {
+                    Log.e(TAG, "Network result：" + registerBean.toString());
+                }
+            });
         }else if(view == tvGoToLogin){
 
         }else if(view == tvProtocol){
 
+        }
+    }
+
+    private boolean checkRegisterBtn(){
+        if(etPhone.getText() != null && etPhone.getText().length()==11 &&etPwd.getText()!=null && etPwd.getText().length()>6&&etYzm.getText()!=null&&etYzm.getText().length()==6){
+            return true;
+        }else {
+            return false;
         }
     }
 }

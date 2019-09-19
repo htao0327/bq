@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.sy.biquan.Contants;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
+import com.sy.biquan.activity.LoginActivity;
 import com.sy.biquan.chat.ChatActivity;
 import com.sy.biquan.menu.Menu;
 import com.tencent.imsdk.TIMConversationType;
@@ -33,7 +34,7 @@ import com.tencent.qcloud.tim.uikit.utils.PopWindowUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment implements View.OnClickListener {
 
     private View rootView;
     private Menu mMenu;
@@ -66,11 +67,12 @@ public class ChatFragment extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mMenu.isShowing()) {
-                    mMenu.hide();
-                } else {
-                    mMenu.show();
-                }
+//                if (mMenu.isShowing()) {
+//                    mMenu.hide();
+//                } else {
+//                    mMenu.show();
+//                }
+                startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
 
@@ -191,4 +193,8 @@ public class ChatFragment extends Fragment {
         MyApplication.instance().startActivity(intent);
     }
 
+    @Override
+    public void onClick(View view) {
+
+    }
 }

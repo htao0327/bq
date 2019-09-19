@@ -45,7 +45,7 @@ public class HttpProxy implements IHttp {
     }
 
     @Override
-    public void post(String url, Map<String, Object> params, ICallBack callback) {
+    public void post(String url, Map<String, String> params, ICallBack callback) {
         // 事情的事前准备工作
         mHttp.post(url, params, callback);
         //访问后的处理

@@ -16,6 +16,7 @@
             android:id="@+id/iv_register_back"
             android:src="@drawable/back"
             android:layout_centerInParent="true"
+            android:scaleType="fitXY"
             />
     </RelativeLayout>
     <TextView
@@ -23,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/loginTitle"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="64dp"
         android:layout_marginStart="36dp"
         android:text="@string/register_title"
         android:textColor="@color/colorLoginTitle"
@@ -158,6 +159,40 @@
         android:layout_below="@id/ll_register_pwd_input"
         android:background="@color/colorLoginLine"
         />
+
+    <LinearLayout
+        android:id="@+id/ll_yqm"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_below="@id/ll_register_pwd_input"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <EditText
+            android:id="@+id/et_register_yqm"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入邀请码（选填）"
+            android:textColorHint="@color/colorLoginEditHint"
+            android:textColor="@color/colorLoginTitle"
+            android:textSize="@dimen/loginEditText"
+            android:maxLength="20"
+            />
+
+    </LinearLayout>
+    <View
+        android:id="@+id/v_register_line4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_below="@id/ll_yqm"
+        android:background="@color/colorLoginLine"
+        />
     <Button
         android:id="@+id/btn_register_next"
         android:layout_width="match_parent"
@@ -165,7 +200,7 @@
         android:background="@drawable/btn_bg_register_next_noclick"
         android:layout_marginStart="36dp"
         android:layout_marginEnd="36dp"
-        android:layout_below="@id/v_register_line3"
+        android:layout_below="@id/v_register_line4"
         android:layout_marginTop="40dp"
         android:text="@string/register_now"
         android:textColor="@color/white"

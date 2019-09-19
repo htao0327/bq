@@ -1,9 +1,12 @@
 package com.sy.biquan.viewutil;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,8 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
+import com.sy.biquan.activity.GiveRedEnvelope;
+import com.sy.biquan.chat.ChatActivity;
 import com.tencent.imsdk.TIMCustomElem;
 import com.tencent.qcloud.tim.uikit.modules.chat.ChatLayout;
 import com.tencent.qcloud.tim.uikit.modules.chat.base.BaseInputFragment;
@@ -30,8 +35,13 @@ import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 public class ChatLayoutHelper {
 
     private static final String TAG = ChatLayoutHelper.class.getSimpleName();
+    public static Context context;
+    public ChatLayoutHelper(Context context){
+        this.context = context;
 
-    public static void customizeChatLayout(final Context context, final ChatLayout layout) {
+    }
+    public void customizeChatLayout(final ChatLayout layout) {
+//        Log.e(TAG,"context==="+context);
 
 //        //====== NoticeLayout使用范例 ======//
 //        NoticeLayout noticeLayout = layout.getNoticeLayout();
@@ -149,70 +159,33 @@ public class ChatLayoutHelper {
 //        inputLayout.disableVideoRecordAction(true);
         // TODO 可以自己增加一些功能，可以打开下面代码测试
         InputMoreActionUnit unit = new InputMoreActionUnit();
-        unit.setIconResId(R.drawable.custom);
-        unit.setTitleId(R.string.test_custom_action);
+        unit.setIconResId(R.drawable.hb);
+        unit.setTitleId(R.string.laoyao);
         unit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Gson gson = new Gson();
-                CustomMessageData customMessageData = new CustomMessageData();
-                String data = gson.toJson(customMessageData);
-                MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
-                layout.sendMessage(info, false);
+//                Gson gson = new Gson();
+//                CustomMessageData customMessageData = new CustomMessageData();
+//                String data = gson.toJson(customMessageData);
+//                MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
+//                layout.sendMessage(info, false);
+                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnvelope.class));
             }
         });
         inputLayout.addAction(unit);
-    }
-
-    public static class CustomInputFragment extends BaseInputFragment {
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-            View baseView = inflater.inflate(R.layout.test_chat_input_custom_fragment, container, false);
-            Button btn1 = baseView.findViewById(R.id.test_send_message_btn1);
-            btn1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ToastUtil.toastShortMessage("自定义的按钮1");
-                    if (getChatLayout() != null) {
-                        Gson gson = new Gson();
-                        CustomMessageData customMessageData = new CustomMessageData();
-                        String data = gson.toJson(customMessageData);
-                        MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
-                        getChatLayout().sendMessage(info, false);
-                    }
-                }
-            });
-            Button btn2 = baseView.findViewById(R.id.test_send_message_btn2);
-            btn2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ToastUtil.toastShortMessage("自定义的按钮2");
-                    if (getChatLayout() != null) {
-                        Gson gson = new Gson();
-                        CustomMessageData customMessageData = new CustomMessageData();
-                        String data = gson.toJson(customMessageData);
-                        MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
-                        getChatLayout().sendMessage(info, false);
-                    }
-                }
-            });
-            return baseView;
-        }
-
     }
 
     /**
      * 自定义消息的bean实体，用来与json的相互转化
      */
     public static class CustomMessageData {
-        int version = 1;
+        int version = 1 ;
         String text = "欢迎加入云通信IM大家庭！";
         String link = "https://cloud.tencent.com/document/product/269/3794";
     }
 
     public static class CustomMessageDraw implements IOnCustomMessageDrawListener {
-
+        private static AlertDialog dialog;
         /**
          * 自定义消息渲染时，会调用该方法，本方法实现了自定义消息的创建，以及交互逻辑
          * @param parent 自定义消息显示的父View，需要把创建的自定义消息view添加到parent里
@@ -230,22 +203,19 @@ public class ChatLayoutHelper {
             }
 
             // 把自定义消息view添加到TUIKit内部的父容器里
-            View view = LayoutInflater.from(MyApplication.instance()).inflate(R.layout.test_custom_message_layout1, null, false);
+            View view = LayoutInflater.from(MyApplication.instance()).inflate(R.layout.hb_item, null, false);
             parent.addMessageContentView(view);
 
             // 自定义消息view的实现，这里仅仅展示文本信息，并且实现超链接跳转
-            TextView textView = view.findViewById(R.id.test_custom_message_tv);
+            TextView textView = view.findViewById(R.id.tv_text);
             textView.setText(customMessageData.text);
             view.setClickable(true);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.setAction("android.intent.action.VIEW");
-                    Uri content_url = Uri.parse(customMessageData.link);
-                    intent.setData(content_url);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    MyApplication.instance().startActivity(intent);
+                public void onClick(View view) {
+                    Log.e(TAG,"---------------------------------点击了");
+                    Log.e(TAG,"context==="+context);
+                    DialogUtil.showRedEnvelopesDialog(context);
                 }
             });
         }

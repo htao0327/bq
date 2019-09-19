@@ -13,8 +13,7 @@ public abstract class HttpCallback<Result> implements ICallBack{
         Gson gson = new Gson();
         Class<?> cls = HttpHelper.analysisClazzInfo(this);
 
-        Result objResult = (Result) gson.fromJson(result,
-                cls);
+        Result objResult = (Result) gson.fromJson(result,cls);
         onSuccess(objResult);
     }
 

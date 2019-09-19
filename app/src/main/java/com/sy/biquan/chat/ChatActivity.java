@@ -8,12 +8,18 @@ import androidx.annotation.Nullable;
 
 import com.sy.biquan.Contants;
 import com.sy.biquan.R;
+import com.sy.biquan.viewutil.DialogUtil;
 import com.tencent.qcloud.tim.uikit.modules.chat.base.ChatInfo;
+//import com.tencent.qcloud.tim.uikit.modules.chat.base.ChatInfo;
 
 public class ChatActivity extends Activity {
 
     private ChatFragment mChatFragment;
     private ChatInfo mChatInfo;
+
+//    public void showRedEnvelopesDialog(){
+//        DialogUtil.showRedEnvelopesDialog(ChatActivity.this);
+//    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

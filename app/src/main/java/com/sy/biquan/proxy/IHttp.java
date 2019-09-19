@@ -12,7 +12,7 @@ import java.util.Map;
 //行为规范的接口,表示代理类能代理什么事
 public interface IHttp {
     // post
-    public void post(String url, Map<String, Object> params, ICallBack callback);
+    public void post(String url, Map<String, String> params, ICallBack callback);
 
     // get
     public void get(String url, Map<String, Object> params, ICallBack callback);

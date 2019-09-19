@@ -41,6 +41,7 @@ public class JBFragment extends Fragment {
 //        mContentTv.setText("TestFragment" + mIndex);
         adapter = new JBFragmentAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
     }
 
