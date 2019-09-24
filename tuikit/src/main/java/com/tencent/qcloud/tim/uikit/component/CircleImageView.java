@@ -16,12 +16,12 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
+import androidx.appcompat.widget.AppCompatImageView;
 
 /**
  * 圆形图片控件
  */
-public class CircleImageView extends ImageView {
-
+public class CircleImageView extends AppCompatImageView {
 
     private Bitmap mBitmap;
     private BitmapShader mBitmapShader;

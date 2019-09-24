@@ -15,6 +15,8 @@ import android.widget.PopupWindow;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.AddMoreActivity;
+import com.sy.biquan.activity.CreateGroupActivity;
+import com.sy.biquan.activity.CreateKOLGroupActivity;
 import com.sy.biquan.activity.StartGroupChatActivity;
 import com.tencent.qcloud.tim.uikit.component.action.PopActionClickListener;
 import com.tencent.qcloud.tim.uikit.component.action.PopMenuAction;
@@ -29,6 +31,9 @@ public class Menu {
 
     public static final int MENU_TYPE_CONTACT = 1;
     public static final int MENU_TYPE_CONVERSATION = 2;
+
+    public static final int MENU_USER_TYPE_NORMAL = 1001;//普通用户
+    public static final int MENU_USER_TYPE_KOL = 1002;//KOL
 
     // 更多menu
     private ListView mMenuList;
@@ -68,6 +73,19 @@ public class Menu {
 //                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                    mActivity.startActivity(intent);
 //                }
+                if (TextUtils.equals(action.getActionName(), mActivity.getResources().getString(R.string.create_new_group))) {
+                    Intent intent = new Intent(MyApplication.instance(), CreateGroupActivity.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent.putExtra(TUIKitConstants.GroupType.TYPE, TUIKitConstants.GroupType.PRIVATE);
+                    mActivity.startActivity(intent);
+                }
+
+                if (TextUtils.equals(action.getActionName(), mActivity.getResources().getString(R.string.create_new_kol_group))) {
+                    Intent intent = new Intent(MyApplication.instance(), CreateKOLGroupActivity.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent.putExtra(TUIKitConstants.GroupType.TYPE, TUIKitConstants.GroupType.PRIVATE);
+                    mActivity.startActivity(intent);
+                }
 
                 if (TextUtils.equals(action.getActionName(), mActivity.getResources().getString(R.string.create_private_group))) {
                     Intent intent = new Intent(MyApplication.instance(), StartGroupChatActivity.class);
@@ -146,6 +164,13 @@ public class Menu {
         action.setIconResId(R.drawable.m_group_icon);
         action.setActionClickListener(popActionClickListener);
         menuActions.add(action);
+        if(menuType == MENU_USER_TYPE_KOL){
+            action = new PopMenuAction();
+            action.setActionName(mActivity.getResources().getString(R.string.create_new_kol_group));
+            action.setIconResId(R.drawable.m_group_icon);
+            action.setActionClickListener(popActionClickListener);
+            menuActions.add(action);
+        }
 
         action = new PopMenuAction();
         action.setActionName(mActivity.getResources().getString(R.string.sys));

@@ -3,6 +3,12 @@ package com.sy.biquan.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+import com.sy.biquan.Contants;
+import com.sy.biquan.MyApplication;
+import com.sy.biquan.activity.CreateKOLGroupActivity;
+import com.sy.biquan.bean.RegisterBean;
+
 public class SharedPreferencesUtil {
 
     public static final int TYPE_INT = 1;
@@ -12,7 +18,20 @@ public class SharedPreferencesUtil {
     public static final int TYPE_FLOAT = 5;
     private static final String USERINFO = "userInfo";
 
-    public static boolean userInfoPutString(Context context,String key,String value,int type){
+    public static String getToken(){
+        Gson gson = new Gson();
+        String userInfoString = userInfoGetString(MyApplication.instance(), Contants.USERINFO);
+        RegisterBean user = gson.fromJson(userInfoString,RegisterBean.class);
+        return user.getData().getToken();
+    }
+
+    public static RegisterBean getUserInfo(){
+        Gson gson = new Gson();
+        String userInfoString = userInfoGetString(MyApplication.instance(), Contants.USERINFO);
+        return gson.fromJson(userInfoString,RegisterBean.class);
+    }
+
+    public static boolean userInfoPutString(Context context,String key,String value){
         SharedPreferences sharedPreferences = context.getSharedPreferences(USERINFO, Context.MODE_PRIVATE);//
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key,value);//写入String类型的数据

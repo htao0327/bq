@@ -414,7 +414,16 @@ color btn_positive
 color btn_positive_hover
 color button_material_dark
 color button_material_light
+color colorAccent
+color colorLoginBtn
+color colorLoginEditHint
+color colorLoginLine
+color colorLoginOtherText
 color colorLoginTitle
+color colorMainBottomBtn
+color colorPrimary
+color colorPrimaryDark
+color color_main_icon_text
 color custom_transparent
 color dialog_line_bg
 color dim_foreground_disabled_material_dark
@@ -474,6 +483,7 @@ color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
 color tab_text_normal_color
 color tab_text_selected_color
+color test_blue
 color text_color_black
 color text_color_gray
 color text_gray1
@@ -730,6 +740,7 @@ drawable add_group_member
 drawable alert_bg
 drawable arrow_right
 drawable biaoqing
+drawable black_back
 drawable blue_btn_bg
 drawable bottom_action_border
 drawable btn_checkbox_checked_mtrl
@@ -796,6 +807,7 @@ drawable ic_volume_dialog_length_short
 drawable img_shape
 drawable indicator_point_nomal
 drawable indicator_point_select
+drawable main_search_bg
 drawable message_send_border
 drawable message_send_fail
 drawable msg_editor_border
@@ -817,6 +829,8 @@ drawable page_unselected
 drawable play_voice_message
 drawable popu_dialog_bg
 drawable recording_volume
+drawable search
+drawable search_error_bg
 drawable selector_face_text
 drawable shape_side_bar_bg
 drawable shipin
@@ -895,6 +909,7 @@ id actions
 id actions_page_indicator
 id activity_chooser_view_content
 id add
+id add_friend_titlebar
 id add_group_member
 id add_wording
 id alertTitle
@@ -903,6 +918,7 @@ id audio_content_ll
 id audio_play_iv
 id audio_time_tv
 id avatar
+id back
 id blackList
 id blocking
 id bottom
@@ -963,8 +979,10 @@ id dialog_title
 id edit_content_et
 id edit_query
 id edit_title_bar
+id empty_text
 id end
 id end_padder
+id et_search
 id expand_activities_button
 id expanded_menu
 id face_btn
@@ -1038,6 +1056,8 @@ id listMode
 id list_item
 id ll_alert
 id ll_background
+id ll_error
+id ll_title
 id media_actions
 id message
 id message_sending_pb
@@ -1049,6 +1069,8 @@ id msg_content_fl
 id msg_content_ll
 id multiply
 id name
+id new_friend_list
+id new_friend_titlebar
 id none
 id normal
 id notice_content
@@ -1136,10 +1158,13 @@ id title_template
 id top
 id topPanel
 id tvCity
+id tv_error_msg
+id tv_search
 id tv_title
 id unchecked
 id uniform
 id up
+id user_id
 id user_name_tv
 id video_duration_tv
 id video_play_btn
@@ -1202,9 +1227,11 @@ layout chat_inputmore_fragment
 layout chat_inputmore_layout
 layout chat_layout
 layout chat_notice_layout
+layout contact_add_activity
 layout contact_friend_profile_layout
 layout contact_layout
 layout contact_list
+layout contact_new_friend_activity
 layout contact_selecable_adapter_item
 layout conversation_adapter
 layout conversation_custom_adapter
@@ -1310,6 +1337,7 @@ string downloading
 string exit_group
 string file
 string group
+string group_2
 string group_apply_click_handle
 string group_apply_members
 string group_apply_tips
@@ -1332,6 +1360,7 @@ string modify_group_notice_success
 string modify_nick_name_in_goup
 string modify_nickname_success
 string new_friend
+string new_friend_2
 string photo
 string pic
 string profile_add_wording
@@ -1351,6 +1380,7 @@ string sended
 string sending
 string status_bar_notification_info_overflow
 string sure
+string system_msg
 string un_download
 string video
 string view_original_image

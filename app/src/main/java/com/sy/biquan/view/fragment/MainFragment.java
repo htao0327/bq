@@ -107,7 +107,7 @@ public class MainFragment extends Fragment {
     int scrollY;
 
     private static final String TAG = "MainActivity";
-    private Map<String,Object> params = new HashMap<>();
+    private Map<String,String> params = new HashMap<>();
 
     public MainFragment() {
     }
@@ -193,7 +193,7 @@ public class MainFragment extends Fragment {
 
         initEvent();
         imageStart();
-        getData();
+//        getData();
     }
 
     private void getScrollY(){

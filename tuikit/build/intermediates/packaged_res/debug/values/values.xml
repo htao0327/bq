@@ -177,7 +177,16 @@
     <color name="btn_negative_hover">#cc3428</color>
     <color name="btn_positive">#00a4ff</color>
     <color name="btn_positive_hover">#006eff</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorLoginBtn">#008489</color>
+    <color name="colorLoginEditHint">#B4B4B4</color>
+    <color name="colorLoginLine">#ffe6e6e6</color>
+    <color name="colorLoginOtherText">#909090</color>
     <color name="colorLoginTitle">#484848</color>
+    <color name="colorMainBottomBtn">#FF5A5F</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="color_main_icon_text">#767676</color>
     <color name="custom_transparent">#B3000000</color>
     <color name="dialog_line_bg">#c6c6c6</color>
     <color name="font_blue">#066fff</color>
@@ -190,6 +199,7 @@
     <color name="read_dot_bg">#f74c31</color>
     <color name="tab_text_normal_color">#888888</color>
     <color name="tab_text_selected_color">#006EFF</color>
+    <color name="test_blue">#338BFF</color>
     <color name="text_color_black">#000</color>
     <color name="text_color_gray">#696969</color>
     <color name="text_gray1">#777777</color>
@@ -238,6 +248,7 @@
     <string name="exit_group">退出群聊</string>
     <string name="file">文件</string>
     <string name="group">我的群聊</string>
+    <string name="group_2">群聊</string>
     <string name="group_apply_click_handle">点击处理</string>
     <string name="group_apply_members">群申请</string>
     <string name="group_apply_tips">%1$d 条入群申请</string>
@@ -259,6 +270,7 @@
     <string name="modify_nick_name_in_goup">修改我的群昵称</string>
     <string name="modify_nickname_success">修改昵称成功</string>
     <string name="new_friend">新的联系人</string>
+    <string name="new_friend_2">新的币友</string>
     <string name="photo">拍照</string>
     <string name="pic">图片</string>
     <string name="profile_add_wording">验证消息</string>
@@ -276,6 +288,7 @@
     <string name="sended">已发送</string>
     <string name="sending">发送中...</string>
     <string name="sure">确定</string>
+    <string name="system_msg">群系统消息</string>
     <string name="un_download">未下载</string>
     <string name="video">视频</string>
     <string name="view_original_image">查看原图</string>
@@ -307,15 +320,15 @@
         <attr name="duration_max"/>
     </declare-styleable>
     <declare-styleable name="LineControllerView">
-        <!-- 名称 -->
+        
         <attr format="string" name="name"/>
-        <!-- 内容或当前状态 -->
+        
         <attr format="string" name="subject"/>
-        <!-- 是否是列表中最后一个 -->
+        
         <attr format="boolean" name="isBottom"/>
-        <!-- 是否可以跳转 -->
+        
         <attr format="boolean" name="canNav"/>
-        <!-- 是否是开关 -->
+        
         <attr format="boolean" name="isSwitch"/>
     </declare-styleable>
     <declare-styleable name="ShadeImageView">
@@ -323,17 +336,17 @@
         <attr format="dimension" name="shadeWidth"/>
     </declare-styleable>
     <declare-styleable name="SynthesizedImageView">
-        <!--合成图片的背景-->
+        
         <attr format="color" name="synthesized_image_bg"/>
-        <!--合成图片的默认图片-->
+        
         <attr format="reference" name="synthesized_default_image"/>
-        <!--合成图片的尺寸-->
+        
         <attr format="dimension" name="synthesized_image_size"/>
-        <!--多图片之间的空隙间隔-->
+        
         <attr format="dimension" name="synthesized_image_gap"/>
     </declare-styleable>
     <declare-styleable name="UserIconView">
-        <!--默认头像-->
+        
         <attr format="reference" name="default_image"/>
         <attr format="dimension" name="image_radius"/>
     </declare-styleable>

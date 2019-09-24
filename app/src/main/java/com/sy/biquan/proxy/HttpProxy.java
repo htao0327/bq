@@ -52,7 +52,7 @@ public class HttpProxy implements IHttp {
     }
 
     @Override
-    public void get(String url, Map<String, Object> params, ICallBack callback) {
+    public void get(String url, Map<String, String> params, ICallBack callback) {
         //访问前的预处理
         mHttp.get(url, params, callback);
         //访问后的操作

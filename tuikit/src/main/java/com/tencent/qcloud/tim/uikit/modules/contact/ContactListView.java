@@ -192,11 +192,11 @@ public class ContactListView extends LinearLayout {
                 }
                 mData.clear();
                 if (loopMore) {
-                    mData.add((ContactItemBean) new ContactItemBean(getResources().getString(R.string.new_friend))
+                    mData.add((ContactItemBean) new ContactItemBean(getResources().getString(R.string.new_friend_2))
                             .setTop(true).setBaseIndexTag(ContactItemBean.INDEX_STRING_TOP));
-                    mData.add((ContactItemBean) new ContactItemBean(getResources().getString(R.string.group)).
+                    mData.add((ContactItemBean) new ContactItemBean(getResources().getString(R.string.group_2)).
                             setTop(true).setBaseIndexTag(ContactItemBean.INDEX_STRING_TOP));
-                    mData.add((ContactItemBean) new ContactItemBean(getResources().getString(R.string.blacklist)).
+                    mData.add((ContactItemBean) new ContactItemBean(getResources().getString(R.string.system_msg)).
                             setTop(true).setBaseIndexTag(ContactItemBean.INDEX_STRING_TOP));
                 }
                 for (TIMFriend timFriend : timFriends) {

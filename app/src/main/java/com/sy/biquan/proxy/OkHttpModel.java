@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
@@ -11,6 +13,7 @@ import java.util.Map;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -41,6 +44,8 @@ public class OkHttpModel implements IHttp {
      * @return
      */
     private RequestBody setRequestBody(Map<String, String> BodyParams){
+        Gson gson = new Gson();
+
         RequestBody body=null;
         okhttp3.FormBody.Builder formEncodingBuilder=new okhttp3.FormBody.Builder();
         if(BodyParams != null){
@@ -55,15 +60,20 @@ public class OkHttpModel implements IHttp {
         body=formEncodingBuilder.build();
         return body;
 
+
     }
 
     @Override
     //真正干活的地方，服务提供方法
     public void post(String url, Map<String, String> params,final ICallBack callback) {
-        RequestBody body=setRequestBody(params);
+//        RequestBody body=setRequestBody(params);
         //2 构造Request
         Request.Builder requestBuilder = new Request.Builder();
-        Request request = requestBuilder.post(body).addHeader("Content-Type","application/json").url(url).build();
+//        Request request = requestBuilder.post(body).addHeader("Content-Type","application/json").url(url).build();
+        Gson gson = new Gson();
+        String mBody = gson.toJson(params);
+        MediaType MEDIA_TYPE_TEXT = MediaType.parse("application/json");
+        Request request = requestBuilder.post(RequestBody.create(MEDIA_TYPE_TEXT, mBody)).url(url).build();
         //3 将Request封装为Call
         Call call = mOkHttpClient.newCall(request);
         //4 执行Call
@@ -94,9 +104,20 @@ public class OkHttpModel implements IHttp {
 
     @Override
     //真正干活的地方，服务提供方法
-    public void get(String url, Map<String, Object> params, final ICallBack callback) {
+    public void get(String url, Map<String, String> params, final ICallBack callback) {
+        HttpUrl.Builder urlBuilder =HttpUrl.parse(url)
+                .newBuilder();
+//        Iterator<String> iterator = params.keySet().iterator();
+//        String key = "";
+//        while (iterator.hasNext()) {
+//            key = iterator.next().toString();
+////            formEncodingBuilder.add(key, BodyParams.get(key));
+//            urlBuilder.addQueryParameter(key,params.get(key).toString());
+//            Log.e("post http", "post_Params==="+key+"===="+params.get(key).toString());
+//        }
+//
         final Request request = new Request.Builder()
-                .url(url)
+                .url(urlBuilder.build())
                 .addHeader("User-Agent", "Zh")
                 .build();
         mOkHttpClient.newCall(request).enqueue(new Callback() {

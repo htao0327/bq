@@ -50,6 +50,9 @@
     <string name="view_original_image">查看原图</string>
 
     // 联系人相关
+    <string name="system_msg">群系统消息</string>
+    <string name="group_2">群聊</string>
+    <string name="new_friend_2">新的币友</string>
     <string name="new_friend">新的联系人</string>
     <string name="group">我的群聊</string>
     <string name="blacklist">黑名单</string>

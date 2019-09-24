@@ -14,12 +14,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.gson.Gson;
 import com.sy.biquan.Contants;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
+import com.sy.biquan.activity.CreateKOLGroupActivity;
 import com.sy.biquan.activity.LoginActivity;
+import com.sy.biquan.bean.RegisterBean;
 import com.sy.biquan.chat.ChatActivity;
 import com.sy.biquan.menu.Menu;
+import com.sy.biquan.util.SharedPreferencesUtil;
 import com.tencent.imsdk.TIMConversationType;
 import com.tencent.qcloud.tim.uikit.component.TitleBarLayout;
 import com.tencent.qcloud.tim.uikit.component.action.PopActionClickListener;
@@ -62,17 +66,25 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         // 会话列表面板的默认 UI 和交互初始化
         conversationLayout.initDefault();
         add = rootView.findViewById(R.id.iv_add);
-        mMenu = new Menu(getActivity(), add, Menu.MENU_TYPE_CONVERSATION);
+        Gson gson = new Gson();
+        String userInfoString = SharedPreferencesUtil.userInfoGetString(MyApplication.instance(),Contants.USERINFO);
+        RegisterBean user = gson.fromJson(userInfoString,RegisterBean.class);
+        if(user.getData().getUserType() == Contants.USER_TYPE_KOL){
+            mMenu = new Menu(getActivity(), add, Menu.MENU_USER_TYPE_KOL);
+        }else {
+            mMenu = new Menu(getActivity(), add, Menu.MENU_USER_TYPE_NORMAL);
+        }
+        mMenu = new Menu(getActivity(), add, Menu.MENU_USER_TYPE_KOL);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (mMenu.isShowing()) {
-//                    mMenu.hide();
-//                } else {
-//                    mMenu.show();
-//                }
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                if (mMenu.isShowing()) {
+                    mMenu.hide();
+                } else {
+                    mMenu.show();
+                }
+//                startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
 

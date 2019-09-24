@@ -34,8 +34,30 @@
             android:layout_below="@id/iv_user_img"
             android:layout_marginTop="10dp"
             />
-
+        <TextView
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_text"
+            android:text="日行一赏"
+            android:textColor="#ffffffff"
+            android:textSize="22sp"
+            android:layout_centerInParent="true"
+            />
+        <TextView
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_tips"
+            android:text="已过期"
+            android:textColor="#ffffffff"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/tv_look_more"
+            android:layout_marginBottom="60dp"
+            />
         <Button
+            android:id="@+id/btn_click_red_envelope"
             android:layout_marginBottom="10dp"
             android:layout_width="92dp"
             android:layout_height="92dp"

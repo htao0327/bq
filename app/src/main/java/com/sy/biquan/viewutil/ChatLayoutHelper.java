@@ -1,36 +1,36 @@
 package com.sy.biquan.viewutil;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-
 import com.google.gson.Gson;
+import com.sy.biquan.Contants;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.GiveRedEnvelope;
-import com.sy.biquan.chat.ChatActivity;
+import com.sy.biquan.bean.GetRedCheck;
+import com.sy.biquan.bean.RegisterBean;
+import com.sy.biquan.proxy.HttpCallback;
+import com.sy.biquan.proxy.HttpProxy;
+import com.sy.biquan.util.SharedPreferencesUtil;
 import com.tencent.imsdk.TIMCustomElem;
 import com.tencent.qcloud.tim.uikit.modules.chat.ChatLayout;
-import com.tencent.qcloud.tim.uikit.modules.chat.base.BaseInputFragment;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.input.InputLayout;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.inputmore.InputMoreActionUnit;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.MessageLayout;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.ICustomMessageViewGroup;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.IOnCustomMessageDrawListener;
 import com.tencent.qcloud.tim.uikit.modules.message.MessageInfo;
-import com.tencent.qcloud.tim.uikit.modules.message.MessageInfoUtil;
-import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChatLayoutHelper {
 
@@ -40,6 +40,7 @@ public class ChatLayoutHelper {
         this.context = context;
 
     }
+
     public void customizeChatLayout(final ChatLayout layout) {
 //        Log.e(TAG,"context==="+context);
 
@@ -169,7 +170,9 @@ public class ChatLayoutHelper {
 //                String data = gson.toJson(customMessageData);
 //                MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
 //                layout.sendMessage(info, false);
+//                EventBus.getDefault().post(layout);
                 MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnvelope.class));
+
             }
         });
         inputLayout.addAction(unit);
@@ -179,9 +182,189 @@ public class ChatLayoutHelper {
      * 自定义消息的bean实体，用来与json的相互转化
      */
     public static class CustomMessageData {
-        int version = 1 ;
-        String text = "欢迎加入云通信IM大家庭！";
-        String link = "https://cloud.tencent.com/document/product/269/3794";
+          private int type = 1;
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        private  int version = 1 ;
+//        String text = "欢迎加入云通信IM大家庭！";
+//        String link = "https://cloud.tencent.com/document/product/269/3794";
+
+        public int getVersion() {
+            return version;
+        }
+
+        public void setVersion(int version) {
+            this.version = version;
+        }
+
+        /**
+         * code : 200
+         * message : ok
+         * data : {"id":"1174987434899439618","userId":"1174940561761329154","receiverId":"","userName":null,"groupId":"","money":5,"congratulations":"","number":5,"remainNumber":5,"createTime":"2019-09-20 18:03:29","expire":0,"type":1}
+         */
+
+        private int code;
+        private String message;
+        private DataBean data;
+
+        public int getCode() {
+            return code;
+        }
+
+        public void setCode(int code) {
+            this.code = code;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public DataBean getData() {
+            return data;
+        }
+
+        public void setData(DataBean data) {
+            this.data = data;
+        }
+
+        public static class DataBean {
+            /**
+             * id : 1174987434899439618
+             * userId : 1174940561761329154
+             * receiverId :
+             * userName : null
+             * groupId :
+             * money : 5.0
+             * congratulations :
+             * number : 5
+             * remainNumber : 5
+             * createTime : 2019-09-20 18:03:29
+             * expire : 0
+             * type : 1
+             */
+
+            private String id;
+            private String userId;
+            private String receiverId;
+            private Object userName;
+            private String groupId;
+            private double money;
+            private String congratulations;
+            private int number;
+            private int remainNumber;
+            private String createTime;
+            private int expire;
+            private int type;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getUserId() {
+                return userId;
+            }
+
+            public void setUserId(String userId) {
+                this.userId = userId;
+            }
+
+            public String getReceiverId() {
+                return receiverId;
+            }
+
+            public void setReceiverId(String receiverId) {
+                this.receiverId = receiverId;
+            }
+
+            public Object getUserName() {
+                return userName;
+            }
+
+            public void setUserName(Object userName) {
+                this.userName = userName;
+            }
+
+            public String getGroupId() {
+                return groupId;
+            }
+
+            public void setGroupId(String groupId) {
+                this.groupId = groupId;
+            }
+
+            public double getMoney() {
+                return money;
+            }
+
+            public void setMoney(double money) {
+                this.money = money;
+            }
+
+            public String getCongratulations() {
+                return congratulations;
+            }
+
+            public void setCongratulations(String congratulations) {
+                this.congratulations = congratulations;
+            }
+
+            public int getNumber() {
+                return number;
+            }
+
+            public void setNumber(int number) {
+                this.number = number;
+            }
+
+            public int getRemainNumber() {
+                return remainNumber;
+            }
+
+            public void setRemainNumber(int remainNumber) {
+                this.remainNumber = remainNumber;
+            }
+
+            public String getCreateTime() {
+                return createTime;
+            }
+
+            public void setCreateTime(String createTime) {
+                this.createTime = createTime;
+            }
+
+            public int getExpire() {
+                return expire;
+            }
+
+            public void setExpire(int expire) {
+                this.expire = expire;
+            }
+
+            public int getType() {
+                return type;
+            }
+
+            public void setType(int type) {
+                this.type = type;
+            }
+        }
+
+
     }
 
     public static class CustomMessageDraw implements IOnCustomMessageDrawListener {
@@ -208,14 +391,57 @@ public class ChatLayoutHelper {
 
             // 自定义消息view的实现，这里仅仅展示文本信息，并且实现超链接跳转
             TextView textView = view.findViewById(R.id.tv_text);
-            textView.setText(customMessageData.text);
+            if(customMessageData.getData()!=null){
+                textView.setText(customMessageData.getData().getCongratulations());
+            }
             view.setClickable(true);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Log.e(TAG,"---------------------------------点击了");
                     Log.e(TAG,"context==="+context);
-                    DialogUtil.showRedEnvelopesDialog(context);
+                    Gson gson = new Gson();
+                    RegisterBean registerBean;
+                    String gsonString = SharedPreferencesUtil.userInfoGetString(MyApplication.instance(),Contants.JSONUSERINFO);
+                    registerBean = gson.fromJson(gsonString,RegisterBean.class);
+                    Map<String,String> map = new HashMap<>();
+                    map.put("token",registerBean.getData().getToken());
+                    map.put("id",customMessageData.getData().id);
+                    HttpProxy.obtain().post(Contants.URL + Contants.GETREDENVELOPE, map, new HttpCallback<GetRedCheck>() {
+                        @Override
+                        public void onFailure(String e) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(GetRedCheck getRedCheck) {
+                            if(getRedCheck.getCode() == Contants.GET_DATA_SUCCESS){
+                                boolean isMe = getRedCheck.getData().isIsMe();
+                                boolean hasRedPack = getRedCheck.getData().isHasRedPack();
+                                boolean isExpire = getRedCheck.getData().isIsExpire();
+                                boolean allowRob = getRedCheck.getData().isAllowRob();
+
+                                if(allowRob){//没抢过，允许抢红包
+                                    DialogUtil.showRedEnvelopesDialog(context, isMe, hasRedPack, isExpire, new DialogUtil.AlertDialogBtnClickListener() {
+                                        @Override
+                                        public void clickPositive() {
+
+                                        }
+
+                                        @Override
+                                        public void clickNegative() {
+
+                                        }
+                                    });
+                                }else {//已经抢过了，直接进红包详情页
+
+                                }
+
+                            }
+
+                        }
+                    });
+
                 }
             });
         }

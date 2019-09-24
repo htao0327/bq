@@ -2,12 +2,14 @@ package com.sy.biquan.chat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
 import com.sy.biquan.Contants;
 import com.sy.biquan.MainActivity;
 import com.sy.biquan.MyApplication;
@@ -28,6 +30,10 @@ import com.tencent.qcloud.tim.uikit.modules.message.MessageInfoUtil;
 import com.tencent.qcloud.tim.uikit.utils.TUIKitConstants;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 
 public class ChatFragment extends BaseFragment {
 
@@ -41,6 +47,7 @@ public class ChatFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         mChatInfo = (ChatInfo) bundle.getSerializable(Contants.CHAT_INFO);
+        EventBus.getDefault().register(this);
         if (mChatInfo == null) {
             return null;
         }
@@ -52,6 +59,7 @@ public class ChatFragment extends BaseFragment {
     private void initView() {
         //从布局文件中获取聊天面板组件
         mChatLayout = mBaseView.findViewById(R.id.chat_layout);
+//        EventBus.getDefault().post(mChatLayout);
 //        MessageLayout messageLayout = mChatLayout.getMessageLayout();
         // 设置自己聊天气泡的背景
 //        messageLayout.setRightBubble(MyApplication.instance().getResources().getDrawable(R.drawable.chat_bg_right));
@@ -61,7 +69,7 @@ public class ChatFragment extends BaseFragment {
         // 设置头像圆角，不设置则默认不做圆角处理
 //        messageLayout.setAvatarRadius(50);
         // 设置头像大小
-//        messageLayout.setAvatarSize(new int[]{40, 40});
+//        messageLayout.setAvatarSize(new int[]{35, 35});
 
         //单聊组件的默认UI和交互初始化
         mChatLayout.initDefault();
@@ -70,6 +78,7 @@ public class ChatFragment extends BaseFragment {
         ChatLayoutHelper helper = new ChatLayoutHelper(getActivity());
         helper.customizeChatLayout(mChatLayout);
 //        ChatLayoutHelper.customizeChatLayout(getActivity(), mChatLayout);
+
 
         /*
          * 需要聊天的基本信息
@@ -157,6 +166,16 @@ public class ChatFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         mChatLayout.exitChat();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void sendRedEnvelopr(ChatLayoutHelper.CustomMessageData customMessageData){
+        Log.e("ChatFragment","-=-==-=-=-=-=================================-------");
+        Gson gson = new Gson();
+        String data = gson.toJson(customMessageData);
+        MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
+        Log.e("ChatFragment","data--->"+data);
+        mChatLayout.sendMessage(info, false);
     }
 
 

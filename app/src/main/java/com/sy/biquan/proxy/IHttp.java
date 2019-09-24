@@ -15,7 +15,7 @@ public interface IHttp {
     public void post(String url, Map<String, String> params, ICallBack callback);
 
     // get
-    public void get(String url, Map<String, Object> params, ICallBack callback);
+    public void get(String url, Map<String, String> params, ICallBack callback);
 
     // down
 

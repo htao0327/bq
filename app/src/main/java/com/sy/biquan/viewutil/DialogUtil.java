@@ -18,6 +18,51 @@ import com.sy.biquan.chat.ChatActivity;
 public class DialogUtil {
     private static AlertDialog dialog;
 
+    public static void createGroupAlertDialog(Activity activity,  String title1, String msg,
+                                            String positiveText, String negativeText, boolean
+                                                    cancelableTouchOut, final AlertDialogBtnClickListener
+                                                    alertDialogBtnClickListener) {
+        View view = LayoutInflater.from(activity).inflate(R.layout.dialog_create_group, null);
+        TextView mTitle1 = view.findViewById(R.id.title);
+        TextView mMessage = view.findViewById(R.id.message);
+        Button positiveButton = view.findViewById(R.id.positiveButton);
+        Button negativeButton = view.findViewById(R.id.negativeButton);
+        LinearLayout content = view.findViewById(R.id.content);
+        if(msg == null || "".equals(msg)){
+            content.setVisibility(View.GONE);
+        }else {
+            mMessage.setText(msg);
+        }
+        mTitle1.setText(title1);
+        positiveButton.setText(positiveText);
+        negativeButton.setText(negativeText);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialogBtnClickListener.clickPositive();
+                dialog.dismiss();
+            }
+        });
+        negativeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialogBtnClickListener.clickNegative();
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setView(view);
+
+        builder.setCancelable(true);   //返回键dismiss
+        //创建对话框
+        dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);//去掉圆角背景背后的棱角
+        dialog.setCanceledOnTouchOutside(cancelableTouchOut);   //失去焦点dismiss
+        dialog.show();
+    }
+
+
     /**
      * @param activity                    Context
      * @param iconRes                     提示图标
@@ -41,13 +86,19 @@ public class DialogUtil {
         Button negativeButton = view.findViewById(R.id.negativeButton);
         LinearLayout content = view.findViewById(R.id.content);
 
+        if(iconRes == 0){
+            mIcon.setVisibility(View.GONE);
+        }else {
+            mIcon.setImageResource(iconRes);
+        }
+
         if(msg == null || "".equals(msg)){
             content.setVisibility(View.GONE);
         }else {
             mMessage.setText(msg);
         }
 
-        mIcon.setImageResource(iconRes);
+
         mTitle1.setText(title1);
         mTitle2.setText(title2);
 
@@ -80,13 +131,37 @@ public class DialogUtil {
         dialog.show();
     }
 
-    public static void showRedEnvelopesDialog(Context context){
+    /**
+     * boolean isMe = getRedCheck.getData().isIsMe();
+     *                                 boolean hasRedPack = getRedCheck.getData().isHasRedPack();
+     *                                 boolean isExpire = getRedCheck.getData().isIsExpire();
+     *                                 boolean allowRob = getRedCheck.getData().isAllowRob();
+     * @param context
+     * @param alertDialogBtnClickListener
+     */
+    public static void showRedEnvelopesDialog(Context context,boolean isMe,boolean hasRedPack,boolean isExpire,final AlertDialogBtnClickListener
+            alertDialogBtnClickListener){
+
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View view = LayoutInflater.from(MyApplication.instance()).inflate(R.layout.red_envelope_dialog, null);
         builder.setView(view);
+        TextView look_more = view.findViewById(R.id.tv_look_more);
+        TextView tips = view.findViewById(R.id.tv_tips);
+        Button get = view.findViewById(R.id.btn_click_red_envelope);
+        if(!isMe&&hasRedPack){
+            look_more.setVisibility(View.GONE);
+        }else {
+            look_more.setVisibility(View.VISIBLE);
+        }
+        if(isExpire){
+            get.setVisibility(View.GONE);
+            tips.setVisibility(View.VISIBLE);
+        }
+
+
         dialog = builder.create();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);//去掉圆角背景背后的棱角
-        dialog.setCanceledOnTouchOutside(false);   //失去焦点dismiss
+        dialog.setCanceledOnTouchOutside(true);   //失去焦点dismiss
         dialog.show();
     }
 
