@@ -170,7 +170,6 @@ public class ChatFragment extends BaseFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void sendRedEnvelopr(ChatLayoutHelper.CustomMessageData customMessageData){
-        Log.e("ChatFragment","-=-==-=-=-=-=================================-------");
         Gson gson = new Gson();
         String data = gson.toJson(customMessageData);
         MessageInfo info = MessageInfoUtil.buildCustomMessage(data);

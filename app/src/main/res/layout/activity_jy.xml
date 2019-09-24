@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            >
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="18dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/back_blank"
+                android:scaleType="fitXY"
+                />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="188dp"
+            android:minHeight="28dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/jy_btn_bg"
+            >
+            <Button
+                android:id="@+id/btn_deal_launch"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:layout_weight="1"
+                android:background="@drawable/jy_btn_selected_bg"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:text="发起的交易"
+                />
+            <Button
+                android:id="@+id/btn_deal_receive"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:textColor="@color/colorLoginBtn"
+                android:textSize="14sp"
+                android:text="收到的交易"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tab_layout"
+        />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/title_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F8F8F8"
+        />
+</LinearLayout>

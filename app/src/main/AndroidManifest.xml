@@ -85,6 +85,7 @@
         <activity android:name=".activity.SearchFriendsActivity"/>
         <activity android:name=".activity.CreateGroupActivity"/>
         <activity android:name=".activity.CreateKOLGroupActivity"/>
+        <activity android:name=".activity.JYActivity"/>
 
     </application>
 

@@ -2,6 +2,13 @@ package com.sy.biquan;
 
 public class Contants {
 
+    public static final String ACCESS_KEY_ID = "LTAI4FuYVSZUTu9EkmNVdBbf";
+    public static final String ACCESS_KEY_SECRET = "Lo9ZihFQiWhnp5tlRnJQtN8cUqGpT8";
+    public static final String BUCKET = "landscape-test";
+    public static final String END_POINT = "oss-cn-hangzhou.aliyuncs.com";
+    public static final String BUCKET_DOMAIN = "landscape-test.oss-cn-hangzhou.aliyuncs.com";
+    public static final String UPLOAD_PATH = "https://landscape-test.oss-cn-hangzhou.aliyuncs.com";
+
     //用户类型
     public static final int USER_TYPE_NORMAL = 1;//普通用户
     public static final int USER_TYPE_KOL = 2;//KOL

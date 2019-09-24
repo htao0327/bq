@@ -134,7 +134,6 @@ public class CustomInputFragment extends BaseInputFragment {
         mPermissionDialog.cancel();
     }
 
-
     private void showPermissionDialog() {
         if (mPermissionDialog == null) {
             mPermissionDialog = new AlertDialog.Builder(mActivity)
