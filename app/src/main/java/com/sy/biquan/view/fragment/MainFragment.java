@@ -47,9 +47,12 @@ import com.sy.biquan.activity.XMActivity;
 import com.sy.biquan.adapter.JBAdapter;
 import com.sy.biquan.adapter.MainMenuAdapter;
 import com.sy.biquan.adapter.MainViewPagerAdapter;
+import com.sy.biquan.bean.BannerBean;
 import com.sy.biquan.bean.MainBean;
+import com.sy.biquan.bean.MainListData;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
+import com.sy.biquan.util.SharedPreferencesUtil;
 import com.sy.biquan.viewutil.ImageCarousel;
 import com.sy.biquan.viewutil.ImageInfo;
 import com.sy.biquan.viewutil.TabLayoutUtil;
@@ -95,14 +98,19 @@ public class MainFragment extends Fragment {
     private ImageCarousel imageCarousel;
     private List<View> dots = new ArrayList<>();//小点
 
+    private List<BannerBean.DataBean> bannerLists;
 
     // 图片数据，包括图片标题、图片链接、数据、点击要打开的网站（点击打开的网页或一些提示指令）
     private List<ImageInfo> imageInfoList;
-    private MainBean allData;
-    List<MainBean.DataBean.ChannelListBean> channelListBeanList;//大模块列表 财富密码等
-    List<MainBean.DataBean.BannerListBean> bannerList;//轮播图列表
-    List<MainBean.DataBean.OrderCategoryListBean> orderCategoryListBeanList;//标题列表  最热等
-    List<MainBean.DataBean.OrderListBean> orderListBeanList;//最下方默认列表
+
+
+//    private MainBean allData;
+//    List<MainBean.DataBean.ChannelListBean> channelListBeanList;//大模块列表 财富密码等
+//    List<MainBean.DataBean.BannerListBean> bannerList;//轮播图列表
+//    List<MainBean.DataBean.OrderCategoryListBean> orderCategoryListBeanList;//标题列表  最热等
+//    List<MainBean.DataBean.OrderListBean> orderListBeanList;//最下方默认列表
+
+
 
     int scrollY;
 
@@ -190,9 +198,9 @@ public class MainFragment extends Fragment {
                 }
             }
         });
-
-        initEvent();
-        imageStart();
+        getImageData();
+//        initEvent();
+//        imageStart();
 //        getData();
     }
 
@@ -251,7 +259,9 @@ public class MainFragment extends Fragment {
     private void imageStart() {
         //设置图片轮播
         int[] imgaeIds = new int[]{R.id.pager_image1, R.id.pager_image2, R.id.pager_image3, R.id.pager_image4,
-                R.id.pager_image5, R.id.pager_image6, R.id.pager_image7, R.id.pager_image8};
+                R.id.pager_image5, R.id.pager_image6, R.id.pager_image7, R.id.pager_image8,R.id.pager_image9, R.id.pager_image10, R.id.pager_image11,
+                R.id.pager_image12,
+                R.id.pager_image13, R.id.pager_image14, R.id.pager_image15, R.id.pager_image16};
         String[] titles = new String[imageInfoList.size()];
         List<SimpleDraweeView> simpleDraweeViewList = new ArrayList<>();
 
@@ -356,61 +366,25 @@ public class MainFragment extends Fragment {
         return dots;
     }
 
-    private void getData(){
-        HttpProxy.obtain().get(Contants.URL+Contants.HOME_DATA, params, new HttpCallback<MainBean>() {
+    private void getImageData(){
+        Map<String,String> params = new HashMap<>();
+        HttpProxy.obtain().post(Contants.URL + Contants.HOME_BANNER, params, new HttpCallback<BannerBean>() {
             @Override
             public void onFailure(String e) {
-                Log.e(TAG, "onFailure: " + e);
-                loadNetImg();
-            }
-            @Override
-            public void onSuccess(MainBean result) {
-//                initBubble(mounth, result.getDesc());
-                Log.e(TAG, "Network result：" + result.toString() );
-                allData = result;
-                if(allData.getCode() == 200){//数据正常
-                    setData();
-                    loadNetImg();
-                }else {//数据异常
-                    Log.e(TAG, "Network result：" + "连接服务器失败" );
-                }
 
+            }
+
+            @Override
+            public void onSuccess(BannerBean bannerBean) {
+                bannerLists = bannerBean.getData();
+                imageInfoList = new ArrayList<>();
+                for (BannerBean.DataBean banner : bannerLists){
+                    imageInfoList.add(new ImageInfo(1, "图片1，", "",banner.getThumbnail() , banner.getHref()));
+                }
+                imageStart();
 
             }
         });
-    }
-    private void setData(){
-        bannerList = allData.getData().getBannerList();
-        channelListBeanList = allData.getData().getChannelList();
-        orderCategoryListBeanList = allData.getData().getOrderCategoryList();
-        orderListBeanList = allData.getData().getOrderList();
-    }
-
-    private void loadNetImg(){
-        if(bannerList == null || bannerList.size() == 0){//没有轮播图，就随便加载一点
-            Log.e(TAG, "MainActivity：--------->" + "连接服务器失败，没有轮播图，就随便加载一点" );
-            initEvent();
-        } else {
-            imageInfoList = new ArrayList<>();
-            Log.e(TAG, "MainActivity ----------->" + "连接服务器成功" );
-            for (MainBean.DataBean.BannerListBean bannerListBean : bannerList){
-                imageInfoList.add(new ImageInfo(1, "图片1，", "",bannerListBean.getThumbnail() , bannerListBean.getHref()));
-            }
-        }
-        imageStart();
-    }
-
-    /**
-     * 初始化事件
-     */
-    private void initEvent() {
-        imageInfoList = new ArrayList<>();
-        imageInfoList.clear();
-        imageInfoList.add(new ImageInfo(1, "图片1，", "", "http://d.hiphotos.baidu.com/image/pic/item/6159252dd42a2834a75bb01156b5c9ea15cebf2f.jpg", "http://www.cnblogs.com/luhuan/"));
-        imageInfoList.add(new ImageInfo(1, "图片2，", "", "http://c.hiphotos.baidu.com/image/h%3D300/sign=cfce96dfa251f3dedcb2bf64a4eff0ec/4610b912c8fcc3ce912597269f45d688d43f2039.jpg", "http://www.cnblogs.com/luhuan/"));
-        imageInfoList.add(new ImageInfo(1, "图片3，", "", "http://e.hiphotos.baidu.com/image/pic/item/6a600c338744ebf85ed0ab2bd4f9d72a6059a705.jpg", "http://www.cnblogs.com/luhuan/"));
-        imageInfoList.add(new ImageInfo(1, "图片4，", "仅展示", "http://b.hiphotos.baidu.com/image/h%3D300/sign=8ad802f3801001e9513c120f880e7b06/a71ea8d3fd1f4134be1e4e64281f95cad1c85efa.jpg", ""));
-        imageInfoList.add(new ImageInfo(1, "图片5，", "仅展示", "http://e.hiphotos.baidu.com/image/h%3D300/sign=73443062281f95cab9f594b6f9177fc5/72f082025aafa40fafb5fbc1a664034f78f019be.jpg", ""));
     }
 
 }

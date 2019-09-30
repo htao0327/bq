@@ -19,6 +19,7 @@ import com.sy.biquan.Contants;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.CreateKOLGroupActivity;
+import com.sy.biquan.activity.KOLListActivity;
 import com.sy.biquan.activity.LoginActivity;
 import com.sy.biquan.bean.RegisterBean;
 import com.sy.biquan.chat.ChatActivity;
@@ -38,11 +39,14 @@ import com.tencent.qcloud.tim.uikit.utils.PopWindowUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatFragment extends Fragment implements View.OnClickListener {
+public class ChatFragment extends Fragment {
 
     private View rootView;
     private Menu mMenu;
     ImageView add;
+
+
+    private ImageView kol_list;
 
 //    private View mBaseView;
 
@@ -66,6 +70,13 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         // 会话列表面板的默认 UI 和交互初始化
         conversationLayout.initDefault();
         add = rootView.findViewById(R.id.iv_add);
+        kol_list = rootView.findViewById(R.id.iv_cfmm);
+        kol_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), KOLListActivity.class));
+            }
+        });
         Gson gson = new Gson();
         String userInfoString = SharedPreferencesUtil.userInfoGetString(MyApplication.instance(),Contants.USERINFO);
         RegisterBean user = gson.fromJson(userInfoString,RegisterBean.class);
@@ -205,8 +216,4 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         MyApplication.instance().startActivity(intent);
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 }

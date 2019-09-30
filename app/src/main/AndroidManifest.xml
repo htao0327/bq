@@ -86,6 +86,17 @@
         <activity android:name=".activity.CreateGroupActivity"/>
         <activity android:name=".activity.CreateKOLGroupActivity"/>
         <activity android:name=".activity.JYActivity"/>
+        <activity android:name=".activity.MyWalletActivity"/>
+        <activity android:name=".activity.CheckDealInfoActivity"/>
+        <activity android:name=".activity.CheckDealInfoAddWalletActivity"/>
+        <activity android:name=".activity.LaunchDealActivity"/>
+        <activity android:name=".activity.WalletAddress"/>
+        <activity android:name=".activity.KOLListActivity"/>
+        <activity android:name=".activity.BaseSetActivity"/>
+        <activity android:name=".activity.NameSetActivity"/>
+        <activity android:name=".activity.SlognSetActivity"/>
+        <activity android:name=".activity.DakaDetailActivity"/>
+        <activity android:name=".activity.JBDetailActivity"/>
 
     </application>
 

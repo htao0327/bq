@@ -168,10 +168,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             if(checkPhone()){
                 time.start();
                 Map<String,String> params = new HashMap<>();
-                params.put("phone",etPhone.getText().toString().trim());
-                params.put("captchaType",Contants.GET_YZM_REGISTER);
+//                params.put("phone",etPhone.getText().toString().trim());
+//                params.put("captchaType",Contants.GET_YZM_REGISTER);
 
-                HttpProxy.obtain().get(Contants.URL + Contants.GETYZM, params, new HttpCallback<RegisterBean>() {
+                HttpProxy.obtain().get(Contants.URL + Contants.GETYZM+"?phone="+etPhone.getText().toString().trim()+"&captchaType="+Contants.GET_YZM_REGISTER, params, new HttpCallback<RegisterBean>() {
                     @Override
                     public void onFailure(String e) {
                         Log.e(TAG, "onFailure: " + e);
@@ -183,7 +183,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         if(registerBean.getCode() == Contants.GET_DATA_SUCCESS){
 
                         }else {//显示错误信息
-                            ToastUtil.toastLongMessage(registerBean.getMessage());
+                            ToastUtil.toastLongMessage(registerBean.getMsg());
                         }
                     }
                 });
@@ -229,7 +229,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             });
                             startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                         }else {//显示错误信息
-                            ToastUtil.toastLongMessage(registerBean.getMessage());
+                            ToastUtil.toastLongMessage(registerBean.getMsg());
                         }
 
                     }

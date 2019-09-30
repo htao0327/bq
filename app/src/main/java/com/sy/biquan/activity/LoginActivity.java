@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
                             });
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         } else {//显示错误信息
-                            ToastUtil.toastLongMessage(registerBean.getMessage());
+                            ToastUtil.toastLongMessage(registerBean.getMsg());
                         }
                     }
                 });

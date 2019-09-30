@@ -23,7 +23,7 @@
             android:paddingBottom="15dp"
             android:paddingTop="15dp">
 
-            <ImageView
+            <com.sy.biquan.viewutil.CircleImageView
                 android:src="@drawable/img_test"
                 android:id="@+id/icon"
                 android:layout_width="50dp"

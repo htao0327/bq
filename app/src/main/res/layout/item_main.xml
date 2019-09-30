@@ -144,7 +144,7 @@
         android:layout_below="@id/v_line"
         android:padding="10dp"
         >
-        <ImageView
+        <com.sy.biquan.viewutil.CircleImageView
             android:id="@+id/iv_user"
             android:layout_width="38dp"
             android:layout_height="38dp"

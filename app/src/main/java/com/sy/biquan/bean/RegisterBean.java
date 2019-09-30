@@ -2,16 +2,23 @@ package com.sy.biquan.bean;
 
 public class RegisterBean {
 
-
     /**
+     * msg : 成功
      * code : 200
-     * message : 注册成功
-     * data : {"id":"1174924081204256770","token":"mHXqyOFYxtc3fArwPEnw_1568958704684_1174924081204256770","userSig":"eJw1jk0LgkAYhP-LnsNeddd2hQ4dIgwJwrCP27rvWouZ5loY0X9PtI4z88wwb7KLE0d3tWk0CV3GmAcAk8F96oaExHOAjNpiIevaYM9RAI-5PT0mBvWtNbkZCjrnbiYQJUWgMqCcZQoDUExrhYrL-5o597CtrHpt4pSl8poU3F-sxTS6REsXDpUtvcdxtY6E7O542s5-xdaUw9WAC8ZnQD9fw485QQ__","userType":null,"userPhone":"18358108782","userCode":"yumbg8","inviteCode":"","userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg","userAlias":"币友儿_yumbg8","isReal":null,"followCount":0,"fansCount":0,"peak":null,"taskScore":null,"remainScore":null,"allScore":null,"userImCode":"ef81b9dda4d04a6485bcd60c5eecdc8a","slogan":null}
+     * data : {"id":"1178163237804019713","token":"34zAeawQcowYtMjARE4U_1569730979797_1178163237804019713","userSig":"eJw1jssOgjAQRf*la2OGPmhL4kI3KhASg6Db0lZsDAaRKNH47zagu7lzz5nMG*3TfG6H1nUWRQFjDAPAbNw*bIcihOeApnw3F9W2zniOAmBGPD01zthr705uFKipNFdWEUaIn7HkwIgNmdBKCE3E-5qrPZxtkrA3WqerpsheW1rFRcl4cCh3yZqX9HlUg7gtz7HO68VP7F0zvhpKTkBy*fkCR*o3xg__","userType":null,"userPhone":"18358108782","userCode":"qk3m7h","inviteCode":"123456","userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg","userAlias":"币友儿_qk3m7h","isReal":1,"followCount":0,"fansCount":0,"peak":0,"taskScore":0,"remainScore":0,"allScore":0,"userImCode":"4dbc7aea35334db297053e658ca88c38","slogan":"一枚默默无闻的币友儿","deal_password":0}
      */
 
+    private String msg;
     private int code;
-    private String message;
     private DataBean data;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public int getCode() {
         return code;
@@ -19,14 +26,6 @@ public class RegisterBean {
 
     public void setCode(int code) {
         this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public DataBean getData() {
@@ -39,24 +38,25 @@ public class RegisterBean {
 
     public static class DataBean {
         /**
-         * id : 1174924081204256770
-         * token : mHXqyOFYxtc3fArwPEnw_1568958704684_1174924081204256770
-         * userSig : eJw1jk0LgkAYhP-LnsNeddd2hQ4dIgwJwrCP27rvWouZ5loY0X9PtI4z88wwb7KLE0d3tWk0CV3GmAcAk8F96oaExHOAjNpiIevaYM9RAI-5PT0mBvWtNbkZCjrnbiYQJUWgMqCcZQoDUExrhYrL-5o597CtrHpt4pSl8poU3F-sxTS6REsXDpUtvcdxtY6E7O542s5-xdaUw9WAC8ZnQD9fw485QQ__
+         * id : 1178163237804019713
+         * token : 34zAeawQcowYtMjARE4U_1569730979797_1178163237804019713
+         * userSig : eJw1jssOgjAQRf*la2OGPmhL4kI3KhASg6Db0lZsDAaRKNH47zagu7lzz5nMG*3TfG6H1nUWRQFjDAPAbNw*bIcihOeApnw3F9W2zniOAmBGPD01zthr705uFKipNFdWEUaIn7HkwIgNmdBKCE3E-5qrPZxtkrA3WqerpsheW1rFRcl4cCh3yZqX9HlUg7gtz7HO68VP7F0zvhpKTkBy*fkCR*o3xg__
          * userType : null
          * userPhone : 18358108782
-         * userCode : yumbg8
-         * inviteCode :
+         * userCode : qk3m7h
+         * inviteCode : 123456
          * userAvatar : https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg
-         * userAlias : 币友儿_yumbg8
-         * isReal : null
+         * userAlias : 币友儿_qk3m7h
+         * isReal : 1
          * followCount : 0
          * fansCount : 0
-         * peak : null
-         * taskScore : null
-         * remainScore : null
-         * allScore : null
-         * userImCode : ef81b9dda4d04a6485bcd60c5eecdc8a
-         * slogan : null
+         * peak : 0
+         * taskScore : 0
+         * remainScore : 0
+         * allScore : 0
+         * userImCode : 4dbc7aea35334db297053e658ca88c38
+         * slogan : 一枚默默无闻的币友儿
+         * deal_password : 0
          */
 
         private String id;
@@ -68,15 +68,16 @@ public class RegisterBean {
         private String inviteCode;
         private String userAvatar;
         private String userAlias;
-        private Object isReal;
+        private int isReal;
         private int followCount;
         private int fansCount;
-        private Object peak;
-        private Object taskScore;
-        private Object remainScore;
-        private Object allScore;
+        private int peak;
+        private int taskScore;
+        private int remainScore;
+        private int allScore;
         private String userImCode;
-        private Object slogan;
+        private String slogan;
+        private int deal_password;
 
         public String getId() {
             return id;
@@ -150,11 +151,11 @@ public class RegisterBean {
             this.userAlias = userAlias;
         }
 
-        public Object getIsReal() {
+        public int getIsReal() {
             return isReal;
         }
 
-        public void setIsReal(Object isReal) {
+        public void setIsReal(int isReal) {
             this.isReal = isReal;
         }
 
@@ -174,35 +175,35 @@ public class RegisterBean {
             this.fansCount = fansCount;
         }
 
-        public Object getPeak() {
+        public int getPeak() {
             return peak;
         }
 
-        public void setPeak(Object peak) {
+        public void setPeak(int peak) {
             this.peak = peak;
         }
 
-        public Object getTaskScore() {
+        public int getTaskScore() {
             return taskScore;
         }
 
-        public void setTaskScore(Object taskScore) {
+        public void setTaskScore(int taskScore) {
             this.taskScore = taskScore;
         }
 
-        public Object getRemainScore() {
+        public int getRemainScore() {
             return remainScore;
         }
 
-        public void setRemainScore(Object remainScore) {
+        public void setRemainScore(int remainScore) {
             this.remainScore = remainScore;
         }
 
-        public Object getAllScore() {
+        public int getAllScore() {
             return allScore;
         }
 
-        public void setAllScore(Object allScore) {
+        public void setAllScore(int allScore) {
             this.allScore = allScore;
         }
 
@@ -214,12 +215,20 @@ public class RegisterBean {
             this.userImCode = userImCode;
         }
 
-        public Object getSlogan() {
+        public String getSlogan() {
             return slogan;
         }
 
-        public void setSlogan(Object slogan) {
+        public void setSlogan(String slogan) {
             this.slogan = slogan;
+        }
+
+        public int getDeal_password() {
+            return deal_password;
+        }
+
+        public void setDeal_password(int deal_password) {
+            this.deal_password = deal_password;
         }
     }
 }

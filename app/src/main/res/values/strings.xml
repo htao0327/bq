@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">币车车</string>
+    <string name="app_name">币圈儿</string>
 
-    <string name="login_title">登录币车车</string>
+    <string name="login_title">登录币圈儿</string>
     <string name="input_phone">请输入手机号</string>
     <string name="input_pwd">请输登录密码</string>
     <string name="login_btn_text">立即登录</string>

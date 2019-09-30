@@ -29,7 +29,6 @@
             android:textSize="18sp"
             android:layout_centerInParent="true"
             android:textColor="#212121"
-            android:textStyle="bold"
             android:text="@string/main_cfmm"
             />
     </RelativeLayout>

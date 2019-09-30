@@ -1,6 +1,8 @@
 package com.sy.biquan.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -12,12 +14,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sy.biquan.Contants;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.adapter.CFMMAdapter1;
 import com.sy.biquan.adapter.CFMMAdapter2;
+import com.sy.biquan.adapter.JBAdapter;
+import com.sy.biquan.adapter.JBFragmentAdapter;
+import com.sy.biquan.bean.MainListData;
+import com.sy.biquan.bean.TopBean;
+import com.sy.biquan.proxy.HttpCallback;
+import com.sy.biquan.proxy.HttpProxy;
+import com.sy.biquan.util.SharedPreferencesUtil;
 import com.sy.biquan.viewutil.DialogUtil;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CFMMActivity extends AppCompatActivity {
 
@@ -29,32 +42,14 @@ public class CFMMActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cfmm);
         initView();
-
+        getTopData();
+        getJbListData();
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         dfbRecycler.setLayoutManager(manager);
-        CFMMAdapter1 adapter1 = new CFMMAdapter1();
-        adapter1.setOnItemClickListener(new CFMMAdapter1.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                DialogUtil.showPersonAlertDialog(CFMMActivity.this, R.drawable.img_test, "圆圆", "", "潇潇社区是集数字货币分析，优质项目推广广，资产风控管理，前端信息挖掘，区块链项目相关技术研发等多元化一体的区块链综合社区，旨传播正能量。",
-                        "7887", "12%", "80.00", "主页", "关注", true, new DialogUtil.AlertDialogBtnClickListener() {
-                            @Override
-                            public void clickPositive() {
-
-                            }
-
-                            @Override
-                            public void clickNegative() {
-
-                            }
-                        });
-            }
-        });
-        dfbRecycler.setAdapter(adapter1);
 
         dktjRecycler.setLayoutManager(new LinearLayoutManager(this));
-        dktjRecycler.setAdapter(new CFMMAdapter2());
+//        dktjRecycler.setAdapter(new CFMMAdapter2());
 
         rlBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +57,75 @@ public class CFMMActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    private void getTopData(){
+        Map<String,String> params = new HashMap<>();
+        params.put("token", SharedPreferencesUtil.getToken());
+        HttpProxy.obtain().post(Contants.URL + Contants.HOME_TOP, params, new HttpCallback<TopBean>() {
+            @Override
+            public void onFailure(String e) {
+                Log.e("CFMMActivity","onFailure"+e);
+            }
 
+            @Override
+            public void onSuccess(final TopBean topBean) {
+                if(topBean.getCode() == Contants.GET_DATA_SUCCESS) {
+                    CFMMAdapter1 adapter1 = new CFMMAdapter1(CFMMActivity.this, topBean);
+                    adapter1.setOnItemClickListener(new CFMMAdapter1.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View v, final int position) {
+                            DialogUtil.showPersonAlertDialog(CFMMActivity.this, topBean.getData().get(position).getAvatar(),
+                                    topBean.getData().get(position).getAlias(), "", topBean.getData().get(position).getSlogan(),
+                                    topBean.getData().get(position).getFansNum()+"", topBean.getData().get(position).getSuccessRate()+"%",
+                                    topBean.getData().get(position).getIncome()+"",
+                                    "主页", "关注", true, new DialogUtil.AlertDialogBtnClickListener() {
+                                        @Override
+                                        public void clickPositive() {
+                                            startActivity(new Intent(CFMMActivity.this,DakaDetailActivity.class)
+                                                    .putExtra(DakaDetailActivity.USER_ID,topBean.getData().get(position).getUserID()));
+                                        }
+
+                                        @Override
+                                        public void clickNegative() {
+
+                                        }
+                                    });
+                        }
+                    });
+                    dfbRecycler.setAdapter(adapter1);
+                }
+            }
+        });
+    }
+
+    private void getJbListData(){
+        Map<String,String> params = new HashMap<>();
+        params.put("token", SharedPreferencesUtil.getToken());
+        params.put("pageNum", "1");
+        params.put("pageSize", "10");
+        HttpProxy.obtain().post(Contants.URL + Contants.KOL_ORDER, params, new HttpCallback<MainListData>() {
+            @Override
+            public void onFailure(String e) {
+                Log.e("CFMMActivity","onFailure"+e);
+            }
+
+            @Override
+            public void onSuccess(final MainListData mainListData) {
+                if(mainListData.getCode() == Contants.GET_DATA_SUCCESS) {
+                    JBFragmentAdapter adapter = new JBFragmentAdapter(CFMMActivity.this,mainListData);
+                    dktjRecycler.setAdapter(adapter);
+                    adapter.setOnItemClickListener(new CFMMAdapter1.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View v, int position) {
+                            startActivity(new Intent(CFMMActivity.this,JBDetailActivity.class)
+                                    .putExtra(JBDetailActivity.ORDER_ID,mainListData.getData().get(position).getId()));
+
+                        }
+                    });
+                }
+            }
+        });
     }
 
     private void initView(){

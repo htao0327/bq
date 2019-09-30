@@ -15,6 +15,7 @@ import com.sy.biquan.MainActivity;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.FriendProfileActivity;
+import com.sy.biquan.bean.DealBean;
 import com.sy.biquan.viewutil.ChatLayoutHelper;
 import com.tencent.imsdk.TIMConversationType;
 import com.tencent.qcloud.tim.uikit.base.BaseFragment;
@@ -77,6 +78,7 @@ public class ChatFragment extends BaseFragment {
         // TODO 通过api设置ChatLayout各种属性的样例
         ChatLayoutHelper helper = new ChatLayoutHelper(getActivity());
         helper.customizeChatLayout(mChatLayout);
+        helper.dealCharLayout(mChatLayout);
 //        ChatLayoutHelper.customizeChatLayout(getActivity(), mChatLayout);
 
 
@@ -177,6 +179,13 @@ public class ChatFragment extends BaseFragment {
         mChatLayout.sendMessage(info, false);
     }
 
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void sendDeal(DealBean dealBean){
+        Gson gson = new Gson();
+        String data = gson.toJson(dealBean);
+        MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
+        Log.e("ChatFragment","data--->"+data);
+        mChatLayout.sendMessage(info, false);
+    }
 
 }

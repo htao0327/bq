@@ -22,6 +22,7 @@ public class Contants {
 
     // 存储
     public static final String USERINFO = "userInfo";
+    public static final String USERINFO2 = "userInfo2";
     public static final String JSONUSERINFO = "userInfo";
     public static final String ACCOUNT = "account";
     public static final String PWD = "password";
@@ -40,7 +41,7 @@ public class Contants {
     public final static int SDKAppID = 1400253555;
     public final static String SECRETKEY = "bc042dfa5db7c057d7d2baf1d3e06514e3ab13e6af5486a111e27c86cb4a84d4";
     public final static String MYURL = "http://192.168.1.17:9000";
-    public final static String URL = "http://192.168.1.19:9000";
+    public final static String URL = "http://192.168.1.31:9000";
     public final static String HOME_DATA = "/landscape-service-provider-content/home";//首页
     public final static String LOGIN = "/landscape-service-user/user/login";//登录
     public final static String REGISTER = "/landscape-service-user/user/reg/register";//注册
@@ -55,5 +56,20 @@ public class Contants {
     public final static String SEARCH_GROUP = "/landscape-service-im/im/group/searchByGroupId";//精确搜索群
     public final static String SEARCH_BY_KEY = "/landscape-service-search/search/key";
     public final static String HOT_WORD_SEARCH = "/landscape-service-search/search/hot_word/list";
+    public final static String MY_WALLET_LIST = "/landscape-service-provider-content/wallet/list";
+    public final static String DEAL_CHECK = "/landscape-service-im/im/transaction/getTransactionTable";//交易验证
+    public final static String DEAL_LAUNCH = "/landscape-service-im/im/transaction/insertTransactionTable";//交易发起
+    public final static String MY_DEAL_LIST = "/landscape-service-im/im/transaction/transcationList";//我的交易列表
+    public final static String DELETE_WALLET = "/landscape-service-provider-content/wallet/delete";//删除钱包地址
+    public final static String KOL_LIST = "/landscape-service-kol/kol/push";//KOL推送列表
+    public final static String MINE_INFO = "/landscape-service-user/user/center";//我的信息
+    public final static String SET_NAME = "/landscape-service-user/user/set";//设置昵称
+    public final static String HOME_BANNER = "/landscape-service-provider-content/banner/home";//首页-banner
+    public final static String HOME_LIST = "/landscape-service-provider-content/wealth/home-two";//首页-列表
+    public final static String HOME_TOP = "/landscape-service-provider-content/wealth/top";//巅峰榜
+    public final static String KOL_ORDER = "/landscape-service-provider-content/wealth/kolOrder";//大咖荐币
+    public final static String DAKA_DETAIL = "/landscape-service-provider-content/wealth/dakar/detail";//大咖详情
+    public final static String DAKA_ORDER = "/landscape-service-provider-content/wealth/dakar/order";//大咖历史荐币
+    public final static String JB_DETIAL = "/landscape-service-provider-content/order/detail/user";//荐币详情
 
 }

@@ -11,9 +11,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sy.biquan.Contants;
 import com.sy.biquan.R;
 import com.sy.biquan.adapter.JBFragmentAdapter;
 import com.sy.biquan.adapter.RemenAdapter;
+import com.sy.biquan.bean.MainListData;
+import com.sy.biquan.proxy.HttpCallback;
+import com.sy.biquan.proxy.HttpProxy;
+import com.sy.biquan.util.SharedPreferencesUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class JBFragment extends Fragment {
     private static final String TAG ="TestFragment";
@@ -24,7 +32,9 @@ public class JBFragment extends Fragment {
     private RecyclerView recyclerView;
     private JBFragmentAdapter adapter;
 
-    public JBFragment(){}
+    public JBFragment(){
+
+    }
 
     @Nullable
     @Override
@@ -39,16 +49,40 @@ public class JBFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //        mContentTv.setText("TestFragment" + mIndex);
-        adapter = new JBFragmentAdapter(getActivity());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(adapter);
+        getData();
+//        adapter = new JBFragmentAdapter(getActivity());
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        recyclerView.setNestedScrollingEnabled(false);
+//        recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mIndex = getArguments().getInt("index");//根据不同的额index显示不同的内容
+
+    }
+
+    private void getData(){
+
+        Map<String,String> params = new HashMap<>();
+        params.put("token", SharedPreferencesUtil.getToken());
+        params.put("pageNum","1");
+        params.put("pageSize","10");
+        HttpProxy.obtain().post(Contants.URL + Contants.HOME_LIST, params, new HttpCallback<MainListData>() {
+            @Override
+            public void onFailure(String e) {
+
+            }
+
+            @Override
+            public void onSuccess(MainListData mainListData) {
+                adapter = new JBFragmentAdapter(getActivity(),mainListData);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setNestedScrollingEnabled(false);
+                recyclerView.setAdapter(adapter);
+            }
+        });
 
     }
 
