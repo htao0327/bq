@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.sy.biquan.Contants;
+import com.sy.biquan.MainActivity;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.CreateKOLGroupActivity;
@@ -39,12 +40,11 @@ import com.tencent.qcloud.tim.uikit.utils.PopWindowUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment implements View.OnClickListener {
 
     private View rootView;
     private Menu mMenu;
     ImageView add;
-
 
     private ImageView kol_list;
 
@@ -56,6 +56,7 @@ public class ChatFragment extends Fragment {
     private ListView mConversationPopList;
 
     private PopDialogAdapter mConversationPopAdapter;
+    private String imCode = "";
 
     @Nullable
     @Override
@@ -71,55 +72,46 @@ public class ChatFragment extends Fragment {
         conversationLayout.initDefault();
         add = rootView.findViewById(R.id.iv_add);
         kol_list = rootView.findViewById(R.id.iv_cfmm);
-        kol_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), KOLListActivity.class));
-            }
-        });
+        kol_list.setOnClickListener(this);
+
         Gson gson = new Gson();
         String userInfoString = SharedPreferencesUtil.userInfoGetString(MyApplication.instance(),Contants.USERINFO);
         RegisterBean user = gson.fromJson(userInfoString,RegisterBean.class);
-        if(user.getData().getUserType() == Contants.USER_TYPE_KOL){
+        if(user != null && user.getData()!=null){
+            imCode = user.getData().getUserImCode();
+            if(user.getData().getUserType() == Contants.USER_TYPE_KOL){
+                mMenu = new Menu(getActivity(), add, Menu.MENU_USER_TYPE_KOL);
+            }else {
+                mMenu = new Menu(getActivity(), add, Menu.MENU_USER_TYPE_NORMAL);
+            }
             mMenu = new Menu(getActivity(), add, Menu.MENU_USER_TYPE_KOL);
-        }else {
-            mMenu = new Menu(getActivity(), add, Menu.MENU_USER_TYPE_NORMAL);
+
+            add.setOnClickListener(this);
         }
-        mMenu = new Menu(getActivity(), add, Menu.MENU_USER_TYPE_KOL);
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mMenu.isShowing()) {
-                    mMenu.hide();
-                } else {
-                    mMenu.show();
-                }
-//                startActivity(new Intent(getActivity(), LoginActivity.class));
-            }
-        });
+            // 获取 TitleBarLayout
+            TitleBarLayout titleBarLayout = conversationLayout.findViewById(R.id.conversation_title);
+            titleBarLayout.setVisibility(View.GONE);
 
-        // 获取 TitleBarLayout
-        TitleBarLayout titleBarLayout = conversationLayout.findViewById(R.id.conversation_title);
-        titleBarLayout.setVisibility(View.GONE);
-
-        // 会话列表面板的默认UI和交互初始化
-        conversationLayout.initDefault();
-        // 通过API设置ConversataonLayout各种属性的样例，开发者可以打开注释，体验效果
+            // 会话列表面板的默认UI和交互初始化
+            conversationLayout.initDefault();
+            // 通过API设置ConversataonLayout各种属性的样例，开发者可以打开注释，体验效果
 //        ConversationLayoutHelper.customizeConversation(mConversationLayout);
-        conversationLayout.getConversationList().setOnItemClickListener(new ConversationListLayout.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position, ConversationInfo conversationInfo) {
-                //此处为demo的实现逻辑，更根据会话类型跳转到相关界面，开发者可根据自己的应用场景灵活实现
-                startChatActivity(conversationInfo);
-            }
-        });
-        conversationLayout.getConversationList().setOnItemLongClickListener(new ConversationListLayout.OnItemLongClickListener() {
-            @Override
-            public void OnItemLongClick(View view, int position, ConversationInfo conversationInfo) {
-                startPopShow(view, position, conversationInfo);
-            }
-        });
+            conversationLayout.getConversationList().setOnItemClickListener(new ConversationListLayout.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position, ConversationInfo conversationInfo) {
+                    //此处为demo的实现逻辑，更根据会话类型跳转到相关界面，开发者可根据自己的应用场景灵活实现
+                    startChatActivity(conversationInfo);
+                }
+            });
+            conversationLayout.getConversationList().setOnItemLongClickListener(new ConversationListLayout.OnItemLongClickListener() {
+                @Override
+                public void OnItemLongClick(View view, int position, ConversationInfo conversationInfo) {
+                    startPopShow(view, position, conversationInfo);
+                }
+            });
+
+
 //        initTitleAction();
         initPopMenuAction();
 
@@ -216,4 +208,24 @@ public class ChatFragment extends Fragment {
         MyApplication.instance().startActivity(intent);
     }
 
+    @Override
+    public void onClick(View view) {
+        if("".equals(imCode )){
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+            return;
+        }
+        switch (view.getId()){
+            case R.id.iv_cfmm:
+                startActivity(new Intent(getActivity(), KOLListActivity.class));
+                break;
+            case R.id.iv_add:
+                if (mMenu.isShowing()) {
+                    mMenu.hide();
+                } else {
+                    mMenu.show();
+                }
+                break;
+
+        }
+    }
 }

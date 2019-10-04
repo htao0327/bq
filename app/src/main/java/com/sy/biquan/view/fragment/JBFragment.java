@@ -1,5 +1,6 @@
 package com.sy.biquan.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,10 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sy.biquan.Contants;
+import com.sy.biquan.MainActivity;
+import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
+import com.sy.biquan.activity.JBDetailActivity;
+import com.sy.biquan.activity.LoginActivity;
+import com.sy.biquan.adapter.CFMMAdapter1;
 import com.sy.biquan.adapter.JBFragmentAdapter;
-import com.sy.biquan.adapter.RemenAdapter;
 import com.sy.biquan.bean.MainListData;
+import com.sy.biquan.bean.RegisterBean;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.SharedPreferencesUtil;
@@ -31,7 +37,7 @@ public class JBFragment extends Fragment {
     private View mTestView;
     private RecyclerView recyclerView;
     private JBFragmentAdapter adapter;
-
+    RegisterBean registerBean = null;
     public JBFragment(){
 
     }
@@ -66,7 +72,13 @@ public class JBFragment extends Fragment {
     private void getData(){
 
         Map<String,String> params = new HashMap<>();
-        params.put("token", SharedPreferencesUtil.getToken());
+        registerBean = SharedPreferencesUtil.getUserInfo();
+        if(registerBean != null && !"".equals(registerBean.toString().trim())){
+            params.put("token", SharedPreferencesUtil.getToken());
+        }else{
+            params.put("token", "");
+        }
+
         params.put("pageNum","1");
         params.put("pageSize","10");
         HttpProxy.obtain().post(Contants.URL + Contants.HOME_LIST, params, new HttpCallback<MainListData>() {
@@ -76,8 +88,21 @@ public class JBFragment extends Fragment {
             }
 
             @Override
-            public void onSuccess(MainListData mainListData) {
+            public void onSuccess(final MainListData mainListData) {
                 adapter = new JBFragmentAdapter(getActivity(),mainListData);
+                adapter.setOnItemClickListener(new JBFragmentAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        registerBean = SharedPreferencesUtil.getUserInfo();
+                        Log.e("JBFragment","registerBean------------"+registerBean);
+                        if(registerBean == null ){
+                            startActivity(new Intent(MyApplication.instance(), LoginActivity.class));
+                            return;
+                        }
+                        startActivity(new Intent(getActivity(), JBDetailActivity.class)
+                                .putExtra(JBDetailActivity.ORDER_ID,mainListData.getData().get(position).getId()));
+                    }
+                });
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 recyclerView.setNestedScrollingEnabled(false);
                 recyclerView.setAdapter(adapter);

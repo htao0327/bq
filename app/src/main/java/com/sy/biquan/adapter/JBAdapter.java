@@ -15,15 +15,17 @@ import java.util.List;
 public class JBAdapter extends FragmentPagerAdapter {
     private List<String> mTabTitles ;
     private static final int FRAGMENT_COUNT = 5;
-
-    public JBAdapter(FragmentManager fragmentManager, List<BaseFragment> fragments, List<String> tabTitles) {
+    List<Fragment> fragments;
+    public JBAdapter(FragmentManager fragmentManager, List<Fragment> fragments, List<String> tabTitles) {
         super(fragmentManager);
         this.mTabTitles = tabTitles;
+        this.fragments = fragments;
     }
 
     @Override
     public Fragment getItem(int position) {
-        JBFragment testFragment = new JBFragment();
+//        JBFragment testFragment = new JBFragment();
+        Fragment testFragment = fragments.get(position);
         Bundle bundle = new Bundle();
         bundle.putInt("index",position);//传入不同的index
         testFragment.setArguments(bundle);

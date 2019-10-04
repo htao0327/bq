@@ -326,11 +326,12 @@
             android:src="@drawable/right"
             />
     </LinearLayout>
+
     <ImageView
         android:id="@+id/iv_more"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@drawable/more"
+        android:src="@drawable/plus_cfmm"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"

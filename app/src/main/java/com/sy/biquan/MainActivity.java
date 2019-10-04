@@ -7,10 +7,15 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.sy.biquan.activity.LoginActivity;
+import com.sy.biquan.bean.RegisterBean;
 import com.sy.biquan.util.GenerateTestUserSig;
+import com.sy.biquan.util.SharedPreferencesUtil;
 import com.sy.biquan.view.fragment.ChatFragment;
 import com.sy.biquan.view.fragment.CustomerServiceFragment;
 import com.sy.biquan.view.fragment.MainFragment;
@@ -24,11 +29,12 @@ import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private BottomNavigationView bottomNavigationView;
     private List<Fragment> fragments;
     private int lastIndex;
+    private String imCode = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,23 +42,36 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initData();
         initBottomNavigation();
+
+        RegisterBean registerBean = SharedPreferencesUtil.getUserInfo();
+
+        if(registerBean != null && !"".equals(registerBean.toString())){
+            imCode = registerBean.getData().getUserImCode();
+
+            String userSig = GenerateTestUserSig.genTestUserSig(imCode);
+
+            Log.e("token","token------------>"+ SharedPreferencesUtil.getToken());
+            TUIKit.login(imCode, userSig, new IUIKitCallBack() {
+                @Override
+                public void onError(String module, final int code, final String desc) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+//                            ToastUtil.toastLongMessage("登录失败, errCode = " + code + ", errInfo = " + desc);
+                        }
+                    });
+                }
+
+                @Override
+                public void onSuccess(Object data) {
+                    ToastUtil.toastLongMessage("登录成功");
+                }
+            });
+        }
+
+
+
         String account = "13173676521";
-        String userSig = GenerateTestUserSig.genTestUserSig(account);
-        TUIKit.login(account, userSig, new IUIKitCallBack() {
-            @Override
-            public void onError(String module, final int code, final String desc) {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        ToastUtil.toastLongMessage("登录失败, errCode = " + code + ", errInfo = " + desc);
-                    }
-                });
-            }
 
-            @Override
-            public void onSuccess(Object data) {
-
-            }
-        });
     }
 
     private void initView(){
@@ -89,7 +108,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 switch (item.getItemId()) {
+
                     case R.id.navigation_home:
                         setFragmentPosition(1);
                         break;
@@ -97,12 +118,24 @@ public class MainActivity extends AppCompatActivity {
                         setFragmentPosition(0);
                         break;
                     case R.id.navigation_cus:
+                        if("".equals(imCode )){
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                            break;
+                        }
                         setFragmentPosition(2);
                         break;
                     case R.id.navigation_task:
+                        if("".equals(imCode )){
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                            break;
+                        }
                         setFragmentPosition(3);
                         break;
                     case R.id.navigation_user:
+                        if("".equals(imCode )){
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                            break;
+                        }
                         setFragmentPosition(4);
                         break;
                     default:
@@ -115,4 +148,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View view) {
+        if("".equals(imCode )){
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            return;
+        }
+    }
 }

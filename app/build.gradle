@@ -18,9 +18,9 @@ android {
         }
     }
     repositories {
+
         mavenCentral()
     }
-
 }
 
 dependencies {
@@ -54,5 +54,7 @@ dependencies {
 //    implementation 'org.xutils:xutils:3.5.0'
 //    implementation 'com.androidkun:XTabLayout:1.1.4'
 //    implementation project(':tuikit')
+
+    implementation 'com.github.lzyzsd:jsbridge:1.0.4'
 
 }

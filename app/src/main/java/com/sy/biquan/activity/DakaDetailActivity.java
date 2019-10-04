@@ -2,6 +2,7 @@ package com.sy.biquan.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -37,6 +38,8 @@ public class DakaDetailActivity extends AppCompatActivity {
     private TextView su2;//平均推荐收益率
     private CircleImageView userImg;//用户头像
 
+
+
     private Button btnGz;//关注
 
     private RecyclerView c1;//当前荐币
@@ -56,6 +59,12 @@ public class DakaDetailActivity extends AppCompatActivity {
         userID = getIntent().getStringExtra(USER_ID);
         getDakarDetailData();
         getDakarOrderData();
+        btnGz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void initView(){
@@ -100,6 +109,7 @@ public class DakaDetailActivity extends AppCompatActivity {
                     c1.setAdapter(adapter);
 
                 }
+
             }
         });
     }

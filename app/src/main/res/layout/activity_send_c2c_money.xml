@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8"
+    android:gravity="center_horizontal"
+    >
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        >
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            >
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="18dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/back_blank"
+                android:scaleType="fitXY"
+                />
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_centerInParent="true"
+            android:textColor="#212121"
+            android:text="打赏"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="54dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/colorLoginTitle"
+            android:layout_centerVertical="true"
+            android:text="打赏金额"
+            />
+        <TextView
+            android:id="@+id/tv_money_end"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/colorLoginTitle"
+            android:layout_centerVertical="true"
+            android:text="Q豆"
+            />
+        <EditText
+            android:id="@+id/et_money"
+            android:textCursorDrawable="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/tv_money_end"
+            android:layout_marginEnd="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorLoginTitle"
+            android:background="@null"
+            android:minWidth="100dp"
+            android:gravity="right"
+            android:hint="输入Q豆数"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="54dp"
+        android:background="@color/white"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:gravity="center_vertical"
+        >
+
+        <EditText
+            android:id="@+id/et_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorLoginTitle"
+            android:background="@null"
+            android:minWidth="100dp"
+            android:hint="每日一赏"
+            />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="146dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="104dp"
+        android:background="@drawable/btn_money_bg"
+        android:text="塞Q豆"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        android:id="@+id/btn_send"
+        />
+
+
+
+
+
+</LinearLayout>

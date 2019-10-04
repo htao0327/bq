@@ -63,6 +63,7 @@
                     android:textSize="12sp"
                     />
                 <Button
+                    android:id="@+id/btn_gz"
                     android:background="@drawable/btn_bg_gz"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,6 +82,15 @@
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/test_img"
                     android:id="@+id/civ_user_img"
+                    />
+                <ImageView
+                    android:id="@+id/iv_success"
+                    android:layout_width="55dp"
+                    android:layout_height="53dp"
+                    android:src="@drawable/success_icon"
+                    android:layout_toEndOf="@id/civ_user_img"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
                     />
                 <TextView
                     android:id="@+id/name"
@@ -377,6 +387,7 @@
                     android:textSize="12sp"
                     />
                 <TextView
+                    android:id="@+id/more"
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_below="@id/line3"
@@ -399,6 +410,7 @@
                     android:scaleType="fitXY"
                     />
                 <Button
+                    android:id="@+id/btn_buy"
                     android:layout_width="164dp"
                     android:layout_height="40dp"
                     android:layout_centerHorizontal="true"
@@ -423,7 +435,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/test_img"
+                    android:src="@drawable/dktj"
                     />
                 <TextView
                     android:layout_width="wrap_content"

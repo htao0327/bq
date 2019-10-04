@@ -19,6 +19,9 @@ public class Contants {
     public static final String GET_YZM_REGISTER = "1";
     public static final String GET_YZM_FIND_PWD = "2";
     public static final String GET_YZM_REPLACE_PWD = "3";
+    public static final String GET_YZM_MODIFY_PHONE = "4";
+    public static final String GET_YZM_SET_DEAL_PWD = "5";
+    public static final String GET_YZM_SET_LOGIN_PWD = "6";
 
     // 存储
     public static final String USERINFO = "userInfo";
@@ -71,5 +74,25 @@ public class Contants {
     public final static String DAKA_DETAIL = "/landscape-service-provider-content/wealth/dakar/detail";//大咖详情
     public final static String DAKA_ORDER = "/landscape-service-provider-content/wealth/dakar/order";//大咖历史荐币
     public final static String JB_DETIAL = "/landscape-service-provider-content/order/detail/user";//荐币详情
+    public final static String FOLLOW = "/landscape-service-provider-content/follow";//关注
+    public final static String UNFOLLOW = "/landscape-service-provider-content/unFollow";//取消关注
+    public final static String BUY = "/landscape-service-provider-content/order/buy";//购买荐币
+    public final static String TUIJIANJB = "/landscape-service-provider-content/order/tuijian";//推荐荐币
+    public final static String HOME_JB_LIST = "/landscape-service-provider-content/wealth/categoryCode";//财富密码5个列表
+    public final static String KT_LIST = "/landscape-service-provider-content/airdrop/list";//空投列表
+    public final static String XM_LIST = "/landscape-service-provider-content/project/list";//项目列表
+    public final static String XM_DETAIL = "/landscape-service-provider-content/project/id/2";//项目详情
+    public final static String XM_DETAIL_GROUP_LIST = "/landscape-service-im/im/group/project/recommend-group";//项目推荐群聊
+    public final static String MODIFY_GROUP_INFO = "/landscape-service-im/im/group/update-group-info";//修改群资料
+    public final static String GET_GROUP_INFO = "/landscape-service-im/im/group/info";//获取群资料
+    public final static String RED_PAC_C2C = "/landscape-service-im/red_packet/distribute";//1:1红包
+    public final static String RED_PAC_C2C_CLICK = "/landscape-service-im/red_packet/o2o-info";//1:1红包点击
+    public final static String RED_PAC_C2C_GET = "/landscape-service-im/im/red_packet/o2o-receive";//1:1红包领取
+    public final static String MY_JB_1 = "/landscape-service-provider-content/order/publish/user";//我的发布
+    public final static String MY_JB_2 = "/landscape-service-provider-content/order/purchase/user";//我的购买
+    public final static String MY_JB_3 = "/landscape-service-provider-content/order/follow/user";//我的关注
+    public final static String BIND_USER = "/landscape-service-user/user//bind-user";//设置邀请人
+    public final static String RESET = "/landscape-service-user/user/reset";//重置密码
+    public final static String DEAL_PWD = "/landscape-service-user/user/set-trans-password";//设置交易密码
 
 }

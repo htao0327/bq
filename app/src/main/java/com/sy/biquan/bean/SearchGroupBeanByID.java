@@ -5,7 +5,7 @@ public class SearchGroupBeanByID {
     /**
      * msg : 成功
      * code : 200
-     * data : {"id":"1","ownerAccount":"ffa6b683174b4fab837ac6eea66abf3d","type":"Public","groupId":"2413291324","name":"开发者1群","introduction":"sopdfsodifsdj","currencyId":"1","currency":"BTC","projectId":"1","notification":"群公告","faceUrl":"/head","maxMemberCount":500,"dropCount":0,"privatePlacementCount":0,"privatePlacementTime":"2019-09-15 21:00:49","createTime":"2019-09-06 08:01:56","updateTime":"2019-09-06 08:01:56","dissolveTime":"2019-09-21 08:28:08","kol":0,"isDissolve":"n","top":0,"topTime":null,"walletId":"1","creatorId":"1","pushGroupId":null,"pushMessage":null,"userAlias":null,"userPhone":null,"groupPersonNum":null,"projectName":null}
+     * data : {"id":"1179330629942841345","dropId":"","isAirDrop":0,"ownerAccount":"cf6cdf7baf194a66892b90f00e49c473","type":"Public","groupId":"7584871024","name":"ggccbb","introduction":"","currencyId":"1176733022313693186","currency":"BNBBN","projectId":"","notification":"","faceUrl":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg","groupNum":1,"ownerName":"ahahaha","ownerAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg","isHere":0,"ownerId":"1174940561761329154","maxMemberCount":1000,"dropCount":0,"privatePlacementCount":0,"privatePlacementTime":"2019-10-02 09:41:51","createTime":"2019-10-02 17:41:48","updateTime":"2019-10-02 09:41:51","dissolveTime":null,"kol":1,"isDissolve":"","top":0,"topTime":null,"walletId":"","creatorId":"","pushGroupId":"","pushMessage":"","userAlias":null,"userPhone":null,"groupPersonNum":null,"projectName":null,"currencyName":null}
      */
 
     private String msg;
@@ -38,39 +38,49 @@ public class SearchGroupBeanByID {
 
     public static class DataBean {
         /**
-         * id : 1
-         * ownerAccount : ffa6b683174b4fab837ac6eea66abf3d
+         * id : 1179330629942841345
+         * dropId :
+         * isAirDrop : 0
+         * ownerAccount : cf6cdf7baf194a66892b90f00e49c473
          * type : Public
-         * groupId : 2413291324
-         * name : 开发者1群
-         * introduction : sopdfsodifsdj
-         * currencyId : 1
-         * currency : BTC
-         * projectId : 1
-         * notification : 群公告
-         * faceUrl : /head
-         * maxMemberCount : 500
+         * groupId : 7584871024
+         * name : ggccbb
+         * introduction :
+         * currencyId : 1176733022313693186
+         * currency : BNBBN
+         * projectId :
+         * notification :
+         * faceUrl : https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg
+         * groupNum : 1
+         * ownerName : ahahaha
+         * ownerAvatar : https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg
+         * isHere : 0
+         * ownerId : 1174940561761329154
+         * maxMemberCount : 1000
          * dropCount : 0
          * privatePlacementCount : 0
-         * privatePlacementTime : 2019-09-15 21:00:49
-         * createTime : 2019-09-06 08:01:56
-         * updateTime : 2019-09-06 08:01:56
-         * dissolveTime : 2019-09-21 08:28:08
-         * kol : 0
-         * isDissolve : n
+         * privatePlacementTime : 2019-10-02 09:41:51
+         * createTime : 2019-10-02 17:41:48
+         * updateTime : 2019-10-02 09:41:51
+         * dissolveTime : null
+         * kol : 1
+         * isDissolve :
          * top : 0
          * topTime : null
-         * walletId : 1
-         * creatorId : 1
-         * pushGroupId : null
-         * pushMessage : null
+         * walletId :
+         * creatorId :
+         * pushGroupId :
+         * pushMessage :
          * userAlias : null
          * userPhone : null
          * groupPersonNum : null
          * projectName : null
+         * currencyName : null
          */
 
         private String id;
+        private String dropId;
+        private int isAirDrop;
         private String ownerAccount;
         private String type;
         private String groupId;
@@ -81,25 +91,31 @@ public class SearchGroupBeanByID {
         private String projectId;
         private String notification;
         private String faceUrl;
+        private int groupNum;
+        private String ownerName;
+        private String ownerAvatar;
+        private int isHere;
+        private String ownerId;
         private int maxMemberCount;
         private int dropCount;
         private int privatePlacementCount;
         private String privatePlacementTime;
         private String createTime;
         private String updateTime;
-        private String dissolveTime;
+        private Object dissolveTime;
         private int kol;
         private String isDissolve;
         private int top;
         private Object topTime;
         private String walletId;
         private String creatorId;
-        private Object pushGroupId;
-        private Object pushMessage;
+        private String pushGroupId;
+        private String pushMessage;
         private Object userAlias;
         private Object userPhone;
         private Object groupPersonNum;
         private Object projectName;
+        private Object currencyName;
 
         public String getId() {
             return id;
@@ -107,6 +123,22 @@ public class SearchGroupBeanByID {
 
         public void setId(String id) {
             this.id = id;
+        }
+
+        public String getDropId() {
+            return dropId;
+        }
+
+        public void setDropId(String dropId) {
+            this.dropId = dropId;
+        }
+
+        public int getIsAirDrop() {
+            return isAirDrop;
+        }
+
+        public void setIsAirDrop(int isAirDrop) {
+            this.isAirDrop = isAirDrop;
         }
 
         public String getOwnerAccount() {
@@ -189,6 +221,46 @@ public class SearchGroupBeanByID {
             this.faceUrl = faceUrl;
         }
 
+        public int getGroupNum() {
+            return groupNum;
+        }
+
+        public void setGroupNum(int groupNum) {
+            this.groupNum = groupNum;
+        }
+
+        public String getOwnerName() {
+            return ownerName;
+        }
+
+        public void setOwnerName(String ownerName) {
+            this.ownerName = ownerName;
+        }
+
+        public String getOwnerAvatar() {
+            return ownerAvatar;
+        }
+
+        public void setOwnerAvatar(String ownerAvatar) {
+            this.ownerAvatar = ownerAvatar;
+        }
+
+        public int getIsHere() {
+            return isHere;
+        }
+
+        public void setIsHere(int isHere) {
+            this.isHere = isHere;
+        }
+
+        public String getOwnerId() {
+            return ownerId;
+        }
+
+        public void setOwnerId(String ownerId) {
+            this.ownerId = ownerId;
+        }
+
         public int getMaxMemberCount() {
             return maxMemberCount;
         }
@@ -237,11 +309,11 @@ public class SearchGroupBeanByID {
             this.updateTime = updateTime;
         }
 
-        public String getDissolveTime() {
+        public Object getDissolveTime() {
             return dissolveTime;
         }
 
-        public void setDissolveTime(String dissolveTime) {
+        public void setDissolveTime(Object dissolveTime) {
             this.dissolveTime = dissolveTime;
         }
 
@@ -293,19 +365,19 @@ public class SearchGroupBeanByID {
             this.creatorId = creatorId;
         }
 
-        public Object getPushGroupId() {
+        public String getPushGroupId() {
             return pushGroupId;
         }
 
-        public void setPushGroupId(Object pushGroupId) {
+        public void setPushGroupId(String pushGroupId) {
             this.pushGroupId = pushGroupId;
         }
 
-        public Object getPushMessage() {
+        public String getPushMessage() {
             return pushMessage;
         }
 
-        public void setPushMessage(Object pushMessage) {
+        public void setPushMessage(String pushMessage) {
             this.pushMessage = pushMessage;
         }
 
@@ -339,6 +411,14 @@ public class SearchGroupBeanByID {
 
         public void setProjectName(Object projectName) {
             this.projectName = projectName;
+        }
+
+        public Object getCurrencyName() {
+            return currencyName;
+        }
+
+        public void setCurrencyName(Object currencyName) {
+            this.currencyName = currencyName;
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.sy.biquan.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.Editable;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -60,7 +62,7 @@ public class AddMoreActivity extends AppCompatActivity {
     private View layout;
 
     private LinearLayout ll_title,ll_error,ll_find_people,ll_find_group;
-
+    private RelativeLayout rlBack;
     private TextView tv_people,tv_group;
 
     @Override
@@ -84,7 +86,14 @@ public class AddMoreActivity extends AppCompatActivity {
         tv_people = layout.findViewById(R.id.tv_people);
         ll_find_people = layout.findViewById(R.id.ll_find_people);
         ll_find_group = layout.findViewById(R.id.ll_find_group);
-        popupWindow = new PopupWindow(layout,500,300);//参数为1.View
+        rlBack = findViewById(R.id.back);
+        rlBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        popupWindow = new PopupWindow(layout,1080,500);//参数为1.View
         popupWindow.setFocusable(false);
 
         etSearch.addTextChangedListener(new TextWatcher() {
@@ -123,7 +132,17 @@ public class AddMoreActivity extends AppCompatActivity {
                                             Log.e("AddMoreActivity","search.setOnClickListener---------"+searchByPhoneBean);
                                             if(searchByPhoneBean.getCode() == Contants.GET_DATA_SUCCESS){
                                                 ll_error.setVisibility(View.GONE);
+                                                popupWindow.dismiss();
+                                                startActivity(new Intent(AddMoreActivity.this,UserInfoActivity.class)
+                                                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                                        .putExtra(UserInfoActivity.USER_NAME,searchByPhoneBean.getData().getUserAlias())
+                                                        .putExtra(UserInfoActivity.USER_IMG,searchByPhoneBean.getData().getUserAvatar())
+                                                        .putExtra(UserInfoActivity.USER_SLOGAN,searchByPhoneBean.getData().getSlogan())
+                                                        .putExtra(UserInfoActivity.USER_ID,searchByPhoneBean.getData().getUserId())
+                                                        .putExtra(UserInfoActivity.USER_IM_CODE,searchByPhoneBean.getData().getUserImCode()));
+
                                             }else {
+                                                popupWindow.dismiss();
                                                 ll_error.setVisibility(View.VISIBLE);
                                                 errorMsg.setText(searchByPhoneBean.getMessage());
                                             }
@@ -153,7 +172,25 @@ public class AddMoreActivity extends AppCompatActivity {
                                             Log.e("AddMoreActivity","SEARCH_GROUP.setOnClickListener---------"+searchGroupBeanByID);
                                             if(searchGroupBeanByID.getCode() == Contants.GET_DATA_SUCCESS){
                                                 ll_error.setVisibility(View.GONE);
+                                                popupWindow.dismiss();
+                                                startActivity(new Intent(AddMoreActivity.this,SearchGroupInfoActivity.class)
+                                                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                                        .putExtra(SearchGroupInfoActivity.GROUP_NAME,searchGroupBeanByID.getData().getName())
+                                                        .putExtra(SearchGroupInfoActivity.GROUP_ID,searchGroupBeanByID.getData().getGroupId())
+                                                        .putExtra(SearchGroupInfoActivity.GROUP_NUM,searchGroupBeanByID.getData().getGroupNum())
+                                                        .putExtra(SearchGroupInfoActivity.GROUP_IMG,searchGroupBeanByID.getData().getFaceUrl())
+                                                        .putExtra(SearchGroupInfoActivity.GROUP_PROJECT_NAME,searchGroupBeanByID.getData().getCurrency())
+                                                        .putExtra(SearchGroupInfoActivity.GROUP_QZ_NAME,searchGroupBeanByID.getData().getOwnerName())
+                                                        .putExtra(SearchGroupInfoActivity.GROUP_QZ_IMG,searchGroupBeanByID.getData().getOwnerAvatar())
+                                                        .putExtra(SearchGroupInfoActivity.IS_KOL,searchGroupBeanByID.getData().getKol())
+                                                        .putExtra(SearchGroupInfoActivity.IS_HERE,searchGroupBeanByID.getData().getIsHere())
+                                                        .putExtra(SearchGroupInfoActivity.GROUP_QZ_ID,searchGroupBeanByID.getData().getOwnerId())
+                                                );
+
+
+
                                             }else {
+                                                popupWindow.dismiss();
                                                 ll_error.setVisibility(View.VISIBLE);
                                                 errorMsg.setText(searchGroupBeanByID.getMsg());
                                             }

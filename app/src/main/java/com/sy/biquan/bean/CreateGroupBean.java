@@ -4,14 +4,22 @@ public class CreateGroupBean {
 
 
     /**
+     * msg : ok
      * code : 200
-     * message : ok
-     * data : {"ActionStatus":"OK","ErrorCode":0,"ErrorInfo":"","GroupId":"4841273753"}
+     * data : 9317050294
      */
 
+    private String msg;
     private int code;
-    private String message;
-    private DataBean data;
+    private String data;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public int getCode() {
         return code;
@@ -21,65 +29,11 @@ public class CreateGroupBean {
         this.code = code;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public DataBean getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(DataBean data) {
+    public void setData(String data) {
         this.data = data;
-    }
-
-    public static class DataBean {
-        /**
-         * ActionStatus : OK
-         * ErrorCode : 0
-         * ErrorInfo :
-         * GroupId : 4841273753
-         */
-
-        private String ActionStatus;
-        private int ErrorCode;
-        private String ErrorInfo;
-        private String GroupId;
-
-        public String getActionStatus() {
-            return ActionStatus;
-        }
-
-        public void setActionStatus(String ActionStatus) {
-            this.ActionStatus = ActionStatus;
-        }
-
-        public int getErrorCode() {
-            return ErrorCode;
-        }
-
-        public void setErrorCode(int ErrorCode) {
-            this.ErrorCode = ErrorCode;
-        }
-
-        public String getErrorInfo() {
-            return ErrorInfo;
-        }
-
-        public void setErrorInfo(String ErrorInfo) {
-            this.ErrorInfo = ErrorInfo;
-        }
-
-        public String getGroupId() {
-            return GroupId;
-        }
-
-        public void setGroupId(String GroupId) {
-            this.GroupId = GroupId;
-        }
     }
 }

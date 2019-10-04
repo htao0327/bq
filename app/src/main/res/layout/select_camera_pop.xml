@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F8F8F8"
+    >
+
+    <TextView
+        android:id="@+id/tv_xc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:textColor="@color/colorLoginTitle"
+        android:text="相册"
+        />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_xj"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:textColor="@color/colorLoginTitle"
+        android:text="相机"
+        />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_qx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:textColor="@color/colorLoginTitle"
+        android:text="取消"
+        />
+
+
+
+</LinearLayout>

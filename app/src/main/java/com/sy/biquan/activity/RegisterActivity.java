@@ -180,11 +180,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onSuccess(RegisterBean registerBean) {
                         Log.e(TAG, "Network result：" + registerBean.toString());
-                        if(registerBean.getCode() == Contants.GET_DATA_SUCCESS){
+//                        if(registerBean.getCode() == Contants.GET_DATA_SUCCESS){
 
-                        }else {//显示错误信息
+//                        }else {//显示错误信息
                             ToastUtil.toastLongMessage(registerBean.getMsg());
-                        }
+//                        }
                     }
                 });
             }else {

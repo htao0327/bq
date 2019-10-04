@@ -38,6 +38,11 @@ public class MyApplication extends Application {
         //        HttpProxy.init(VolleyModel.getInstance(getApplicationContext()));
         HttpProxy.init(new OkHttpModel(getApplicationContext()));
         instance = this;
+
+
+
+
+
     }
 
 

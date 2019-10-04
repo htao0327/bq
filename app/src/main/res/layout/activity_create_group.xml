@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:id="@+id/layout_main"
     >
     <ScrollView
         android:layout_width="match_parent"
@@ -47,7 +47,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 >
-                <ImageView
+
+                <com.sy.biquan.viewutil.CircleImageView
+                    android:id="@+id/user_img"
                     android:layout_width="84dp"
                     android:layout_height="84dp"
                     android:src="@drawable/camera_bg"
@@ -55,11 +57,13 @@
                     android:scaleType="fitXY"
                     />
                 <ImageView
+                    android:id="@+id/iv_camera"
                     android:layout_width="34dp"
                     android:layout_height="28dp"
                     android:src="@drawable/camera"
                     android:layout_centerInParent="true"
                     />
+
 
             </RelativeLayout>
             <TextView

@@ -21,6 +21,7 @@ import com.sy.biquan.adapter.CFMMAdapter1;
 import com.sy.biquan.adapter.CFMMAdapter2;
 import com.sy.biquan.adapter.JBAdapter;
 import com.sy.biquan.adapter.JBFragmentAdapter;
+import com.sy.biquan.bean.AddWalletBean;
 import com.sy.biquan.bean.MainListData;
 import com.sy.biquan.bean.TopBean;
 import com.sy.biquan.proxy.HttpCallback;
@@ -71,26 +72,69 @@ public class CFMMActivity extends AppCompatActivity {
             @Override
             public void onSuccess(final TopBean topBean) {
                 if(topBean.getCode() == Contants.GET_DATA_SUCCESS) {
-                    CFMMAdapter1 adapter1 = new CFMMAdapter1(CFMMActivity.this, topBean);
+
+                    final CFMMAdapter1 adapter1 = new CFMMAdapter1(CFMMActivity.this, topBean);
                     adapter1.setOnItemClickListener(new CFMMAdapter1.OnItemClickListener() {
                         @Override
                         public void onItemClick(View v, final int position) {
-                            DialogUtil.showPersonAlertDialog(CFMMActivity.this, topBean.getData().get(position).getAvatar(),
-                                    topBean.getData().get(position).getAlias(), "", topBean.getData().get(position).getSlogan(),
-                                    topBean.getData().get(position).getFansNum()+"", topBean.getData().get(position).getSuccessRate()+"%",
-                                    topBean.getData().get(position).getIncome()+"",
-                                    "主页", "关注", true, new DialogUtil.AlertDialogBtnClickListener() {
+                            Log.e("CFMMActivity","----onItemClickBtn----"+v.getId());
+                            if(v.getId() == R.id.btn_gz){//点击关注
+
+                                Log.e("CFMMActivity","----onItemClickBtn----");
+                                Map<String,String> params = new HashMap<>();
+                                params.put("token",SharedPreferencesUtil.getToken());
+                                params.put("followerId",topBean.getData().get(position).getUserID());
+                                if(topBean.getData().get(position).getIsFollow() == 1){//已关注
+                                    HttpProxy.obtain().post(Contants.URL + Contants.UNFOLLOW, params, new HttpCallback<AddWalletBean>() {
                                         @Override
-                                        public void clickPositive() {
-                                            startActivity(new Intent(CFMMActivity.this,DakaDetailActivity.class)
-                                                    .putExtra(DakaDetailActivity.USER_ID,topBean.getData().get(position).getUserID()));
+                                        public void onFailure(String e) {
+                                            ToastUtil.toastLongMessage("取关失败");
                                         }
 
                                         @Override
-                                        public void clickNegative() {
+                                        public void onSuccess(AddWalletBean addWalletBean) {
+                                            ToastUtil.toastLongMessage("取关成功");
+                                            topBean.getData().get(position).setIsFollow(0);
+                                            adapter1.notifyItemChanged(position);
 
                                         }
                                     });
+                                }else{//未关注
+
+                                    HttpProxy.obtain().post(Contants.URL + Contants.FOLLOW, params, new HttpCallback<AddWalletBean>() {
+                                        @Override
+                                        public void onFailure(String e) {
+                                            ToastUtil.toastLongMessage("关注失败");
+                                        }
+
+                                        @Override
+                                        public void onSuccess(AddWalletBean addWalletBean) {
+                                            topBean.getData().get(position).setIsFollow(1);
+                                            ToastUtil.toastLongMessage("关注成功");
+                                            adapter1.notifyItemChanged(position);
+                                        }
+                                    });
+                                }
+
+                            }else{
+                                DialogUtil.showPersonAlertDialog(CFMMActivity.this, topBean.getData().get(position).getAvatar(),
+                                        topBean.getData().get(position).getAlias(), "", topBean.getData().get(position).getSlogan(),
+                                        topBean.getData().get(position).getFansNum()+"", topBean.getData().get(position).getSuccessRate()+"%",
+                                        topBean.getData().get(position).getIncome()+"",
+                                        "主页", "关注", true, new DialogUtil.AlertDialogBtnClickListener() {
+                                            @Override
+                                            public void clickPositive() {
+                                                startActivity(new Intent(CFMMActivity.this,DakaDetailActivity.class)
+                                                        .putExtra(DakaDetailActivity.USER_ID,topBean.getData().get(position).getUserID()));
+                                            }
+
+                                            @Override
+                                            public void clickNegative() {
+
+                                            }
+                                        });
+                            }
+
                         }
                     });
                     dfbRecycler.setAdapter(adapter1);
@@ -115,7 +159,7 @@ public class CFMMActivity extends AppCompatActivity {
                 if(mainListData.getCode() == Contants.GET_DATA_SUCCESS) {
                     JBFragmentAdapter adapter = new JBFragmentAdapter(CFMMActivity.this,mainListData);
                     dktjRecycler.setAdapter(adapter);
-                    adapter.setOnItemClickListener(new CFMMAdapter1.OnItemClickListener() {
+                    adapter.setOnItemClickListener(new JBFragmentAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(View v, int position) {
                             startActivity(new Intent(CFMMActivity.this,JBDetailActivity.class)

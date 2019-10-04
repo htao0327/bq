@@ -48,7 +48,7 @@ public class SearchByPhoneBean {
         private String userId;
         private String userAvatar;
         private String userAlias;
-        private Object slogan;
+        private String slogan;
         private String userImCode;
 
         public String getUserId() {
@@ -75,11 +75,11 @@ public class SearchByPhoneBean {
             this.userAlias = userAlias;
         }
 
-        public Object getSlogan() {
+        public String getSlogan() {
             return slogan;
         }
 
-        public void setSlogan(Object slogan) {
+        public void setSlogan(String slogan) {
             this.slogan = slogan;
         }
 

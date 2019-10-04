@@ -37,19 +37,22 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.sy.biquan.Contants;
+import com.sy.biquan.MainActivity;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.CFMMActivity;
 import com.sy.biquan.activity.JBActivity;
 import com.sy.biquan.activity.KTActivity;
+import com.sy.biquan.activity.LoginActivity;
 import com.sy.biquan.activity.RemenActivity;
 import com.sy.biquan.activity.SearchActivity;
+import com.sy.biquan.activity.SendJbActivity;
 import com.sy.biquan.activity.XMActivity;
 import com.sy.biquan.adapter.JBAdapter;
 import com.sy.biquan.adapter.MainMenuAdapter;
 import com.sy.biquan.adapter.MainViewPagerAdapter;
 import com.sy.biquan.bean.BannerBean;
-import com.sy.biquan.bean.MainBean;
 import com.sy.biquan.bean.MainListData;
+import com.sy.biquan.bean.RegisterBean;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.SharedPreferencesUtil;
@@ -65,7 +68,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements View.OnClickListener {
 
     private EditText etSearch;
     private View rootView;
@@ -75,7 +78,7 @@ public class MainFragment extends Fragment {
     private TabLayout mTabLayout,mTabLayout2;
     private ViewPagerForScrollView titleViewPager;
     private List<String> mTabTitles = new ArrayList(){};//{"全部","最新","最热","当前涨幅","预期涨幅"}
-    private List<BaseFragment> mFragments = new ArrayList<>();
+    private List<Fragment> mFragments = new ArrayList<>();
 //    private MainViewPagerAdapter mAdapter;
 //    private LayoutInflater mInflater;
 //    private View view1;
@@ -88,6 +91,8 @@ public class MainFragment extends Fragment {
     private MainMenuAdapter mainMenuAdapter;
 
 
+    private String imCode = "";
+
     private TextView tv_cfmm,tv_jb,tv_kt,tv_xm,tv_rm;
     private LinearLayout ll_cfmm,jb,kt,xm,remen;
 //    private ImageView
@@ -97,6 +102,8 @@ public class MainFragment extends Fragment {
     private LinearLayout mLineLayoutDot;
     private ImageCarousel imageCarousel;
     private List<View> dots = new ArrayList<>();//小点
+
+    private ImageView iv_more;
 
     private List<BannerBean.DataBean> bannerLists;
 
@@ -131,11 +138,25 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
+        RegisterBean registerBean = SharedPreferencesUtil.getUserInfo();
+        if(registerBean != null && !"".equals(registerBean.toString())) {
+            imCode = registerBean.getData().getUserImCode();
+        }
         mTabTitles.add("全新");
         mTabTitles.add("最新");
         mTabTitles.add("最热");
         mTabTitles.add("当前涨幅");
         mTabTitles.add("预期涨幅");
+        JBFragment jbFragment = new JBFragment();
+        MainNewFragment newFragment = new MainNewFragment();
+        MainHotFragment hotFragment = new MainHotFragment();
+        MainDqzfFragment dqzfFragment = new MainDqzfFragment();
+        MainYqzfFragment mainYqzfFragment = new MainYqzfFragment();
+        mFragments.add(jbFragment);
+        mFragments.add(newFragment);
+        mFragments.add(hotFragment);
+        mFragments.add(dqzfFragment);
+        mFragments.add(mainYqzfFragment);
         titleViewPager.setAdapter(new JBAdapter(getActivity().getSupportFragmentManager(),mFragments,mTabTitles));
         TabLayoutUtil.setTabLayoutIndicator(mTabLayout);
         TabLayoutUtil.setTabLayoutIndicator(mTabLayout2);
@@ -143,43 +164,14 @@ public class MainFragment extends Fragment {
         mTabLayout2.setupWithViewPager(titleViewPager);
         etSearch.setFocusable(false);
         getScrollY();
-        etSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), SearchActivity.class));
-            }
-        });
+        iv_more.setOnClickListener(this);
+        etSearch.setOnClickListener(this);
 
-        remen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), RemenActivity.class));
-            }
-        });
-        ll_cfmm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), CFMMActivity.class));
-            }
-        });
-        xm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), XMActivity.class));
-            }
-        });
-        kt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), KTActivity.class));
-            }
-        });
-        jb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), JBActivity.class));
-            }
-        });
+        remen.setOnClickListener(this);
+        ll_cfmm.setOnClickListener(this);
+        xm.setOnClickListener(this);
+        kt.setOnClickListener(this);
+        jb.setOnClickListener(this);
 
         mSv.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
@@ -236,6 +228,37 @@ public class MainFragment extends Fragment {
         return y;
     }
 
+    @Override
+    public void onClick(View view) {
+        if("".equals(imCode )){
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+            return;
+        }
+        switch (view.getId()){
+            case R.id.iv_more:
+                startActivity(new Intent(getActivity(), SendJbActivity.class));
+                break;
+            case R.id.et_search:
+                startActivity(new Intent(getActivity(), SearchActivity.class));
+                break;
+            case R.id.ll_remen:
+                startActivity(new Intent(getActivity(), RemenActivity.class));
+                break;
+            case R.id.ll_cfmm:
+                startActivity(new Intent(getActivity(), CFMMActivity.class));
+                break;
+            case R.id.ll_xm:
+                startActivity(new Intent(getActivity(), XMActivity.class));
+                break;
+            case R.id.ll_kt:
+                startActivity(new Intent(getActivity(), KTActivity.class));
+                break;
+            case R.id.ll_jb:
+                startActivity(new Intent(getActivity(), JBActivity.class));
+                break;
+        }
+    }
+
     private void initView(){
         etSearch = rootView.findViewById(R.id.et_search);
         mSv = rootView.findViewById(R.id.sv_main);
@@ -252,6 +275,7 @@ public class MainFragment extends Fragment {
         remen = rootView.findViewById(R.id.ll_remen);
         ll_tab_layout = rootView.findViewById(R.id.ll_tab_layout);
         ll_tab_layout2 = rootView.findViewById(R.id.ll_tab_layout_disable);
+        iv_more = rootView.findViewById(R.id.iv_more);
 
 //        mainMenuAdapter = new MainMenuAdapter();
     }
@@ -386,5 +410,6 @@ public class MainFragment extends Fragment {
             }
         });
     }
+
 
 }

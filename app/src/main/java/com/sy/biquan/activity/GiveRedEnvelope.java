@@ -120,14 +120,14 @@ public class GiveRedEnvelope extends AppCompatActivity implements View.OnClickLi
                     Log.e("GiveRedEnvelope","onSuccess"+redEnvelopeBean.toString());
                     if(redEnvelopeBean.getCode() == Contants.GET_DATA_SUCCESS){
 
-                        ChatLayoutHelper.CustomMessageData customMessageData = redEnvelopeBean;
-                        customMessageData.setVersion(1);
-                        customMessageData.setType(1);
-                        EventBus.getDefault().post(customMessageData);
-
-                        finish();
+//                        ChatLayoutHelper.CustomMessageData customMessageData = redEnvelopeBean;
+//                        customMessageData.setVersion(1);
+//                        customMessageData.setType(1);
+//                        EventBus.getDefault().post(customMessageData);
+//
+//                        finish();
                     }else {
-                        ToastUtil.toastLongMessage(redEnvelopeBean.getMessage());
+                        ToastUtil.toastLongMessage(redEnvelopeBean.getMsg());
                     }
                 }
             });

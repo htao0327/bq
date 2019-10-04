@@ -12,7 +12,6 @@ import com.tencent.qcloud.tim.uikit.R;
 import com.tencent.qcloud.tim.uikit.component.TitleBarLayout;
 import com.tencent.qcloud.tim.uikit.modules.contact.interfaces.IContactLayout;
 
-
 public class ContactLayout extends LinearLayout implements IContactLayout {
 
     private static final String TAG = ContactLayout.class.getSimpleName();

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,7 +21,9 @@ import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.BaseSetActivity;
 import com.sy.biquan.activity.JYActivity;
+import com.sy.biquan.activity.MyJbActivity;
 import com.sy.biquan.activity.MyWalletActivity;
+import com.sy.biquan.activity.SetInvitePersonActivity;
 import com.sy.biquan.bean.MineDataBean;
 import com.sy.biquan.bean.RegisterBean;
 import com.sy.biquan.proxy.HttpCallback;
@@ -34,12 +37,14 @@ import java.util.Map;
 public class MineFragment extends Fragment {
 
     private View rootView;
-    private LinearLayout ll_my_deal,ll_my_jb,ll_qb,ll_set;
+    private LinearLayout ll_my_deal,ll_my_jb,ll_qb,ll_set,ll_register;
     private TextView name;//用户姓名
     private TextView userMsg;//用户slogan
     private TextView gz;//关注
     private TextView fs;//粉丝
     private TextView qd;//Q豆
+    private TextView bj;//编辑
+    private Button exit;//编辑
     private NiceImageView userImg;//用户头像
     private MineDataBean mMineDataBean;
     @Nullable
@@ -57,10 +62,22 @@ public class MineFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 //        initView();
 //        getData();
+        bj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), BaseSetActivity.class));
+            }
+        });
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+        });
         ll_my_jb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(getActivity(), MyJbActivity.class));
             }
         });
 
@@ -84,8 +101,14 @@ public class MineFragment extends Fragment {
                 startActivity(new Intent(getActivity(), BaseSetActivity.class));
             }
         });
-
+        ll_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), SetInvitePersonActivity.class));
+            }
+        });
     }
+
     private void initView(){
         ll_my_deal = rootView.findViewById(R.id.ll_my_deal);
         ll_my_jb = rootView.findViewById(R.id.ll_my_jb);
@@ -97,6 +120,9 @@ public class MineFragment extends Fragment {
         qd = rootView.findViewById(R.id.tv_qd_counts);
         userImg = rootView.findViewById(R.id.iv_user);
         ll_set = rootView.findViewById(R.id.ll_set);
+        bj = rootView.findViewById(R.id.tv_bj);
+        exit = rootView.findViewById(R.id.btn_exit);
+        ll_register = rootView.findViewById(R.id.ll_register);
 
     }
 

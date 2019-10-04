@@ -11,10 +11,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
+import com.sy.biquan.adapter.JysAdapter;
+import com.sy.biquan.bean.JbDetailBean;
 import com.sy.biquan.chat.ChatActivity;
+
+import java.util.List;
 
 public class DialogUtil {
     private static AlertDialog dialog;
@@ -225,6 +232,20 @@ public class DialogUtil {
 
         dialog = builder.create();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);//去掉圆角背景背后的棱角
+        dialog.setCanceledOnTouchOutside(true);   //失去焦点dismiss
+        dialog.show();
+    }
+
+    public static void showJysDialog(Context context, List<JbDetailBean.DataBean.BourseListBean> bourseList){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = LayoutInflater.from(MyApplication.instance()).inflate(R.layout.jys_dialog, null);
+        builder.setView(view);
+        RecyclerView rv = view.findViewById(R.id.rv_jys_list);
+        rv.setLayoutManager(new LinearLayoutManager(context));
+        JysAdapter adapter = new JysAdapter(context,bourseList);
+        rv.setAdapter(adapter);
+        dialog = builder.create();
+//        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);//去掉圆角背景背后的棱角
         dialog.setCanceledOnTouchOutside(true);   //失去焦点dismiss
         dialog.show();
     }

@@ -5,9 +5,9 @@ import java.util.List;
 public class MainListData {
 
     /**
-     * msg : 成功
+     * msg : ok
      * code : 200
-     * data : [{"id":"8cef6cc3-a8ba-4fc1-826d-c012b6295d2d38","userId":"1175339087532007425","title":"开发测试荐币订单","startTime":"11天4小时22分钟前","nowRise":554.15,"expectedRise":10,"bourse":"抹茶","isLock":0,"expectedSucRate":0,"avgIncome":0,"userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg","userName":"昵称","qbeanNumber":30},{"id":"10","userId":"1","title":"开发测试荐币订单","startTime":"11天4小时22分钟前","nowRise":142.94,"expectedRise":10,"bourse":"抹茶","isLock":0,"expectedSucRate":0,"avgIncome":0,"userAvatar":"http://pic16.nipic.com/20111006/6239936_092702973000_2.jpg","userName":"管理员","qbeanNumber":30},{"id":"1176438909910052866","userId":"1174882402065584130","title":"开发测试荐币订单","startTime":"11天4小时22分钟前","nowRise":76.77,"expectedRise":10,"bourse":"抹茶","isLock":0,"expectedSucRate":17,"avgIncome":73,"userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/ios_image/ios_20190929162511_1383397_image.jpg","userName":"国庆节快乐","qbeanNumber":0},{"id":"1176439073777315841","userId":"1174882402065584130","title":"开发测试荐币订单","startTime":"11天4小时22分钟前","nowRise":73.65,"expectedRise":10,"bourse":"抹茶","isLock":0,"expectedSucRate":17,"avgIncome":73,"userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/ios_image/ios_20190929162511_1383397_image.jpg","userName":"国庆节快乐","qbeanNumber":0},{"id":"1172087687447003137","userId":"1174882402065584130","title":"开发测试荐币订单","startTime":"11天4小时22分钟前","nowRise":72.83,"expectedRise":10,"bourse":"抹茶","isLock":0,"expectedSucRate":17,"avgIncome":73,"userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/ios_image/ios_20190929162511_1383397_image.jpg","userName":"国庆节快乐","qbeanNumber":30},{"id":"1176438198103109634","userId":"1174882402065584130","title":"开发测试荐币订单","startTime":"11天4小时22分钟前","nowRise":72.61,"expectedRise":10,"bourse":"抹茶","isLock":0,"expectedSucRate":17,"avgIncome":73,"userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/ios_image/ios_20190929162511_1383397_image.jpg","userName":"国庆节快乐","qbeanNumber":0},{"id":"4c4b2b0a-4f05-4daf-8d52-df105f5a0ad058","userId":"1","title":"开发测试荐币订单","startTime":"11天4小时22分钟前","nowRise":58.74,"expectedRise":10,"bourse":"抹茶","isLock":0,"expectedSucRate":0,"avgIncome":0,"userAvatar":"http://pic16.nipic.com/20111006/6239936_092702973000_2.jpg","userName":"管理员","qbeanNumber":30},{"id":"14","userId":"1174882402065584130","title":"开发测试荐币订单","startTime":"11天4小时22分钟前","nowRise":42.1,"expectedRise":10,"bourse":"抹茶","isLock":0,"expectedSucRate":17,"avgIncome":73,"userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/ios_image/ios_20190929162511_1383397_image.jpg","userName":"国庆节快乐","qbeanNumber":30},{"id":"6906a26f-83f1-4756-b679-d362adb93cd147","userId":"1175339087532007425","title":"开发测试荐币订单","startTime":"11天4小时22分钟前","nowRise":24.99,"expectedRise":10,"bourse":"抹茶","isLock":0,"expectedSucRate":0,"avgIncome":0,"userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg","userName":"昵称","qbeanNumber":30},{"id":"6","userId":"1175339087532007425","title":"开发测试荐币订单","startTime":"11天4小时22分钟前","nowRise":20.99,"expectedRise":10,"bourse":"抹茶","isLock":0,"expectedSucRate":0,"avgIncome":0,"userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg","userName":"昵称","qbeanNumber":30}]
+     * data : [{"income":30,"userAvatar":"http://pic16.nipic.com/20111006/6239936_092702973000_2.jpg","fanNum":1,"title":"结束订单","userName":"管理员","expectedSucRate":0,"userID":"1","isLock":0,"isFollow":0,"bourse":[{"exchangeRegSite":"http://zhucedizhi","exchangeName":"抹茶","id":"1","exchangeSite":"http://guanwangdizhi"},{"exchangeRegSite":"http://zhucedizhi","exchangeName":"火币","id":"2","exchangeSite":"http://guanwangdizhi"},{"exchangeRegSite":"http://zhucedizhi","exchangeName":"币安","id":"3","exchangeSite":"http://guanwangdizhi"}],"nowRise":-0.82,"expectedRise":10,"avgIncomeRate":0,"currency":"ETH","startTime":"0天22小时15分钟前","id":"1178963595820138491","slogan":"","qbNumer":30},{"income":30,"userAvatar":"http://pic16.nipic.com/20111006/6239936_092702973000_2.jpg","fanNum":1,"title":"测试订单","userName":"管理员","expectedSucRate":0,"userID":"1","isLock":0,"isFollow":0,"bourse":[{"exchangeRegSite":"http://zhucedizhi","exchangeName":"抹茶","id":"1","exchangeSite":"http://guanwangdizhi"},{"exchangeRegSite":"http://zhucedizhi","exchangeName":"火币","id":"2","exchangeSite":"http://guanwangdizhi"},{"exchangeRegSite":"http://zhucedizhi","exchangeName":"币安","id":"3","exchangeSite":"http://guanwangdizhi"}],"nowRise":-1.59,"expectedRise":10,"avgIncomeRate":0,"currency":"ETH","startTime":"0天22小时15分钟前","id":"1178963595820138498","slogan":"","qbNumer":30}]
      */
 
     private String msg;
@@ -40,49 +40,67 @@ public class MainListData {
 
     public static class DataBean {
         /**
-         * id : 8cef6cc3-a8ba-4fc1-826d-c012b6295d2d38
-         * userId : 1175339087532007425
-         * title : 开发测试荐币订单
-         * startTime : 11天4小时22分钟前
-         * nowRise : 554.15
-         * expectedRise : 10.0
-         * bourse : 抹茶
+         * income : 30.0
+         * userAvatar : http://pic16.nipic.com/20111006/6239936_092702973000_2.jpg
+         * fanNum : 1
+         * title : 结束订单
+         * userName : 管理员
+         * expectedSucRate : 0.0
+         * userID : 1
          * isLock : 0
-         * expectedSucRate : 0
-         * avgIncome : 0
-         * userAvatar : https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg
-         * userName : 昵称
-         * qbeanNumber : 30
+         * isFollow : 0
+         * bourse : [{"exchangeRegSite":"http://zhucedizhi","exchangeName":"抹茶","id":"1","exchangeSite":"http://guanwangdizhi"},{"exchangeRegSite":"http://zhucedizhi","exchangeName":"火币","id":"2","exchangeSite":"http://guanwangdizhi"},{"exchangeRegSite":"http://zhucedizhi","exchangeName":"币安","id":"3","exchangeSite":"http://guanwangdizhi"}]
+         * nowRise : -0.82
+         * expectedRise : 10.0
+         * avgIncomeRate : 0.0
+         * currency : ETH
+         * startTime : 0天22小时15分钟前
+         * id : 1178963595820138491
+         * slogan :
+         * qbNumer : 30
          */
 
-        private String id;
-        private String userId;
+        private double income;
+        private String userAvatar;
+        private int fanNum;
         private String title;
-        private String startTime;
+        private String userName;
+        private double expectedSucRate;
+        private String userID;
+        private int isLock;
+        private int isFollow;
         private double nowRise;
         private double expectedRise;
-        private String bourse;
-        private int isLock;
-        private double expectedSucRate;
-        private double avgIncome;
-        private String userAvatar;
-        private String userName;
-        private int qbeanNumber;
+        private double avgIncomeRate;
+        private String currency;
+        private String startTime;
+        private String id;
+        private String slogan;
+        private int qbNumer;
+        private List<BourseBean> bourse;
 
-        public String getId() {
-            return id;
+        public double getIncome() {
+            return income;
         }
 
-        public void setId(String id) {
-            this.id = id;
+        public void setIncome(double income) {
+            this.income = income;
         }
 
-        public String getUserId() {
-            return userId;
+        public String getUserAvatar() {
+            return userAvatar;
         }
 
-        public void setUserId(String userId) {
-            this.userId = userId;
+        public void setUserAvatar(String userAvatar) {
+            this.userAvatar = userAvatar;
+        }
+
+        public int getFanNum() {
+            return fanNum;
+        }
+
+        public void setFanNum(int fanNum) {
+            this.fanNum = fanNum;
         }
 
         public String getTitle() {
@@ -93,12 +111,44 @@ public class MainListData {
             this.title = title;
         }
 
-        public String getStartTime() {
-            return startTime;
+        public String getUserName() {
+            return userName;
         }
 
-        public void setStartTime(String startTime) {
-            this.startTime = startTime;
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public double getExpectedSucRate() {
+            return expectedSucRate;
+        }
+
+        public void setExpectedSucRate(double expectedSucRate) {
+            this.expectedSucRate = expectedSucRate;
+        }
+
+        public String getUserID() {
+            return userID;
+        }
+
+        public void setUserID(String userID) {
+            this.userID = userID;
+        }
+
+        public int getIsLock() {
+            return isLock;
+        }
+
+        public void setIsLock(int isLock) {
+            this.isLock = isLock;
+        }
+
+        public int getIsFollow() {
+            return isFollow;
+        }
+
+        public void setIsFollow(int isFollow) {
+            this.isFollow = isFollow;
         }
 
         public double getNowRise() {
@@ -117,60 +167,106 @@ public class MainListData {
             this.expectedRise = expectedRise;
         }
 
-        public String getBourse() {
+        public double getAvgIncomeRate() {
+            return avgIncomeRate;
+        }
+
+        public void setAvgIncomeRate(double avgIncomeRate) {
+            this.avgIncomeRate = avgIncomeRate;
+        }
+
+        public String getCurrency() {
+            return currency;
+        }
+
+        public void setCurrency(String currency) {
+            this.currency = currency;
+        }
+
+        public String getStartTime() {
+            return startTime;
+        }
+
+        public void setStartTime(String startTime) {
+            this.startTime = startTime;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getSlogan() {
+            return slogan;
+        }
+
+        public void setSlogan(String slogan) {
+            this.slogan = slogan;
+        }
+
+        public int getQbNumer() {
+            return qbNumer;
+        }
+
+        public void setQbNumer(int qbNumer) {
+            this.qbNumer = qbNumer;
+        }
+
+        public List<BourseBean> getBourse() {
             return bourse;
         }
 
-        public void setBourse(String bourse) {
+        public void setBourse(List<BourseBean> bourse) {
             this.bourse = bourse;
         }
 
-        public int getIsLock() {
-            return isLock;
-        }
+        public static class BourseBean {
+            /**
+             * exchangeRegSite : http://zhucedizhi
+             * exchangeName : 抹茶
+             * id : 1
+             * exchangeSite : http://guanwangdizhi
+             */
 
-        public void setIsLock(int isLock) {
-            this.isLock = isLock;
-        }
+            private String exchangeRegSite;
+            private String exchangeName;
+            private String id;
+            private String exchangeSite;
 
-        public double getExpectedSucRate() {
-            return expectedSucRate;
-        }
+            public String getExchangeRegSite() {
+                return exchangeRegSite;
+            }
 
-        public void setExpectedSucRate(double expectedSucRate) {
-            this.expectedSucRate = expectedSucRate;
-        }
+            public void setExchangeRegSite(String exchangeRegSite) {
+                this.exchangeRegSite = exchangeRegSite;
+            }
 
-        public double getAvgIncome() {
-            return avgIncome;
-        }
+            public String getExchangeName() {
+                return exchangeName;
+            }
 
-        public void setAvgIncome(double avgIncome) {
-            this.avgIncome = avgIncome;
-        }
+            public void setExchangeName(String exchangeName) {
+                this.exchangeName = exchangeName;
+            }
 
-        public String getUserAvatar() {
-            return userAvatar;
-        }
+            public String getId() {
+                return id;
+            }
 
-        public void setUserAvatar(String userAvatar) {
-            this.userAvatar = userAvatar;
-        }
+            public void setId(String id) {
+                this.id = id;
+            }
 
-        public String getUserName() {
-            return userName;
-        }
+            public String getExchangeSite() {
+                return exchangeSite;
+            }
 
-        public void setUserName(String userName) {
-            this.userName = userName;
-        }
-
-        public int getQbeanNumber() {
-            return qbeanNumber;
-        }
-
-        public void setQbeanNumber(int qbeanNumber) {
-            this.qbeanNumber = qbeanNumber;
+            public void setExchangeSite(String exchangeSite) {
+                this.exchangeSite = exchangeSite;
+            }
         }
     }
 }

@@ -9,10 +9,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import com.sy.biquan.Contants;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
-import com.sy.biquan.activity.CheckDealInfoActivity;
 import com.sy.biquan.activity.GiveRedEnvelope;
 import com.sy.biquan.activity.LaunchDealActivity;
 import com.sy.biquan.bean.DealBean;
@@ -30,8 +30,6 @@ import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.MessageLayout;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.ICustomMessageViewGroup;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.IOnCustomMessageDrawListener;
 import com.tencent.qcloud.tim.uikit.modules.message.MessageInfo;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -205,7 +203,7 @@ public class ChatLayoutHelper {
 //        inputLayout.disableSendFileAction(true);
 //        inputLayout.disableSendPhotoAction(true);
 //        inputLayout.disableVideoRecordAction(true);
-        // TODO 可以自己增加一些功能，可以打开下面代码测试
+//         TODO 可以自己增加一些功能，可以打开下面代码测试
         InputMoreActionUnit unit = new InputMoreActionUnit();
         unit.setIconResId(R.drawable.hb);
         unit.setTitleId(R.string.laoyao);
@@ -218,7 +216,7 @@ public class ChatLayoutHelper {
 //                MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
 //                layout.sendMessage(info, false);
 //                EventBus.getDefault().post(layout);
-                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnvelope.class));
+                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnvelope.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
             }
         });
@@ -230,6 +228,15 @@ public class ChatLayoutHelper {
      */
     public static class CustomMessageData {
           private int type = 1;
+        /**
+         * msg : ok
+         * code : 200
+         * data : {"number":1,"receiverId":"1175963275095638017","money":10,"createTime":"2019-09-28T10:00:00.546+0000","remainNumber":1,"expire":0,"groupId":"","congratulations":"1对1打赏","id":"1177885662603415554","type":2,"userName":"测试","userId":"1174882402065584130","userAvatar":""}
+         */
+
+        private String msg;
+        private int code;
+        private DataBean data;
 
         public int getType() {
             return type;
@@ -251,15 +258,13 @@ public class ChatLayoutHelper {
             this.version = version;
         }
 
-        /**
-         * code : 200
-         * message : ok
-         * data : {"id":"1174987434899439618","userId":"1174940561761329154","receiverId":"","userName":null,"groupId":"","money":5,"congratulations":"","number":5,"remainNumber":5,"createTime":"2019-09-20 18:03:29","expire":0,"type":1}
-         */
+        public String getMsg() {
+            return msg;
+        }
 
-        private int code;
-        private String message;
-        private DataBean data;
+        public void setMsg(String msg) {
+            this.msg = msg;
+        }
 
         public int getCode() {
             return code;
@@ -267,14 +272,6 @@ public class ChatLayoutHelper {
 
         public void setCode(int code) {
             this.code = code;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
         }
 
         public DataBean getData() {
@@ -285,49 +282,45 @@ public class ChatLayoutHelper {
             this.data = data;
         }
 
+
         public static class DataBean {
             /**
-             * id : 1174987434899439618
-             * userId : 1174940561761329154
-             * receiverId :
-             * userName : null
-             * groupId :
-             * money : 5.0
-             * congratulations :
-             * number : 5
-             * remainNumber : 5
-             * createTime : 2019-09-20 18:03:29
+             * number : 1
+             * receiverId : 1175963275095638017
+             * money : 10
+             * createTime : 2019-09-28T10:00:00.546+0000
+             * remainNumber : 1
              * expire : 0
-             * type : 1
+             * groupId :
+             * congratulations : 1对1打赏
+             * id : 1177885662603415554
+             * type : 2
+             * userName : 测试
+             * userId : 1174882402065584130
+             * userAvatar :
              */
 
-            private String id;
-            private String userId;
-            private String receiverId;
-            private Object userName;
-            private String groupId;
-            private double money;
-            private String congratulations;
             private int number;
-            private int remainNumber;
+            private String receiverId;
+            private int money;
             private String createTime;
+            private int remainNumber;
             private int expire;
-            private int type;
+            private String groupId;
+            private String congratulations;
+            private String id;
+            @SerializedName("type")
+            private int typeX;
+            private String userName;
+            private String userId;
+            private String userAvatar;
 
-            public String getId() {
-                return id;
+            public int getNumber() {
+                return number;
             }
 
-            public void setId(String id) {
-                this.id = id;
-            }
-
-            public String getUserId() {
-                return userId;
-            }
-
-            public void setUserId(String userId) {
-                this.userId = userId;
+            public void setNumber(int number) {
+                this.number = number;
             }
 
             public String getReceiverId() {
@@ -338,52 +331,12 @@ public class ChatLayoutHelper {
                 this.receiverId = receiverId;
             }
 
-            public Object getUserName() {
-                return userName;
-            }
-
-            public void setUserName(Object userName) {
-                this.userName = userName;
-            }
-
-            public String getGroupId() {
-                return groupId;
-            }
-
-            public void setGroupId(String groupId) {
-                this.groupId = groupId;
-            }
-
-            public double getMoney() {
+            public int getMoney() {
                 return money;
             }
 
-            public void setMoney(double money) {
+            public void setMoney(int money) {
                 this.money = money;
-            }
-
-            public String getCongratulations() {
-                return congratulations;
-            }
-
-            public void setCongratulations(String congratulations) {
-                this.congratulations = congratulations;
-            }
-
-            public int getNumber() {
-                return number;
-            }
-
-            public void setNumber(int number) {
-                this.number = number;
-            }
-
-            public int getRemainNumber() {
-                return remainNumber;
-            }
-
-            public void setRemainNumber(int remainNumber) {
-                this.remainNumber = remainNumber;
             }
 
             public String getCreateTime() {
@@ -394,6 +347,14 @@ public class ChatLayoutHelper {
                 this.createTime = createTime;
             }
 
+            public int getRemainNumber() {
+                return remainNumber;
+            }
+
+            public void setRemainNumber(int remainNumber) {
+                this.remainNumber = remainNumber;
+            }
+
             public int getExpire() {
                 return expire;
             }
@@ -402,16 +363,62 @@ public class ChatLayoutHelper {
                 this.expire = expire;
             }
 
-            public int getType() {
-                return type;
+            public String getGroupId() {
+                return groupId;
             }
 
-            public void setType(int type) {
-                this.type = type;
+            public void setGroupId(String groupId) {
+                this.groupId = groupId;
+            }
+
+            public String getCongratulations() {
+                return congratulations;
+            }
+
+            public void setCongratulations(String congratulations) {
+                this.congratulations = congratulations;
+            }
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public int getTypeX() {
+                return typeX;
+            }
+
+            public void setTypeX(int typeX) {
+                this.typeX = typeX;
+            }
+
+            public String getUserName() {
+                return userName;
+            }
+
+            public void setUserName(String userName) {
+                this.userName = userName;
+            }
+
+            public String getUserId() {
+                return userId;
+            }
+
+            public void setUserId(String userId) {
+                this.userId = userId;
+            }
+
+            public String getUserAvatar() {
+                return userAvatar;
+            }
+
+            public void setUserAvatar(String userAvatar) {
+                this.userAvatar = userAvatar;
             }
         }
-
-
     }
 
     public static class DealMessageDraw implements  IOnCustomMessageDrawListener{

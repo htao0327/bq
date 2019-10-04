@@ -7,7 +7,7 @@ public class JbDetailBean {
     /**
      * msg : ok
      * code : 200
-     * data : {"tuiJianPrice":8000,"avgRecommendRise":0,"userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg","userName":"昵称","userId":"1175339087532007425","nowTime":"1569489125526","isLock":0,"isFollow":0,"nowPrice":8408.4,"bourseList":[{"id":"1","exchangeSite":"https://ssss","exchangeName":"鹿晗","exchangeRegSite":"12123"}],"isMe":0,"nowRise":0,"expectedSucRise":0,"percentage":"0.84","startTime":"1567675697000","endTime":"1569829608000","id":"26c7a63c-0d0e-4611-b95c-6d3f1b47aac144","expectRise":null,"qbNumber":30,"status":0,"jb_desc":"","photo":""}
+     * data : {"tuiJianPrice":6747,"jb_desc":"1","avgRecommendRise":9.24,"userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/ios_image/ios_20190929162511_1383397_image.jpg","photo":"1","userName":"国庆节快乐呀","userId":"1174882402065584130","nowTime":"1569916184471","bourseList":[{"exchangeRegSite":"http://zhucedizhi","exchangeName":"抹茶","id":"1","exchangeSite":"http://guanwangdizhi"},{"exchangeRegSite":"http://zhucedizhi","exchangeName":"火币","id":"2","exchangeSite":"http://guanwangdizhi"},{"exchangeRegSite":"http://zhucedizhi","exchangeName":"币安","id":"3","exchangeSite":"http://guanwangdizhi"},{"exchangeRegSite":"http://zhucedizhi","exchangeName":"K网","id":"4","exchangeSite":"http://guanwangdizhi"}],"isLock":0,"isFollow":0,"nowPrice":18.48,"isMe":0,"nowRise":18.48,"expectedSucRise":0.5,"percentage":"1.08","currency":"btc","startTime":"1568798897000","endTime":"1569829608000","id":"1171259472178376705","expectRise":10,"isSuccess":1,"qbNumber":30,"status":0}
      */
 
     private String msg;
@@ -40,33 +40,37 @@ public class JbDetailBean {
 
     public static class DataBean {
         /**
-         * tuiJianPrice : 8000
-         * avgRecommendRise : 0
-         * userAvatar : https://landscape-test.oss-cn-hangzhou.aliyuncs.com/default_avatar/%E6%9D%A8%E9%A2%96.jpeg
-         * userName : 昵称
-         * userId : 1175339087532007425
-         * nowTime : 1569489125526
+         * tuiJianPrice : 6747.0
+         * jb_desc : 1
+         * avgRecommendRise : 9.24
+         * userAvatar : https://landscape-test.oss-cn-hangzhou.aliyuncs.com/ios_image/ios_20190929162511_1383397_image.jpg
+         * photo : 1
+         * userName : 国庆节快乐呀
+         * userId : 1174882402065584130
+         * nowTime : 1569916184471
+         * bourseList : [{"exchangeRegSite":"http://zhucedizhi","exchangeName":"抹茶","id":"1","exchangeSite":"http://guanwangdizhi"},{"exchangeRegSite":"http://zhucedizhi","exchangeName":"火币","id":"2","exchangeSite":"http://guanwangdizhi"},{"exchangeRegSite":"http://zhucedizhi","exchangeName":"币安","id":"3","exchangeSite":"http://guanwangdizhi"},{"exchangeRegSite":"http://zhucedizhi","exchangeName":"K网","id":"4","exchangeSite":"http://guanwangdizhi"}]
          * isLock : 0
          * isFollow : 0
-         * nowPrice : 8408.4
-         * bourseList : [{"id":"1","exchangeSite":"https://ssss","exchangeName":"鹿晗","exchangeRegSite":"12123"}]
+         * nowPrice : 18.48
          * isMe : 0
-         * nowRise : 0
-         * expectedSucRise : 0
-         * percentage : 0.84
-         * startTime : 1567675697000
+         * nowRise : 18.48
+         * expectedSucRise : 0.5
+         * percentage : 1.08
+         * currency : btc
+         * startTime : 1568798897000
          * endTime : 1569829608000
-         * id : 26c7a63c-0d0e-4611-b95c-6d3f1b47aac144
-         * expectRise : null
+         * id : 1171259472178376705
+         * expectRise : 10.0
+         * isSuccess : 1
          * qbNumber : 30
          * status : 0
-         * jb_desc :
-         * photo :
          */
 
         private double tuiJianPrice;
+        private String jb_desc;
         private double avgRecommendRise;
         private String userAvatar;
+        private String photo;
         private String userName;
         private String userId;
         private String nowTime;
@@ -77,14 +81,14 @@ public class JbDetailBean {
         private double nowRise;
         private double expectedSucRise;
         private String percentage;
+        private String currency;
         private String startTime;
         private String endTime;
         private String id;
-        private Object expectRise;
-        private double qbNumber;
+        private double expectRise;
+        private int isSuccess;
+        private int qbNumber;
         private int status;
-        private String jb_desc;
-        private String photo;
         private List<BourseListBean> bourseList;
 
         public double getTuiJianPrice() {
@@ -93,6 +97,14 @@ public class JbDetailBean {
 
         public void setTuiJianPrice(double tuiJianPrice) {
             this.tuiJianPrice = tuiJianPrice;
+        }
+
+        public String getJb_desc() {
+            return jb_desc;
+        }
+
+        public void setJb_desc(String jb_desc) {
+            this.jb_desc = jb_desc;
         }
 
         public double getAvgRecommendRise() {
@@ -109,6 +121,14 @@ public class JbDetailBean {
 
         public void setUserAvatar(String userAvatar) {
             this.userAvatar = userAvatar;
+        }
+
+        public String getPhoto() {
+            return photo;
+        }
+
+        public void setPhoto(String photo) {
+            this.photo = photo;
         }
 
         public String getUserName() {
@@ -191,6 +211,14 @@ public class JbDetailBean {
             this.percentage = percentage;
         }
 
+        public String getCurrency() {
+            return currency;
+        }
+
+        public void setCurrency(String currency) {
+            this.currency = currency;
+        }
+
         public String getStartTime() {
             return startTime;
         }
@@ -215,19 +243,27 @@ public class JbDetailBean {
             this.id = id;
         }
 
-        public Object getExpectRise() {
+        public double getExpectRise() {
             return expectRise;
         }
 
-        public void setExpectRise(Object expectRise) {
+        public void setExpectRise(double expectRise) {
             this.expectRise = expectRise;
         }
 
-        public double getQbNumber() {
+        public int getIsSuccess() {
+            return isSuccess;
+        }
+
+        public void setIsSuccess(int isSuccess) {
+            this.isSuccess = isSuccess;
+        }
+
+        public int getQbNumber() {
             return qbNumber;
         }
 
-        public void setQbNumber(double qbNumber) {
+        public void setQbNumber(int qbNumber) {
             this.qbNumber = qbNumber;
         }
 
@@ -237,22 +273,6 @@ public class JbDetailBean {
 
         public void setStatus(int status) {
             this.status = status;
-        }
-
-        public String getJb_desc() {
-            return jb_desc;
-        }
-
-        public void setJb_desc(String jb_desc) {
-            this.jb_desc = jb_desc;
-        }
-
-        public String getPhoto() {
-            return photo;
-        }
-
-        public void setPhoto(String photo) {
-            this.photo = photo;
         }
 
         public List<BourseListBean> getBourseList() {
@@ -265,16 +285,32 @@ public class JbDetailBean {
 
         public static class BourseListBean {
             /**
+             * exchangeRegSite : http://zhucedizhi
+             * exchangeName : 抹茶
              * id : 1
-             * exchangeSite : https://ssss
-             * exchangeName : 鹿晗
-             * exchangeRegSite : 12123
+             * exchangeSite : http://guanwangdizhi
              */
 
+            private String exchangeRegSite;
+            private String exchangeName;
             private String id;
             private String exchangeSite;
-            private String exchangeName;
-            private String exchangeRegSite;
+
+            public String getExchangeRegSite() {
+                return exchangeRegSite;
+            }
+
+            public void setExchangeRegSite(String exchangeRegSite) {
+                this.exchangeRegSite = exchangeRegSite;
+            }
+
+            public String getExchangeName() {
+                return exchangeName;
+            }
+
+            public void setExchangeName(String exchangeName) {
+                this.exchangeName = exchangeName;
+            }
 
             public String getId() {
                 return id;
@@ -290,22 +326,6 @@ public class JbDetailBean {
 
             public void setExchangeSite(String exchangeSite) {
                 this.exchangeSite = exchangeSite;
-            }
-
-            public String getExchangeName() {
-                return exchangeName;
-            }
-
-            public void setExchangeName(String exchangeName) {
-                this.exchangeName = exchangeName;
-            }
-
-            public String getExchangeRegSite() {
-                return exchangeRegSite;
-            }
-
-            public void setExchangeRegSite(String exchangeRegSite) {
-                this.exchangeRegSite = exchangeRegSite;
             }
         }
     }

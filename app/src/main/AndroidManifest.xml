@@ -3,8 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sy.biquan">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.hardware.camera.autofocus" />
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -58,15 +64,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <activity android:name=".activity.LoginActivity"/>-->
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".activity.LoginActivity"/>
+<!--        <activity android:name=".MainActivity"/>-->
         <activity android:name=".activity.RegisterActivity"/>
         <activity android:name=".activity.ResetPwd"/>
         <activity android:name=".activity.BaseActivity"/>
@@ -97,6 +103,19 @@
         <activity android:name=".activity.SlognSetActivity"/>
         <activity android:name=".activity.DakaDetailActivity"/>
         <activity android:name=".activity.JBDetailActivity"/>
+        <activity android:name=".activity.XMDetail"/>
+        <activity android:name=".activity.AddGLianActivity"/>
+        <activity android:name=".activity.MyGroupInfoActivity"/>
+        <activity android:name=".activity.ModifyGroupName"/>
+        <activity android:name=".activity.UserInfoActivity"/>
+        <activity android:name=".activity.SearchGroupInfoActivity"/>
+        <activity android:name=".contact.MyContactActivity"/>
+        <activity android:name=".activity.SendJbActivity"/>
+        <activity android:name=".activity.SetDealPwdActivity"/>
+        <activity android:name=".activity.MyJbActivity"/>
+        <activity android:name=".activity.SetInvitePersonActivity"/>
+        <activity android:name=".activity.AccountSafeActivity"/>
+        <activity android:name=".activity.AboutUs"/>
 
     </application>
 

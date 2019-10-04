@@ -5,14 +5,22 @@ import java.util.List;
 public class MainBean {
 
     /**
+     * msg : 成功
      * code : 200
-     * message : ok
-     * data : {"orderCategoryList":[{"id":"1","categoryName":"全部","categoryCode":"ALL"},{"id":"2","categoryName":"最新","categoryCode":"NEWEST"},{"id":"3","categoryName":"最热","categoryCode":"HOT"},{"id":"4","categoryName":"当前涨幅","categoryCode":"CURRENT"},{"id":"5","categoryName":"预期涨幅","categoryCode":"EXPECT"}],"channelList":[{"id":"1","channelName":"财富密码","channelType":1,"createTime":"2019-08-27 12:44:41","updateTime":"2019-08-27 12:44:41","channelImg":""},{"id":"2","channelName":"荐币","channelType":1,"createTime":"2019-08-27 12:44:41","updateTime":"2019-08-27 12:44:41","channelImg":""},{"id":"3","channelName":"空投","channelType":1,"createTime":"2019-08-27 12:44:41","updateTime":"2019-08-27 12:44:41","channelImg":""},{"id":"4","channelName":"项目","channelType":1,"createTime":"2019-08-27 12:44:41","updateTime":"2019-08-27 12:44:41","channelImg":""},{"id":"5","channelName":"热门","channelType":1,"createTime":"2019-08-27 12:44:41","updateTime":"2019-08-27 12:44:41","channelImg":""}],"bannerList":[{"id":"1166155572460421121","title":"六爻吧","startTime":"2019-08-28 08:43:54","endTime":"2019-08-28 08:44:17","createTime":null,"sort":1,"thumbnail":"ddd111","href":"111","status":1,"type":2},{"id":"7","title":"没钱过年","startTime":"2019-08-31 00:00:00","endTime":"2019-08-31 00:00:00","createTime":"2019-08-31 00:00:00","sort":2,"thumbnail":"www.baidu.com","href":"/img","status":1,"type":2},{"id":"9","title":"没钱过年","startTime":"2019-08-31 00:00:00","endTime":"2019-08-31 00:00:00","createTime":"2019-08-31 00:00:00","sort":3,"thumbnail":"www.baidu.com","href":"/img","status":1,"type":2},{"id":"25","title":"没钱过年","startTime":"2019-08-31 00:00:00","endTime":"2019-08-31 00:00:00","createTime":"2019-08-31 00:00:00","sort":4,"thumbnail":"www.baidu.com","href":"/img","status":1,"type":2},{"id":"28","title":"没钱过年","startTime":"2019-08-31 09:19:36","endTime":"2019-08-31 18:19:36","createTime":"2019-08-31 10:01:19","sort":5,"thumbnail":"www.baidu.com","href":"/img","status":1,"type":2},{"id":"2","title":"国庆大阅兵","startTime":"2019-08-30 00:00:00","endTime":"2019-08-30 00:00:00","createTime":"2019-08-30 00:00:00","sort":6,"thumbnail":"www.111.com","href":"/href/img","status":1,"type":2}],"orderList":[{"id":"9","userID":"1","title":"币圈小呆呆","coinAvatar":"%3D360%2C280%2C50/sign=b38e1e09e8cd7b89e93969c369197191/5fdf8db1cb1349546eaaf6a7584e9258d0094ab8.jpg","currency":"BTC","bourse":"NYBOT","bourseHref":"","description":"来不急了，快上车","period":"3","currentRise":16,"expectedRise":1,"buyerNumber":0,"status":0,"createTime":"2019-08-27 15:46:00","endTime":"2019-08-30 15:46:00","top":0,"view":6,"locked":0,"qbeanNumber":0},{"id":"8","userID":"8","title":"币圈郭富城","coinAvatar":"%3D360%2C280%2C50/sign=b38e1e09e8cd7b89e93969c369197191/5fdf8db1cb1349546eaaf6a7584e9258d0094ab8.jpg","currency":"BTC","bourse":"NYBOT","bourseHref":"","description":"来不急了，快上车","period":"3","currentRise":17,"expectedRise":2,"buyerNumber":0,"status":1,"createTime":"2019-08-26 15:46:48","endTime":"2019-08-29 15:46:48","top":1,"view":7,"locked":0,"qbeanNumber":0},{"id":"7","userID":"8","title":"币圈黎明","coinAvatar":"%3D360%2C280%2C50/sign=b38e1e09e8cd7b89e93969c369197191/5fdf8db1cb1349546eaaf6a7584e9258d0094ab8.jpg","currency":"BTC","bourse":"NYBOT","bourseHref":"","description":"来不急了，快上车","period":"3","currentRise":18,"expectedRise":3,"buyerNumber":0,"status":2,"createTime":"2019-08-25 15:46:48","endTime":"2019-08-28 15:46:48","top":2,"view":8,"locked":0,"qbeanNumber":0},{"id":"6","userID":"1","title":"币圈刘德华","coinAvatar":"%3D360%2C280%2C50/sign=b38e1e09e8cd7b89e93969c369197191/5fdf8db1cb1349546eaaf6a7584e9258d0094ab8.jpg","currency":"BTC","bourse":"NYBOT","bourseHref":"","description":"来不及了，快上车","period":"3","currentRise":19,"expectedRise":4,"buyerNumber":0,"status":3,"createTime":"2019-08-23 15:46:48","endTime":"2019-08-26 15:46:48","top":3,"view":9,"locked":0,"qbeanNumber":0},{"id":"5","userID":"1","title":"币圈小绵羊","coinAvatar":"%3D360%2C280%2C50/sign=b38e1e09e8cd7b89e93969c369197191/5fdf8db1cb1349546eaaf6a7584e9258d0094ab8.jpg","currency":"BTC","bourse":"NYBOT","bourseHref":"","description":"来不急了，快上车","period":"3","currentRise":20,"expectedRise":5,"buyerNumber":0,"status":4,"createTime":"2019-08-22 15:46:00","endTime":"2019-08-25 15:46:00","top":4,"view":10,"locked":0,"qbeanNumber":0},{"id":"4","userID":"1","title":"币圈吴亦凡","coinAvatar":"%3D360%2C280%2C50/sign=b38e1e09e8cd7b89e93969c369197191/5fdf8db1cb1349546eaaf6a7584e9258d0094ab8.jpg","currency":"BTC","bourse":"NYBOT","bourseHref":"","description":"来不急了，快上车","period":"3","currentRise":21,"expectedRise":6,"buyerNumber":0,"status":5,"createTime":"2019-08-20 15:46:00","endTime":"2019-08-23 15:46:00","top":5,"view":11,"locked":0,"qbeanNumber":0},{"id":"3","userID":"2","title":"币圈梁朝伟","coinAvatar":"%3D360%2C280%2C50/sign=b38e1e09e8cd7b89e93969c369197191/5fdf8db1cb1349546eaaf6a7584e9258d0094ab8.jpg","currency":"BTC","bourse":"NYBOT","bourseHref":"","description":"来不急了，快上车","period":"3","currentRise":22,"expectedRise":7,"buyerNumber":0,"status":6,"createTime":"2019-08-15 15:46:48","endTime":"2019-08-18 15:46:48","top":6,"view":12,"locked":0,"qbeanNumber":0},{"id":"2","userID":"2","title":"币圈李嘉诚","coinAvatar":"%3D360%2C280%2C50/sign=b38e1e09e8cd7b89e93969c369197191/5fdf8db1cb1349546eaaf6a7584e9258d0094ab8.jpg","currency":"BTC","bourse":"NYBOT","bourseHref":"","description":"来不及了，快上车","period":"3","currentRise":23,"expectedRise":8,"buyerNumber":0,"status":7,"createTime":"2019-08-11 15:46:48","endTime":"2019-08-14 15:46:48","top":7,"view":13,"locked":0,"qbeanNumber":0},{"id":"17","userID":"1","title":"币圈小呆呆","coinAvatar":"%3D360%2C280%2C50/sign=b38e1e09e8cd7b89e93969c369197191/5fdf8db1cb1349546eaaf6a7584e9258d0094ab8.jpg","currency":"BTC","bourse":"NYBOT","bourseHref":"","description":"来不急了，快上车","period":"3","currentRise":24,"expectedRise":9,"buyerNumber":0,"status":8,"createTime":"2019-08-27 15:46:00","endTime":"2019-08-30 15:46:00","top":8,"view":14,"locked":0,"qbeanNumber":0},{"id":"16","userID":"1","title":"币圈小呆呆","coinAvatar":"%3D360%2C280%2C50/sign=b38e1e09e8cd7b89e93969c369197191/5fdf8db1cb1349546eaaf6a7584e9258d0094ab8.jpg","currency":"BTC","bourse":"NYBOT","bourseHref":"","description":"来不急了，快上车","period":"3","currentRise":25,"expectedRise":10,"buyerNumber":0,"status":9,"createTime":"2019-08-27 15:46:00","endTime":"2019-08-30 15:46:00","top":9,"view":15,"locked":0,"qbeanNumber":0}]}
+     * data : [{"id":"1178562407408820225","userId":"1175675562144837633","title":"测试","startTime":"0天19小时48分钟前","nowRise":0,"expectedRise":10,"bourse":[{"id":"1","bourseName":"抹茶","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":1,"createTime":"2019-09-18T03:39:51.000+0000"},{"id":"2","bourseName":"火币","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":5,"createTime":"2019-09-18T03:39:51.000+0000"},{"id":"3","bourseName":"币安","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":6,"createTime":"2019-09-18T03:39:51.000+0000"},{"id":"4","bourseName":"K网","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":8,"createTime":"2019-09-18T03:39:51.000+0000"}],"isLock":1,"expectedSucRate":8,"avgIncome":8.14,"userAvatar":"http://pic16.nipic.com/20111006/6239936_092702973000_2.jpg","userName":"昵称","qbeanNumber":12},{"id":"1178577099254644737","userId":"1175963275095638017","title":"22222","startTime":"0天18小时49分钟前","nowRise":0,"expectedRise":0,"bourse":[{"id":"1","bourseName":"抹茶","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":1,"createTime":"2019-09-18T03:39:51.000+0000"},{"id":"2","bourseName":"火币","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":5,"createTime":"2019-09-18T03:39:51.000+0000"},{"id":"3","bourseName":"币安","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":6,"createTime":"2019-09-18T03:39:51.000+0000"},{"id":"4","bourseName":"K网","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":8,"createTime":"2019-09-18T03:39:51.000+0000"}],"isLock":1,"expectedSucRate":0,"avgIncome":0,"userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/ios_image/ios_20190923105756_4636018_image.jpg","userName":"周家稳","qbeanNumber":0},{"id":"1178591088994922497","userId":"1174882402065584130","title":"我在这里","startTime":"0天17小时54分钟前","nowRise":0,"expectedRise":0,"bourse":[{"id":"1","bourseName":"抹茶","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":1,"createTime":"2019-09-18T03:39:51.000+0000"},{"id":"2","bourseName":"火币","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":5,"createTime":"2019-09-18T03:39:51.000+0000"},{"id":"3","bourseName":"币安","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":6,"createTime":"2019-09-18T03:39:51.000+0000"},{"id":"4","bourseName":"K网","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":8,"createTime":"2019-09-18T03:39:51.000+0000"}],"isLock":1,"expectedSucRate":2,"avgIncome":9.24,"userAvatar":"https://landscape-test.oss-cn-hangzhou.aliyuncs.com/ios_image/ios_20190929162511_1383397_image.jpg","userName":"国庆节快乐呀","qbeanNumber":0}]
      */
 
+    private String msg;
     private int code;
-    private String message;
-    private DataBean data;
+    private List<DataBean> data;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public int getCode() {
         return code;
@@ -22,310 +30,168 @@ public class MainBean {
         this.code = code;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public DataBean getData() {
+    public List<DataBean> getData() {
         return data;
     }
 
-    public void setData(DataBean data) {
+    public void setData(List<DataBean> data) {
         this.data = data;
     }
 
     public static class DataBean {
-        private List<OrderCategoryListBean> orderCategoryList;
-        private List<ChannelListBean> channelList;
-        private List<BannerListBean> bannerList;
-        private List<OrderListBean> orderList;
 
-        public List<OrderCategoryListBean> getOrderCategoryList() {
-            return orderCategoryList;
+
+        /**
+         * id : 1178562407408820225
+         * userId : 1175675562144837633
+         * title : 测试
+         * startTime : 0天19小时48分钟前
+         * nowRise : 0.0
+         * expectedRise : 10.0
+         * bourse : [{"id":"1","bourseName":"抹茶","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":1,"createTime":"2019-09-18T03:39:51.000+0000"},{"id":"2","bourseName":"火币","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":5,"createTime":"2019-09-18T03:39:51.000+0000"},{"id":"3","bourseName":"币安","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":6,"createTime":"2019-09-18T03:39:51.000+0000"},{"id":"4","bourseName":"K网","bourseHref":"http://guanwangdizhi","status":1,"registeredAddress":"http://zhucedizhi","sort":8,"createTime":"2019-09-18T03:39:51.000+0000"}]
+         * isLock : 1
+         * expectedSucRate : 8.0
+         * avgIncome : 8.14
+         * userAvatar : http://pic16.nipic.com/20111006/6239936_092702973000_2.jpg
+         * userName : 昵称
+         * qbeanNumber : 12
+         */
+        private String id;
+        private String userId;
+        private String title;
+        private String startTime;
+        private double nowRise;
+        private double expectedRise;
+        private int isLock;
+        private double expectedSucRate;
+        private double avgIncome;
+        private String userAvatar;
+        private String userName;
+        private int qbeanNumber;
+        private List<BourseBean> bourse;
+
+        public String getId() {
+            return id;
         }
 
-        public void setOrderCategoryList(List<OrderCategoryListBean> orderCategoryList) {
-            this.orderCategoryList = orderCategoryList;
+        public void setId(String id) {
+            this.id = id;
         }
 
-        public List<ChannelListBean> getChannelList() {
-            return channelList;
+        public String getUserId() {
+            return userId;
         }
 
-        public void setChannelList(List<ChannelListBean> channelList) {
-            this.channelList = channelList;
+        public void setUserId(String userId) {
+            this.userId = userId;
         }
 
-        public List<BannerListBean> getBannerList() {
-            return bannerList;
+        public String getTitle() {
+            return title;
         }
 
-        public void setBannerList(List<BannerListBean> bannerList) {
-            this.bannerList = bannerList;
+        public void setTitle(String title) {
+            this.title = title;
         }
 
-        public List<OrderListBean> getOrderList() {
-            return orderList;
+        public String getStartTime() {
+            return startTime;
         }
 
-        public void setOrderList(List<OrderListBean> orderList) {
-            this.orderList = orderList;
+        public void setStartTime(String startTime) {
+            this.startTime = startTime;
         }
 
-        public static class OrderCategoryListBean {
+        public double getNowRise() {
+            return nowRise;
+        }
+
+        public void setNowRise(double nowRise) {
+            this.nowRise = nowRise;
+        }
+
+        public double getExpectedRise() {
+            return expectedRise;
+        }
+
+        public void setExpectedRise(double expectedRise) {
+            this.expectedRise = expectedRise;
+        }
+
+        public int getIsLock() {
+            return isLock;
+        }
+
+        public void setIsLock(int isLock) {
+            this.isLock = isLock;
+        }
+
+        public double getExpectedSucRate() {
+            return expectedSucRate;
+        }
+
+        public void setExpectedSucRate(double expectedSucRate) {
+            this.expectedSucRate = expectedSucRate;
+        }
+
+        public double getAvgIncome() {
+            return avgIncome;
+        }
+
+        public void setAvgIncome(double avgIncome) {
+            this.avgIncome = avgIncome;
+        }
+
+        public String getUserAvatar() {
+            return userAvatar;
+        }
+
+        public void setUserAvatar(String userAvatar) {
+            this.userAvatar = userAvatar;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public int getQbeanNumber() {
+            return qbeanNumber;
+        }
+
+        public void setQbeanNumber(int qbeanNumber) {
+            this.qbeanNumber = qbeanNumber;
+        }
+
+        public List<BourseBean> getBourse() {
+            return bourse;
+        }
+
+        public void setBourse(List<BourseBean> bourse) {
+            this.bourse = bourse;
+        }
+
+        public static class BourseBean {
             /**
              * id : 1
-             * categoryName : 全部
-             * categoryCode : ALL
-             */
-
-            private String id;
-            private String categoryName;
-            private String categoryCode;
-
-            public String getId() {
-                return id;
-            }
-
-            public void setId(String id) {
-                this.id = id;
-            }
-
-            public String getCategoryName() {
-                return categoryName;
-            }
-
-            public void setCategoryName(String categoryName) {
-                this.categoryName = categoryName;
-            }
-
-            public String getCategoryCode() {
-                return categoryCode;
-            }
-
-            public void setCategoryCode(String categoryCode) {
-                this.categoryCode = categoryCode;
-            }
-        }
-
-        public static class ChannelListBean {
-            /**
-             * id : 1
-             * channelName : 财富密码
-             * channelType : 1
-             * createTime : 2019-08-27 12:44:41
-             * updateTime : 2019-08-27 12:44:41
-             * channelImg :
-             */
-
-            private String id;
-            private String channelName;
-            private int channelType;
-            private String createTime;
-            private String updateTime;
-            private String channelImg;
-
-            public String getId() {
-                return id;
-            }
-
-            public void setId(String id) {
-                this.id = id;
-            }
-
-            public String getChannelName() {
-                return channelName;
-            }
-
-            public void setChannelName(String channelName) {
-                this.channelName = channelName;
-            }
-
-            public int getChannelType() {
-                return channelType;
-            }
-
-            public void setChannelType(int channelType) {
-                this.channelType = channelType;
-            }
-
-            public String getCreateTime() {
-                return createTime;
-            }
-
-            public void setCreateTime(String createTime) {
-                this.createTime = createTime;
-            }
-
-            public String getUpdateTime() {
-                return updateTime;
-            }
-
-            public void setUpdateTime(String updateTime) {
-                this.updateTime = updateTime;
-            }
-
-            public String getChannelImg() {
-                return channelImg;
-            }
-
-            public void setChannelImg(String channelImg) {
-                this.channelImg = channelImg;
-            }
-        }
-
-        public static class BannerListBean {
-            /**
-             * id : 1166155572460421121
-             * title : 六爻吧
-             * startTime : 2019-08-28 08:43:54
-             * endTime : 2019-08-28 08:44:17
-             * createTime : null
-             * sort : 1
-             * thumbnail : ddd111
-             * href : 111
+             * bourseName : 抹茶
+             * bourseHref : http://guanwangdizhi
              * status : 1
-             * type : 2
+             * registeredAddress : http://zhucedizhi
+             * sort : 1
+             * createTime : 2019-09-18T03:39:51.000+0000
              */
 
             private String id;
-            private String title;
-            private String startTime;
-            private String endTime;
-            private Object createTime;
-            private int sort;
-            private String thumbnail;
-            private String href;
-            private int status;
-            private int type;
-
-            public String getId() {
-                return id;
-            }
-
-            public void setId(String id) {
-                this.id = id;
-            }
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
-
-            public String getStartTime() {
-                return startTime;
-            }
-
-            public void setStartTime(String startTime) {
-                this.startTime = startTime;
-            }
-
-            public String getEndTime() {
-                return endTime;
-            }
-
-            public void setEndTime(String endTime) {
-                this.endTime = endTime;
-            }
-
-            public Object getCreateTime() {
-                return createTime;
-            }
-
-            public void setCreateTime(Object createTime) {
-                this.createTime = createTime;
-            }
-
-            public int getSort() {
-                return sort;
-            }
-
-            public void setSort(int sort) {
-                this.sort = sort;
-            }
-
-            public String getThumbnail() {
-                return thumbnail;
-            }
-
-            public void setThumbnail(String thumbnail) {
-                this.thumbnail = thumbnail;
-            }
-
-            public String getHref() {
-                return href;
-            }
-
-            public void setHref(String href) {
-                this.href = href;
-            }
-
-            public int getStatus() {
-                return status;
-            }
-
-            public void setStatus(int status) {
-                this.status = status;
-            }
-
-            public int getType() {
-                return type;
-            }
-
-            public void setType(int type) {
-                this.type = type;
-            }
-        }
-
-        public static class OrderListBean {
-            /**
-             * id : 9
-             * userID : 1
-             * title : 币圈小呆呆
-             * coinAvatar : %3D360%2C280%2C50/sign=b38e1e09e8cd7b89e93969c369197191/5fdf8db1cb1349546eaaf6a7584e9258d0094ab8.jpg
-             * currency : BTC
-             * bourse : NYBOT
-             * bourseHref :
-             * description : 来不急了，快上车
-             * period : 3
-             * currentRise : 16
-             * expectedRise : 1
-             * buyerNumber : 0
-             * status : 0
-             * createTime : 2019-08-27 15:46:00
-             * endTime : 2019-08-30 15:46:00
-             * top : 0
-             * view : 6
-             * locked : 0
-             * qbeanNumber : 0
-             */
-
-            private String id;
-            private String userID;
-            private String title;
-            private String coinAvatar;
-            private String currency;
-            private String bourse;
+            private String bourseName;
             private String bourseHref;
-            private String description;
-            private String period;
-            private int currentRise;
-            private int expectedRise;
-            private int buyerNumber;
             private int status;
+            private String registeredAddress;
+            private int sort;
             private String createTime;
-            private String endTime;
-            private int top;
-            private int view;
-            private int locked;
-            private int qbeanNumber;
 
             public String getId() {
                 return id;
@@ -335,44 +201,12 @@ public class MainBean {
                 this.id = id;
             }
 
-            public String getUserID() {
-                return userID;
+            public String getBourseName() {
+                return bourseName;
             }
 
-            public void setUserID(String userID) {
-                this.userID = userID;
-            }
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
-
-            public String getCoinAvatar() {
-                return coinAvatar;
-            }
-
-            public void setCoinAvatar(String coinAvatar) {
-                this.coinAvatar = coinAvatar;
-            }
-
-            public String getCurrency() {
-                return currency;
-            }
-
-            public void setCurrency(String currency) {
-                this.currency = currency;
-            }
-
-            public String getBourse() {
-                return bourse;
-            }
-
-            public void setBourse(String bourse) {
-                this.bourse = bourse;
+            public void setBourseName(String bourseName) {
+                this.bourseName = bourseName;
             }
 
             public String getBourseHref() {
@@ -383,46 +217,6 @@ public class MainBean {
                 this.bourseHref = bourseHref;
             }
 
-            public String getDescription() {
-                return description;
-            }
-
-            public void setDescription(String description) {
-                this.description = description;
-            }
-
-            public String getPeriod() {
-                return period;
-            }
-
-            public void setPeriod(String period) {
-                this.period = period;
-            }
-
-            public int getCurrentRise() {
-                return currentRise;
-            }
-
-            public void setCurrentRise(int currentRise) {
-                this.currentRise = currentRise;
-            }
-
-            public int getExpectedRise() {
-                return expectedRise;
-            }
-
-            public void setExpectedRise(int expectedRise) {
-                this.expectedRise = expectedRise;
-            }
-
-            public int getBuyerNumber() {
-                return buyerNumber;
-            }
-
-            public void setBuyerNumber(int buyerNumber) {
-                this.buyerNumber = buyerNumber;
-            }
-
             public int getStatus() {
                 return status;
             }
@@ -431,52 +225,28 @@ public class MainBean {
                 this.status = status;
             }
 
+            public String getRegisteredAddress() {
+                return registeredAddress;
+            }
+
+            public void setRegisteredAddress(String registeredAddress) {
+                this.registeredAddress = registeredAddress;
+            }
+
+            public int getSort() {
+                return sort;
+            }
+
+            public void setSort(int sort) {
+                this.sort = sort;
+            }
+
             public String getCreateTime() {
                 return createTime;
             }
 
             public void setCreateTime(String createTime) {
                 this.createTime = createTime;
-            }
-
-            public String getEndTime() {
-                return endTime;
-            }
-
-            public void setEndTime(String endTime) {
-                this.endTime = endTime;
-            }
-
-            public int getTop() {
-                return top;
-            }
-
-            public void setTop(int top) {
-                this.top = top;
-            }
-
-            public int getView() {
-                return view;
-            }
-
-            public void setView(int view) {
-                this.view = view;
-            }
-
-            public int getLocked() {
-                return locked;
-            }
-
-            public void setLocked(int locked) {
-                this.locked = locked;
-            }
-
-            public int getQbeanNumber() {
-                return qbeanNumber;
-            }
-
-            public void setQbeanNumber(int qbeanNumber) {
-                this.qbeanNumber = qbeanNumber;
             }
         }
     }

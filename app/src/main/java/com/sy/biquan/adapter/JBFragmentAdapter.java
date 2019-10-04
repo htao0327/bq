@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,10 +32,10 @@ public class JBFragmentAdapter extends RecyclerView.Adapter<JBFragmentAdapter.My
 
 
     //私有属性
-    private CFMMAdapter1.OnItemClickListener onItemClickListener = null;
+    private OnItemClickListener onItemClickListener = null;
 
     //setter方法
-    public void setOnItemClickListener(CFMMAdapter1.OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -56,12 +57,36 @@ public class JBFragmentAdapter extends RecyclerView.Adapter<JBFragmentAdapter.My
         holder.t1.setText(data.getData().get(position).getTitle());
         holder.t2.setText(data.getData().get(position).getStartTime());
         holder.dqzf.setText(String.valueOf(data.getData().get(position).getNowRise())+"%");
-        holder.jys.setText("交易所:"+data.getData().get(position).getBourse());
+        if(data.getData().get(position).getBourse()!=null&&data.getData().get(position).getBourse().size()>0){
+            StringBuffer sb = new StringBuffer();
+            sb.append("交易所：");
+            for(int i=0;i<data.getData().get(position).getBourse().size();i++){
+                if(i==data.getData().get(position).getBourse().size()-1){
+                    sb.append(data.getData().get(position).getBourse().get(i).getExchangeName());
+                }else {
+                    sb.append(data.getData().get(position).getBourse().get(i).getExchangeName()+"、");
+                }
+                if(i==1){
+                    i=data.getData().get(position).getBourse().size();
+                }
+            }
+            holder.jys.setText(sb);
+        }else {
+            holder.jys.setText("交易所:");
+        }
+
         holder.yqzf.setText(String.valueOf(data.getData().get(position).getExpectedRise())+"%");
-        holder.ddCount.setText(String.valueOf(data.getData().get(position).getQbeanNumber()));
+        holder.ddCount.setText(String.valueOf(data.getData().get(position).getQbNumer()));
         holder.userName.setText(data.getData().get(position).getUserName());
         holder.yqzfSuccess.setText(String.valueOf(data.getData().get(position).getExpectedSucRate()));
-        holder.sy.setText(String.valueOf(data.getData().get(position).getAvgIncome()));
+        holder.sy.setText(String.valueOf(data.getData().get(position).getAvgIncomeRate()));
+        if(data.getData().get(position).getIsLock() == 1){
+            holder.lock.setBackground(context.getResources().getDrawable(R.drawable.suo));
+
+        }else{
+            holder.lock.setBackground(context.getResources().getDrawable(R.drawable.green_circle));
+            holder.lock.setText(data.getData().get(position).getCurrency());
+        }
         Glide.with(MyApplication.instance())
                 .load(data.getData().get(position).getUserAvatar())
                 .into(holder.user);
@@ -83,6 +108,7 @@ public class JBFragmentAdapter extends RecyclerView.Adapter<JBFragmentAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView t1,t2,dqzf,jys,yqzf,ddCount,userName,yqzfSuccess,sy;
         private CircleImageView user;
+        private Button lock;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -96,6 +122,8 @@ public class JBFragmentAdapter extends RecyclerView.Adapter<JBFragmentAdapter.My
             yqzfSuccess = itemView.findViewById(R.id.tv_yqzf_success);
             sy = itemView.findViewById(R.id.tv_sy);
             user = itemView.findViewById(R.id.iv_user);
+            lock = itemView.findViewById(R.id.iv_suo);
+
         }
     }
 

@@ -6,9 +6,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#F8F8F8"
+    >
 
     <com.tencent.qcloud.tim.uikit.component.TitleBarLayout
+        android:background="@color/white"
         android:id="@+id/group_info_title_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/page_title_height" />
@@ -23,6 +26,7 @@
             android:orientation="vertical">
 
             <com.tencent.qcloud.tim.uikit.component.LineControllerView
+                android:background="@color/white"
                 android:id="@+id/group_member_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,12 +36,22 @@
                 android:id="@+id/group_members"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:background="@color/white"
                 android:numColumns="6" />
 
             <com.tencent.qcloud.tim.uikit.component.LineControllerView
+                android:background="@color/white"
+                android:id="@+id/group_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/page_margin"
+                app:name="@string/group_name" />
+
+            <com.tencent.qcloud.tim.uikit.component.LineControllerView
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/page_margin"
                 android:id="@+id/group_type_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,12 +64,7 @@
                 android:layout_marginTop="@dimen/page_margin"
                 app:name="@string/group_id" />
 
-            <com.tencent.qcloud.tim.uikit.component.LineControllerView
-                android:id="@+id/group_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/page_margin"
-                app:name="@string/group_name" />
+
 
             <com.tencent.qcloud.tim.uikit.component.LineControllerView
                 android:id="@+id/group_icon"
@@ -104,10 +113,7 @@
                 android:layout_marginTop="10dp"
                 android:background="#ffffff"
                 android:textColor="#fb6155" />
-
-
         </LinearLayout>
-
 
     </ScrollView>
 

@@ -15,8 +15,10 @@ import com.sy.biquan.MainActivity;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.FriendProfileActivity;
+import com.sy.biquan.activity.MyGroupInfoActivity;
 import com.sy.biquan.bean.DealBean;
 import com.sy.biquan.viewutil.ChatLayoutHelper;
+import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMConversationType;
 import com.tencent.qcloud.tim.uikit.base.BaseFragment;
 import com.tencent.qcloud.tim.uikit.component.AudioPlayer;
@@ -48,6 +50,7 @@ public class ChatFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         mChatInfo = (ChatInfo) bundle.getSerializable(Contants.CHAT_INFO);
+        Log.e("ChatFragment","==========mChatInfo.getID==========:"+mChatInfo.getId());
         EventBus.getDefault().register(this);
         if (mChatInfo == null) {
             return null;
@@ -56,7 +59,6 @@ public class ChatFragment extends BaseFragment {
         initView();
         return mBaseView;
     }
-
     private void initView() {
         //从布局文件中获取聊天面板组件
         mChatLayout = mBaseView.findViewById(R.id.chat_layout);
@@ -81,7 +83,6 @@ public class ChatFragment extends BaseFragment {
         helper.dealCharLayout(mChatLayout);
 //        ChatLayoutHelper.customizeChatLayout(getActivity(), mChatLayout);
 
-
         /*
          * 需要聊天的基本信息
          */
@@ -102,6 +103,7 @@ public class ChatFragment extends BaseFragment {
                 getActivity().finish();
             }
         });
+
         if (mChatInfo.getType() == TIMConversationType.C2C) {
             mTitleBar.setOnRightClickListener(new View.OnClickListener() {
                 @Override
@@ -112,6 +114,17 @@ public class ChatFragment extends BaseFragment {
                     MyApplication.instance().startActivity(intent);
                 }
             });
+        }else if(mChatInfo.getType() == TIMConversationType.Group){
+            mTitleBar.setOnRightClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    MyApplication.instance().startActivity(new Intent(MyApplication.instance(), MyGroupInfoActivity.class)
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            .putExtra(MyGroupInfoActivity.GROUP_ID,mChatInfo.getId()));
+                }
+            });
+//
         }
 
         mChatLayout.getMessageLayout().setOnItemClickListener(new MessageLayout.OnItemClickListener() {

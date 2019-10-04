@@ -23,11 +23,12 @@ public class ContactActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_fragment);
+        initViews();
     }
 
-    private void initViews(View view) {
+    private void initViews() {
         // 从布局文件中获取通讯录面板
-        mContactLayout = view.findViewById(R.id.contact_layout);
+        mContactLayout = findViewById(R.id.contact_layout);
         mMenu = new Menu(this, mContactLayout.getTitleBar(), Menu.MENU_TYPE_CONTACT);
         mContactLayout.getTitleBar().setOnRightClickListener(new View.OnClickListener() {
             @Override

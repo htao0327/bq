@@ -15,9 +15,11 @@ import android.widget.PopupWindow;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.AddMoreActivity;
+import com.sy.biquan.activity.ContactActivity;
 import com.sy.biquan.activity.CreateGroupActivity;
 import com.sy.biquan.activity.CreateKOLGroupActivity;
 import com.sy.biquan.activity.StartGroupChatActivity;
+import com.sy.biquan.contact.MyContactActivity;
 import com.tencent.qcloud.tim.uikit.component.action.PopActionClickListener;
 import com.tencent.qcloud.tim.uikit.component.action.PopMenuAction;
 import com.tencent.qcloud.tim.uikit.component.action.PopMenuAdapter;
@@ -82,6 +84,13 @@ public class Menu {
 
                 if (TextUtils.equals(action.getActionName(), mActivity.getResources().getString(R.string.create_new_kol_group))) {
                     Intent intent = new Intent(MyApplication.instance(), CreateKOLGroupActivity.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent.putExtra(TUIKitConstants.GroupType.TYPE, TUIKitConstants.GroupType.PRIVATE);
+                    mActivity.startActivity(intent);
+                }
+
+                if (TextUtils.equals(action.getActionName(),mActivity.getResources().getString(R.string.txl))) {
+                    Intent intent = new Intent(MyApplication.instance(), MyContactActivity.class);
 //                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                    intent.putExtra(TUIKitConstants.GroupType.TYPE, TUIKitConstants.GroupType.PRIVATE);
                     mActivity.startActivity(intent);
