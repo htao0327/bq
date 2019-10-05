@@ -68,9 +68,9 @@ public class AddMoreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getIntent() != null) {
-            mIsGroup = getIntent().getExtras().getBoolean(TUIKitConstants.GroupType.GROUP);
-        }
+//        if (getIntent() != null) {
+//            mIsGroup = getIntent().getExtras().getBoolean(TUIKitConstants.GroupType.GROUP);
+//        }
 
         setContentView(R.layout.contact_add_activity);
 

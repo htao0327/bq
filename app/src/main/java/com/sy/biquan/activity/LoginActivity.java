@@ -21,6 +21,7 @@ import com.sy.biquan.MainActivity;
 import com.sy.biquan.R;
 import com.sy.biquan.bean.LoginBean;
 import com.sy.biquan.bean.RegisterBean;
+import com.sy.biquan.bean.UserInfo;
 import com.sy.biquan.presenter.LoginPresenter;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
@@ -108,9 +109,11 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
                     public void onSuccess(RegisterBean registerBean) {
 
                         if (registerBean.getCode() == Contants.GET_DATA_SUCCESS) {
-                            Gson gson = new Gson();
-                            String jsonUserInfo = gson.toJson(registerBean);
-                            SharedPreferencesUtil.userInfoPutString(LoginActivity.this, Contants.USERINFO, jsonUserInfo);
+//                            Gson gson = new Gson();
+//                            String jsonUserInfo = gson.toJson(registerBean);
+//                            SharedPreferencesUtil.userInfoPutString(LoginActivity.this, Contants.USERINFO, jsonUserInfo);
+                            SharedPreferencesUtil.setLoginUserInfo(registerBean);
+
                             TUIKit.login(registerBean.getData().getUserImCode(), registerBean.getData().getUserSig(), new IUIKitCallBack() {
                                 @Override
                                 public void onError(String module, final int code, final String desc) {

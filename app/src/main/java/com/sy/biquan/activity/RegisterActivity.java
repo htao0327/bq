@@ -209,15 +209,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     public void onSuccess(RegisterBean registerBean) {
 
                         if(registerBean.getCode() == Contants.GET_DATA_SUCCESS){
-                            Gson gson = new Gson();
-                            String jsonUserInfo = gson.toJson(registerBean);
-                            SharedPreferencesUtil.userInfoPutString(RegisterActivity.this,Contants.USERINFO,jsonUserInfo);
+//                            Gson gson = new Gson();
+//                            String jsonUserInfo = gson.toJson(registerBean);
+//                            SharedPreferencesUtil.userInfoPutString(RegisterActivity.this,Contants.USERINFO,jsonUserInfo);
+                            SharedPreferencesUtil.setLoginUserInfo(registerBean);
                             TUIKit.login(registerBean.getData().getUserImCode(), registerBean.getData().getUserSig(), new IUIKitCallBack() {
                                 @Override
                                 public void onError(String module, final int code, final String desc) {
                                     runOnUiThread(new Runnable() {
                                         public void run() {
                                             ToastUtil.toastLongMessage("登录失败, errCode = " + code + ", errInfo = " + desc);
+
                                         }
                                     });
                                 }

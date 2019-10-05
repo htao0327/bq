@@ -51,6 +51,7 @@ public class ChatFragment extends BaseFragment {
         Bundle bundle = getArguments();
         mChatInfo = (ChatInfo) bundle.getSerializable(Contants.CHAT_INFO);
         Log.e("ChatFragment","==========mChatInfo.getID==========:"+mChatInfo.getId());
+
         EventBus.getDefault().register(this);
         if (mChatInfo == null) {
             return null;
@@ -78,9 +79,9 @@ public class ChatFragment extends BaseFragment {
         mChatLayout.initDefault();
 
         // TODO 通过api设置ChatLayout各种属性的样例
-        ChatLayoutHelper helper = new ChatLayoutHelper(getActivity());
+        ChatLayoutHelper helper = new ChatLayoutHelper(getActivity(),mChatInfo.getType(),mChatInfo.getId());
         helper.customizeChatLayout(mChatLayout);
-        helper.dealCharLayout(mChatLayout);
+//        helper.dealCharLayout(mChatLayout);
 //        ChatLayoutHelper.customizeChatLayout(getActivity(), mChatLayout);
 
         /*
@@ -181,6 +182,7 @@ public class ChatFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         mChatLayout.exitChat();
+        EventBus.getDefault().unregister(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -191,14 +193,16 @@ public class ChatFragment extends BaseFragment {
         Log.e("ChatFragment","data--->"+data);
         mChatLayout.sendMessage(info, false);
     }
+//
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void sendDeal(DealBean dealBean){
+//        Gson gson = new Gson();
+//        String data = gson.toJson(dealBean);
+//        MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
+//        Log.e("ChatFragment","data--->"+data);
+//        mChatLayout.sendMessage(info, false);
+//    }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void sendDeal(DealBean dealBean){
-        Gson gson = new Gson();
-        String data = gson.toJson(dealBean);
-        MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
-        Log.e("ChatFragment","data--->"+data);
-        mChatLayout.sendMessage(info, false);
-    }
+
 
 }

@@ -99,19 +99,4 @@
             />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:minWidth="300dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/btn_bg_deal_check_ok_click"
-        android:layout_marginTop="50dp"
-        android:text="确认"
-        android:textColor="#ffffffff"
-        android:textSize="15sp"
-        />
-
 </LinearLayout>

@@ -12,8 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 import com.sy.biquan.activity.LoginActivity;
+import com.sy.biquan.bean.MineDataBean;
 import com.sy.biquan.bean.RegisterBean;
+import com.sy.biquan.proxy.HttpCallback;
+import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.GenerateTestUserSig;
 import com.sy.biquan.util.SharedPreferencesUtil;
 import com.sy.biquan.view.fragment.ChatFragment;
@@ -27,26 +31,31 @@ import com.tencent.qcloud.tim.uikit.base.IUIKitCallBack;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    public static final String EXIT = "exit";
 
     private BottomNavigationView bottomNavigationView;
     private List<Fragment> fragments;
     private int lastIndex;
-    private String imCode = "";
+    private int isExit;//0已登录  其他表示退出登录
+//    private String imCode = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        isExit = getIntent().getIntExtra(EXIT,0);
         initData();
         initBottomNavigation();
 
-        RegisterBean registerBean = SharedPreferencesUtil.getUserInfo();
 
-        if(registerBean != null && !"".equals(registerBean.toString())){
-            imCode = registerBean.getData().getUserImCode();
+        if(SharedPreferencesUtil.isLogin()){
+            String imCode = SharedPreferencesUtil.newGetUserInfo().getUserImCode();
 
             String userSig = GenerateTestUserSig.genTestUserSig(imCode);
 
@@ -60,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     });
                 }
-
                 @Override
                 public void onSuccess(Object data) {
                     ToastUtil.toastLongMessage("登录成功");
@@ -69,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-
-        String account = "13173676521";
+//
+//        String account = "13173676521";
 
     }
 
@@ -118,21 +126,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         setFragmentPosition(0);
                         break;
                     case R.id.navigation_cus:
-                        if("".equals(imCode )){
+                        if(!SharedPreferencesUtil.isLogin()){
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             break;
                         }
                         setFragmentPosition(2);
                         break;
                     case R.id.navigation_task:
-                        if("".equals(imCode )){
+                        if(!SharedPreferencesUtil.isLogin()){
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             break;
                         }
                         setFragmentPosition(3);
                         break;
                     case R.id.navigation_user:
-                        if("".equals(imCode )){
+                        if(!SharedPreferencesUtil.isLogin()){
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             break;
                         }
@@ -150,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        if("".equals(imCode )){
+        if(!SharedPreferencesUtil.isLogin()){
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             return;
         }

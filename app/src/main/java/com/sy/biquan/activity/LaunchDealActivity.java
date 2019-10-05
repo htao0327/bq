@@ -59,7 +59,6 @@ public class LaunchDealActivity extends AppCompatActivity {
                     }
                 });
 
-
             }
         });
     }

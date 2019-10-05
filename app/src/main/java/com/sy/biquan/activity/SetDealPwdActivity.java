@@ -16,9 +16,11 @@ import com.sy.biquan.Contants;
 import com.sy.biquan.R;
 import com.sy.biquan.bean.BindUserBean;
 import com.sy.biquan.bean.RegisterBean;
+import com.sy.biquan.bean.UserInfo;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.SharedPreferencesUtil;
+import com.tencent.openqq.protocol.imsdk.msgcomm;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
 import java.util.HashMap;
@@ -78,8 +80,6 @@ public class SetDealPwdActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(phone.getText().toString().length()<11){
                     ToastUtil.toastLongMessage("手机号码不正确");
-                }else if("".equals(yzm.getText().toString().trim())){
-                    ToastUtil.toastLongMessage("请输入验证码");
                 }else{
                     time.start();
                     Map<String,String> params = new HashMap<>();
@@ -92,15 +92,15 @@ public class SetDealPwdActivity extends AppCompatActivity {
                         captchaType = "6";
                     }
 
-                    HttpProxy.obtain().get(Contants.URL + Contants.GETYZM+"?phone="+yzm.getText().toString().trim()+"&captchaType="+captchaType, params, new HttpCallback<RegisterBean>() {
+                    HttpProxy.obtain().get(Contants.URL + Contants.GETYZM+"?phone="+phone.getText().toString().trim()+"&captchaType="+captchaType, params, new HttpCallback<RegisterBean>() {
                         @Override
                         public void onFailure(String e) {
-//                            Log.e(TAG, "onFailure: " + e);
+                            Log.e("SetDealPwdActivity", "onFailure: " + e);
                         }
 
                         @Override
                         public void onSuccess(RegisterBean registerBean) {
-//                            Log.e(TAG, "Network result：" + registerBean.toString());
+                            Log.e("SetDealPwdActivity", "Network result：" + registerBean.toString());
 //                            if(registerBean.getCode() == Contants.GET_DATA_SUCCESS){
 //
 //                            }else {//显示错误信息
@@ -137,6 +137,9 @@ public class SetDealPwdActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(BindUserBean bindUserBean) {
                                 ToastUtil.toastLongMessage("设置成功");
+                                UserInfo userInfo = SharedPreferencesUtil.newGetUserInfo();
+                                userInfo.setDealPassword("1");
+                                SharedPreferencesUtil.setUserinfo(userInfo);
                                 finish();
                             }
                         });
@@ -155,6 +158,7 @@ public class SetDealPwdActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(BindUserBean bindUserBean) {
                                 ToastUtil.toastLongMessage("设置成功");
+
                                 finish();
                             }
                         });
@@ -180,16 +184,16 @@ public class SetDealPwdActivity extends AppCompatActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            yzm.setBackground(getResources().getDrawable(R.drawable.btn_yzm_noclick_bg));
-            yzm.setClickable(false);
-            yzm.setText("("+millisUntilFinished / 1000 +") 秒");
+            yzm_btn.setBackground(getResources().getDrawable(R.drawable.btn_yzm_noclick_bg));
+            yzm_btn.setClickable(false);
+            yzm_btn.setText("("+millisUntilFinished / 1000 +") 秒");
         }
 
         @Override
         public void onFinish() {
-            yzm.setText("获取验证码");
-            yzm.setClickable(true);
-            yzm.setBackground(getResources().getDrawable(R.drawable.btn_bg_getyzm));
+            yzm_btn.setText("获取验证码");
+            yzm_btn.setClickable(true);
+            yzm_btn.setBackground(getResources().getDrawable(R.drawable.btn_bg_getyzm));
 
         }
     }

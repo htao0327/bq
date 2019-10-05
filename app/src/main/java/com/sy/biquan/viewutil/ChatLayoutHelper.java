@@ -13,6 +13,7 @@ import com.google.gson.annotations.SerializedName;
 import com.sy.biquan.Contants;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
+import com.sy.biquan.activity.GiveRedEnevlopeC2C;
 import com.sy.biquan.activity.GiveRedEnvelope;
 import com.sy.biquan.activity.LaunchDealActivity;
 import com.sy.biquan.bean.DealBean;
@@ -22,6 +23,7 @@ import com.sy.biquan.bean.RegisterBean;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.SharedPreferencesUtil;
+import com.tencent.imsdk.TIMConversationType;
 import com.tencent.imsdk.TIMCustomElem;
 import com.tencent.qcloud.tim.uikit.modules.chat.ChatLayout;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.input.InputLayout;
@@ -38,53 +40,58 @@ public class ChatLayoutHelper {
 
     private static final String TAG = ChatLayoutHelper.class.getSimpleName();
     public static Context context;
-    public ChatLayoutHelper(Context context){
+    private TIMConversationType type;
+    private String userId;
+    public ChatLayoutHelper(Context context, TIMConversationType type,String userId){
         this.context = context;
+        this.type = type;
+        this.userId = userId;
 
     }
 
-    public void dealCharLayout(final ChatLayout layout){
-        MessageLayout messageLayout = layout.getMessageLayout();
-        messageLayout.setOnCustomMessageDrawListener(new DealMessageDraw());
-        InputLayout inputLayout = layout.getInputLayout();
-        InputMoreActionUnit unit = new InputMoreActionUnit();
-        unit.setIconResId(R.drawable.deal_icon);
-        unit.setTitleId(R.string.custom_message_jy);
-        unit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Gson gson = new Gson();
-//                CustomMessageData customMessageData = new CustomMessageData();
-//                String data = gson.toJson(customMessageData);
-//                MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
-//                layout.sendMessage(info, false);
-//                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnvelope.class));
-                Map<String,String> params = new HashMap<>();
-                params.put("token",SharedPreferencesUtil.getToken());
-                HttpProxy.obtain().post(Contants.URL + Contants.DEAL_CHECK, params, new HttpCallback<DealCheckBean>() {
-                    @Override
-                    public void onFailure(String e) {
-                        Log.e("ChatLayoutHelper","onFailure"+e);
-                    }
-
-                    @Override
-                    public void onSuccess(DealCheckBean dealCheckBean) {
-                        Log.e("ChatLayoutHelper","onSuccess"+dealCheckBean);
-                        if("n".equals(dealCheckBean.getData().getBullet_box())){//不弹窗，表示点击交易是在允许的时间内（9:00-18:00客服上班时间）
-//                            if("y".equals(dealCheckBean.getData().getChecked_type()) && "y".equals(dealCheckBean.getData().getEth_address_type())){
-//                            if("y".equals(dealCheckBean.getData().getEth_address_type())){
-                                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), LaunchDealActivity.class));
-//                            }else {
-//                                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), CheckDealInfoActivity.class).putExtra(CheckDealInfoActivity.IDCARD_TYPE,dealCheckBean.getData().getChecked_type()).putExtra(CheckDealInfoActivity.WALLET_TYPE,dealCheckBean.getData().getEth_address_type()));
-//                            }
-                        }
-                    }
-                });
-
-            }
-        });
-        inputLayout.addAction(unit);
-    }
+//    public void dealCharLayout(final ChatLayout layout){
+//        MessageLayout messageLayout = layout.getMessageLayout();
+//        messageLayout.setOnCustomMessageDrawListener(new DealMessageDraw());
+//        InputLayout inputLayout = layout.getInputLayout();
+//        InputMoreActionUnit unit = new InputMoreActionUnit();
+//        unit.setIconResId(R.drawable.deal_icon);
+//        unit.setTitleId(R.string.custom_message_jy);
+//        unit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Gson gson = new Gson();
+////                CustomMessageData customMessageData = new CustomMessageData();
+////                String data = gson.toJson(customMessageData);
+////                MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
+////                layout.sendMessage(info, false);
+////                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnvelope.class));
+//                Map<String,String> params = new HashMap<>();
+//                params.put("token",SharedPreferencesUtil.getToken());
+//                HttpProxy.obtain().post(Contants.URL + Contants.DEAL_CHECK, params, new HttpCallback<DealCheckBean>() {
+//                    @Override
+//                    public void onFailure(String e) {
+//                        Log.e("ChatLayoutHelper","onFailure"+e);
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(DealCheckBean dealCheckBean) {
+//                        Log.e("ChatLayoutHelper","onSuccess"+dealCheckBean);
+//                        if("n".equals(dealCheckBean.getData().getBullet_box())){//不弹窗，表示点击交易是在允许的时间内（9:00-18:00客服上班时间）
+////                            if("y".equals(dealCheckBean.getData().getChecked_type()) && "y".equals(dealCheckBean.getData().getEth_address_type())){
+////                            if("y".equals(dealCheckBean.getData().getEth_address_type())){
+//                            if(type == TIMConversationType.C2C){}
+//                                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), LaunchDealActivity.class));
+////                            }else {
+////                                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), CheckDealInfoActivity.class).putExtra(CheckDealInfoActivity.IDCARD_TYPE,dealCheckBean.getData().getChecked_type()).putExtra(CheckDealInfoActivity.WALLET_TYPE,dealCheckBean.getData().getEth_address_type()));
+////                            }
+//                        }
+//                    }
+//                });
+//
+//            }
+//        });
+//        inputLayout.addAction(unit);
+//    }
 
     public void customizeChatLayout(final ChatLayout layout) {
 //        Log.e(TAG,"context==="+context);
@@ -216,7 +223,12 @@ public class ChatLayoutHelper {
 //                MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
 //                layout.sendMessage(info, false);
 //                EventBus.getDefault().post(layout);
-                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnvelope.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                if(type == TIMConversationType.C2C){
+                    MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnevlopeC2C.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(GiveRedEnevlopeC2C.USER_ID,userId));
+                }else{
+                    MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnvelope.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+
 
             }
         });
@@ -227,7 +239,7 @@ public class ChatLayoutHelper {
      * 自定义消息的bean实体，用来与json的相互转化
      */
     public static class CustomMessageData {
-          private int type = 1;
+        private int type = 1;
         /**
          * msg : ok
          * code : 200
@@ -420,23 +432,23 @@ public class ChatLayoutHelper {
             }
         }
     }
-
-    public static class DealMessageDraw implements  IOnCustomMessageDrawListener{
-
-        @Override
-        public void onDraw(ICustomMessageViewGroup parent, MessageInfo info) {
-            TIMCustomElem elem = (TIMCustomElem) info.getTIMMessage().getElement(0);
-            final DealBean dealBean = new Gson().fromJson(new String(elem.getData()),DealBean.class);
-            if(dealBean == null){
-                return;
-            }
-            // 把自定义消息view添加到TUIKit内部的父容器里
-            View view = LayoutInflater.from(MyApplication.instance()).inflate(R.layout.deal_message, null, false);
-            parent.addMessageContentView(view);
-
-
-        }
-    }
+//
+//    public static class DealMessageDraw implements  IOnCustomMessageDrawListener{
+//
+//        @Override
+//        public void onDraw(ICustomMessageViewGroup parent, MessageInfo info) {
+//            TIMCustomElem elem = (TIMCustomElem) info.getTIMMessage().getElement(0);
+//            final DealBean dealBean = new Gson().fromJson(new String(elem.getData()),DealBean.class);
+//            if(dealBean == null){
+//                return;
+//            }
+//            // 把自定义消息view添加到TUIKit内部的父容器里
+//            View view = LayoutInflater.from(MyApplication.instance()).inflate(R.layout.deal_message, null, false);
+//            parent.addMessageContentView(view);
+//
+//
+//        }
+//    }
 
     public static class CustomMessageDraw implements IOnCustomMessageDrawListener {
         private static AlertDialog dialog;
@@ -471,14 +483,14 @@ public class ChatLayoutHelper {
                 public void onClick(View view) {
                     Log.e(TAG,"---------------------------------点击了");
                     Log.e(TAG,"context==="+context);
-                    Gson gson = new Gson();
-                    RegisterBean registerBean;
-                    String gsonString = SharedPreferencesUtil.userInfoGetString(MyApplication.instance(),Contants.JSONUSERINFO);
-                    registerBean = gson.fromJson(gsonString,RegisterBean.class);
+//                    Gson gson = new Gson();
+//                    RegisterBean registerBean;
+//                    String gsonString = SharedPreferencesUtil.userInfoGetString(MyApplication.instance(),Contants.JSONUSERINFO);
+//                    registerBean = gson.fromJson(gsonString,RegisterBean.class);
                     Map<String,String> map = new HashMap<>();
-                    map.put("token",registerBean.getData().getToken());
+                    map.put("token",SharedPreferencesUtil.getToken());
                     map.put("id",customMessageData.getData().id);
-                    HttpProxy.obtain().post(Contants.URL + Contants.GETREDENVELOPE, map, new HttpCallback<GetRedCheck>() {
+                    HttpProxy.obtain().post(Contants.URL + Contants.RED_PAC_C2C_CLICK, map, new HttpCallback<GetRedCheck>() {
                         @Override
                         public void onFailure(String e) {
 
@@ -487,26 +499,32 @@ public class ChatLayoutHelper {
                         @Override
                         public void onSuccess(GetRedCheck getRedCheck) {
                             if(getRedCheck.getCode() == Contants.GET_DATA_SUCCESS){
-                                boolean isMe = getRedCheck.getData().isIsMe();
-                                boolean hasRedPack = getRedCheck.getData().isHasRedPack();
-                                boolean isExpire = getRedCheck.getData().isIsExpire();
-                                boolean allowRob = getRedCheck.getData().isAllowRob();
-
-                                if(allowRob){//没抢过，允许抢红包
-                                    DialogUtil.showRedEnvelopesDialog(context, isMe, hasRedPack, isExpire, new DialogUtil.AlertDialogBtnClickListener() {
-                                        @Override
-                                        public void clickPositive() {
-
-                                        }
-
-                                        @Override
-                                        public void clickNegative() {
-
-                                        }
-                                    });
-                                }else {//已经抢过了，直接进红包详情页
-
+                                boolean isMe;
+                                if(getRedCheck.getData().getIsMe() == 1){
+                                    isMe = true;
+                                }else{
+                                    isMe = false;
                                 }
+//
+//                                boolean hasRedPack = getRedCheck.getData().isHasRedPack();
+//                                boolean isExpire = getRedCheck.getData().isIsExpire();
+//                                boolean allowRob = getRedCheck.getData().isAllowRob();
+//
+//                                if(allowRob){//没抢过，允许抢红包
+//                                    DialogUtil.showRedEnvelopesDialog(context, isMe, hasRedPack, isExpire, new DialogUtil.AlertDialogBtnClickListener() {
+//                                        @Override
+//                                        public void clickPositive() {
+//
+//                                        }
+//
+//                                        @Override
+//                                        public void clickNegative() {
+//
+//                                        }
+//                                    });
+//                                }else {//已经抢过了，直接进红包详情页
+//
+//                                }
 
                             }
 

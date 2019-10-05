@@ -14,6 +14,7 @@ import com.sy.biquan.bean.KOLListBean;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.SharedPreferencesUtil;
+import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +55,12 @@ public class KOLListActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(KOLListBean kolListBean) {
-                dataBeans = kolListBean.getData();
+                if(kolListBean.getCode() == Contants.GET_DATA_SUCCESS){
+                    dataBeans = kolListBean.getData();
+                }else{
+                    ToastUtil.toastLongMessage(kolListBean.getMessage());
+                }
+
 
             }
         });

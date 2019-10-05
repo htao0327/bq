@@ -19,6 +19,7 @@ import com.shehuan.niv.NiceImageView;
 import com.sy.biquan.Contants;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
+import com.sy.biquan.activity.AccountSafeActivity;
 import com.sy.biquan.activity.BaseSetActivity;
 import com.sy.biquan.activity.JYActivity;
 import com.sy.biquan.activity.MyJbActivity;
@@ -26,6 +27,7 @@ import com.sy.biquan.activity.MyWalletActivity;
 import com.sy.biquan.activity.SetInvitePersonActivity;
 import com.sy.biquan.bean.MineDataBean;
 import com.sy.biquan.bean.RegisterBean;
+import com.sy.biquan.bean.UserInfo;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.SharedPreferencesUtil;
@@ -37,7 +39,7 @@ import java.util.Map;
 public class MineFragment extends Fragment {
 
     private View rootView;
-    private LinearLayout ll_my_deal,ll_my_jb,ll_qb,ll_set,ll_register;
+    private LinearLayout ll_my_deal,ll_my_jb,ll_qb,ll_set,ll_register,ll_aq;
     private TextView name;//用户姓名
     private TextView userMsg;//用户slogan
     private TextView gz;//关注
@@ -62,7 +64,15 @@ public class MineFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 //        initView();
 //        getData();
-        bj.setOnClickListener(new View.OnClickListener() {
+
+        ll_aq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), AccountSafeActivity.class));
+            }
+        });
+
+                bj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), BaseSetActivity.class));
@@ -123,6 +133,7 @@ public class MineFragment extends Fragment {
         bj = rootView.findViewById(R.id.tv_bj);
         exit = rootView.findViewById(R.id.btn_exit);
         ll_register = rootView.findViewById(R.id.ll_register);
+        ll_aq = rootView.findViewById(R.id.ll_aq);
 
     }
 
@@ -149,10 +160,10 @@ public class MineFragment extends Fragment {
 //                    registerBean.getData().setDeal_password(Integer.valueOf(mineDataBean.getData().getDeal_password()));
 //                    registerBean.getData().setSlogan(mineDataBean.getData().getSlogan());
 //                    mMineDataBean = mineDataBean;
-                    Gson gson = new Gson();
-                    String jsonUserInfo = gson.toJson(mineDataBean);
-                    SharedPreferencesUtil.userInfoPutString(MyApplication.instance(),Contants.USERINFO2,jsonUserInfo);
-
+//                    Gson gson = new Gson();
+//                    String jsonUserInfo = gson.toJson(mineDataBean);
+//                    SharedPreferencesUtil.userInfoPutString(MyApplication.instance(),Contants.USERINFO2,jsonUserInfo);
+                    SharedPreferencesUtil.setMineUserInfo(mineDataBean);
                 }
             }
         });
@@ -165,15 +176,16 @@ public class MineFragment extends Fragment {
     }
 
     private void setData(){
-        MineDataBean mineDataBean = SharedPreferencesUtil.getUserInfo2();
-        if(mineDataBean!= null){
-            name.setText(mineDataBean.getData().getUserAlias());
-            qd.setText(String.valueOf(mineDataBean.getData().getQbNumber()));
-            fs.setText(String.valueOf(mineDataBean.getData().getFansCount()));
-            gz.setText(String.valueOf(mineDataBean.getData().getFollowCount()));
-            userMsg.setText(String.valueOf(mineDataBean.getData().getSlogan()));
+//        MineDataBean mineDataBean = SharedPreferencesUtil.getUserInfo2();
+        UserInfo userInfo = SharedPreferencesUtil.newGetUserInfo();
+        if(userInfo!= null){
+            name.setText(userInfo.getUserAlias());
+            qd.setText(String.valueOf(userInfo.getQbNumber()));
+            fs.setText(String.valueOf(userInfo.getFansCount()));
+            gz.setText(String.valueOf(userInfo.getFollowCount()));
+            userMsg.setText(String.valueOf(userInfo.getSlogan()));
             Glide.with(this)
-                    .load(mineDataBean.getData()
+                    .load(userInfo
                     .getUserAvatar())
                     .into(userImg);
         }

@@ -46,6 +46,7 @@ import com.sy.biquan.activity.LoginActivity;
 import com.sy.biquan.activity.RemenActivity;
 import com.sy.biquan.activity.SearchActivity;
 import com.sy.biquan.activity.SendJbActivity;
+import com.sy.biquan.activity.WebSitActivity;
 import com.sy.biquan.activity.XMActivity;
 import com.sy.biquan.adapter.JBAdapter;
 import com.sy.biquan.adapter.MainMenuAdapter;
@@ -91,7 +92,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private MainMenuAdapter mainMenuAdapter;
 
 
-    private String imCode = "";
+//    private String imCode = "";
 
     private TextView tv_cfmm,tv_jb,tv_kt,tv_xm,tv_rm;
     private LinearLayout ll_cfmm,jb,kt,xm,remen;
@@ -138,10 +139,10 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
-        RegisterBean registerBean = SharedPreferencesUtil.getUserInfo();
-        if(registerBean != null && !"".equals(registerBean.toString())) {
-            imCode = registerBean.getData().getUserImCode();
-        }
+//        RegisterBean registerBean = SharedPreferencesUtil.getUserInfo();
+//        if(registerBean != null && !"".equals(registerBean.toString())) {
+//            imCode = registerBean.getData().getUserImCode();
+//        }
         mTabTitles.add("全新");
         mTabTitles.add("最新");
         mTabTitles.add("最热");
@@ -230,13 +231,14 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if("".equals(imCode )){
+        if(!SharedPreferencesUtil.isLogin()){
             startActivity(new Intent(getActivity(), LoginActivity.class));
             return;
         }
         switch (view.getId()){
             case R.id.iv_more:
-                startActivity(new Intent(getActivity(), SendJbActivity.class));
+//                startActivity(new Intent(getActivity(), SendJbActivity.class));
+                startActivity(new Intent(getActivity(), WebSitActivity.class));
                 break;
             case R.id.et_search:
                 startActivity(new Intent(getActivity(), SearchActivity.class));
@@ -358,7 +360,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
         return dot.getId();
     }
-
 
     /**
      * 资源图片转Drawable

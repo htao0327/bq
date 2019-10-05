@@ -116,6 +116,10 @@
         <activity android:name=".activity.SetInvitePersonActivity"/>
         <activity android:name=".activity.AccountSafeActivity"/>
         <activity android:name=".activity.AboutUs"/>
+        <activity android:name=".activity.WebSitActivity"/>
+        <activity android:name=".activity.GiveRedEnevlopeC2C"/>
+        <activity android:name=".activity.CodeActivity"/>
+        <activity android:name=".activity.RedPacDetail"/>
 
     </application>
 

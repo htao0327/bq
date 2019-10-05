@@ -90,8 +90,9 @@ public class CreateKOLGroupActivity extends AppCompatActivity {
                         if(createGroupBean.getCode() == Contants.GET_DATA_SUCCESS){
                             groupId = createGroupBean.getData();
                             //建群成功
-                            DialogUtil.createGroupAlertDialog(CreateKOLGroupActivity.this,  "创建群聊成功",  "恭喜你新建群成功，现在可以去添加群成员了。",
-                                    "先不添加", "邀请好友进群", false, new DialogUtil.AlertDialogBtnClickListener() {
+                            DialogUtil.createGroupAlertDialog(CreateKOLGroupActivity.this,
+                                    "创建群聊成功",  "恭喜你新建群成功，现在可以去添加群成员了。",
+                                    "先不添加", "邀请好友进群", true, new DialogUtil.AlertDialogBtnClickListener() {
                                         @Override
                                         public void clickPositive() {
                                             startChat();

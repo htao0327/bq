@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -19,6 +20,7 @@ import com.sy.biquan.Contants;
 import com.sy.biquan.MainActivity;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
+import com.sy.biquan.activity.AddMoreActivity;
 import com.sy.biquan.activity.CreateKOLGroupActivity;
 import com.sy.biquan.activity.KOLListActivity;
 import com.sy.biquan.activity.LoginActivity;
@@ -56,7 +58,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     private ListView mConversationPopList;
 
     private PopDialogAdapter mConversationPopAdapter;
-    private String imCode = "";
+//    private String imCode = "";
+    private EditText et_search;
 
     @Nullable
     @Override
@@ -71,15 +74,19 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         // 会话列表面板的默认 UI 和交互初始化
         conversationLayout.initDefault();
         add = rootView.findViewById(R.id.iv_add);
+        et_search = rootView.findViewById(R.id.et_search);
+        et_search.setFocusable(false);
+        et_search.setOnClickListener(this);
         kol_list = rootView.findViewById(R.id.iv_cfmm);
         kol_list.setOnClickListener(this);
 
-        Gson gson = new Gson();
-        String userInfoString = SharedPreferencesUtil.userInfoGetString(MyApplication.instance(),Contants.USERINFO);
-        RegisterBean user = gson.fromJson(userInfoString,RegisterBean.class);
-        if(user != null && user.getData()!=null){
-            imCode = user.getData().getUserImCode();
-            if(user.getData().getUserType() == Contants.USER_TYPE_KOL){
+//        Gson gson = new Gson();
+//        String userInfoString = SharedPreferencesUtil.userInfoGetString(MyApplication.instance(),Contants.USERINFO);
+//        RegisterBean user = gson.fromJson(userInfoString,RegisterBean.class);
+        if(SharedPreferencesUtil.isLogin()){
+//            imCode = user.getData().getUserImCode();
+
+            if(SharedPreferencesUtil.newGetUserInfo().getUserType().equals(String.valueOf(Contants.USER_TYPE_KOL))){
                 mMenu = new Menu(getActivity(), add, Menu.MENU_USER_TYPE_KOL);
             }else {
                 mMenu = new Menu(getActivity(), add, Menu.MENU_USER_TYPE_NORMAL);
@@ -210,7 +217,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if("".equals(imCode )){
+        if(!SharedPreferencesUtil.isLogin()){
             startActivity(new Intent(getActivity(), LoginActivity.class));
             return;
         }
@@ -224,6 +231,9 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                 } else {
                     mMenu.show();
                 }
+                break;
+            case R.id.et_search:
+                startActivity(new Intent(getActivity(), AddMoreActivity.class));
                 break;
 
         }

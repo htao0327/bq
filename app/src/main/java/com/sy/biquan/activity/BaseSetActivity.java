@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.sy.biquan.R;
 import com.sy.biquan.bean.MineDataBean;
+import com.sy.biquan.bean.UserInfo;
 import com.sy.biquan.util.SharedPreferencesUtil;
 import com.sy.biquan.viewutil.CircleImageView;
 
@@ -45,6 +47,7 @@ public class BaseSetActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout ll_phone;
     private LinearLayout ll_invite;
     private LinearLayout ll_id_card;
+    private RelativeLayout rlBack;
 
 
 
@@ -68,7 +71,12 @@ public class BaseSetActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_base_set);
         params = getWindow().getAttributes();
         initView();
-
+        rlBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         ll_user_img.setOnClickListener(this);
         ll_name.setOnClickListener(this);
         ll_slogan.setOnClickListener(this);
@@ -127,24 +135,25 @@ public class BaseSetActivity extends AppCompatActivity implements View.OnClickLi
 
     private void setData(){
 
-        MineDataBean mineDataBean = SharedPreferencesUtil.getUserInfo2();
+//        MineDataBean mineDataBean = SharedPreferencesUtil.getUserInfo2();
+        UserInfo userInfo = SharedPreferencesUtil.newGetUserInfo();
         Glide.with(this)
-                .load(mineDataBean.getData().getUserAvatar())
+                .load(userInfo.getUserAvatar())
                 .into(userImg);
-        name.setText(mineDataBean.getData().getUserAlias());
-        phone.setText(mineDataBean.getData().getUserPhone());
-        if("1".equals(mineDataBean.getData().getHasInviteCode())){
-            invite.setText(mineDataBean.getData().getInviteUserAlias());
+        name.setText(userInfo.getUserAlias());
+        phone.setText(userInfo.getUserPhone());
+        if("1".equals(userInfo.getHasInviteCode())){
+            invite.setText(userInfo.getInviteUserAlias());
         }else {
             invite.setText("未绑定");
         }
-        if("0".equals(mineDataBean.getData().getAuthStatus())){//是否实名认证 0-未认证 1-审核中 2-认证成功 3-认证失败
+        if("0".equals(userInfo.getAuthStatus())){//是否实名认证 0-未认证 1-审核中 2-认证成功 3-认证失败
             idCard.setText("未认证");
-        }else if("1".equals(mineDataBean.getData().getAuthStatus())){//是否实名认证 0-未认证 1-审核中 2-认证成功 3-认证失败
+        }else if("1".equals(userInfo.getAuthStatus())){//是否实名认证 0-未认证 1-审核中 2-认证成功 3-认证失败
             idCard.setText("审核中");
-        }else if("2".equals(mineDataBean.getData().getAuthStatus())){//是否实名认证 0-未认证 1-审核中 2-认证成功 3-认证失败
+        }else if("2".equals(userInfo.getAuthStatus())){//是否实名认证 0-未认证 1-审核中 2-认证成功 3-认证失败
             idCard.setText("认证成功");
-        }else if("3".equals(mineDataBean.getData().getAuthStatus())){//是否实名认证 0-未认证 1-审核中 2-认证成功 3-认证失败
+        }else if("3".equals(userInfo.getAuthStatus())){//是否实名认证 0-未认证 1-审核中 2-认证成功 3-认证失败
             idCard.setText("认证失败");
         }
     }
@@ -163,6 +172,7 @@ public class BaseSetActivity extends AppCompatActivity implements View.OnClickLi
         invite = findViewById(R.id.tv_set_invite);
         idCard = findViewById(R.id.tv_set_id_card);
         userImg = findViewById(R.id.civ_user_img);
+        rlBack = findViewById(R.id.rl_back);
     }
 
     @Override

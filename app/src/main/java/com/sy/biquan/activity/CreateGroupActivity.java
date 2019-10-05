@@ -185,8 +185,9 @@ public class CreateGroupActivity extends AppCompatActivity {
                         if(createGroupBean.getCode() == Contants.GET_DATA_SUCCESS){
                             groupId = createGroupBean.getData();
                             //建群成功
-                            DialogUtil.createGroupAlertDialog(CreateGroupActivity.this,  "创建群聊成功",  "恭喜你新建群成功，现在可以去添加群成员了。",
-                                    "先不添加", "邀请好友进群", false, new DialogUtil.AlertDialogBtnClickListener() {
+                            DialogUtil.createGroupAlertDialog(CreateGroupActivity.this,
+                                    "创建群聊成功",  "恭喜你新建群成功，现在可以去添加群成员了。",
+                                    "先不添加", "邀请好友进群", true, new DialogUtil.AlertDialogBtnClickListener() {
                                         @Override
                                         public void clickPositive() {
                                             startChat();
@@ -273,6 +274,10 @@ public class CreateGroupActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {   //如果在Android7.0以上,使用FileProvider获取Uri
             intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             //创建文件夹
+            File file = new File("com.bq.photo");
+            if (!file.exists()) {
+                file.mkdir();
+            }
             Uri contentUri = FileProvider.getUriForFile(CreateGroupActivity.this, "com.bq.photo", tempFile);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
         } else {    //否则使用Uri.fromFile(file)方法获取Uri

@@ -63,6 +63,7 @@
             android:text="Q豆"
             />
         <EditText
+            android:inputType="number"
             android:id="@+id/et_money"
             android:textCursorDrawable="@null"
             android:layout_width="wrap_content"

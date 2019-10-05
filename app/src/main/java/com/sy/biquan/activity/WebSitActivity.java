@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
-import android.webkit.WebView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -16,15 +15,15 @@ import com.github.lzyzsd.jsbridge.BridgeWebView;
 import com.github.lzyzsd.jsbridge.CallBackFunction;
 import com.github.lzyzsd.jsbridge.DefaultHandler;
 import com.google.gson.Gson;
-import com.sy.biquan.Contants;
 import com.sy.biquan.R;
-import com.sy.biquan.bean.AddWalletBean;
-import com.sy.biquan.bean.FBJBWebReturnBean;
 import com.sy.biquan.util.SharedPreferencesUtil;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
+import java.util.HashMap;
+import java.util.Map;
 
-public class SendJbActivity extends AppCompatActivity {
+public class WebSitActivity extends AppCompatActivity {
+
 
     private BridgeWebView web;
     private RelativeLayout rlBack;
@@ -43,38 +42,37 @@ public class SendJbActivity extends AppCompatActivity {
         });
         web.setDefaultHandler(new DefaultHandler());
         web.setWebChromeClient(new WebChromeClient());
-        web.loadUrl("http://192.168.1.28:8080/bz/StartOrder.html");
+        web.loadUrl("http://192.168.1.28:8080/app/callDetails.html");
 
         web.registerHandler("submitFromWeb", new BridgeHandler() {
             @Override
             public void handler(String data, CallBackFunction function) {
                 Log.e("TAG", "js返回：" + data);
                 //显示js传递给Android的消息
-                Toast.makeText(SendJbActivity.this, "js返回:" + data, Toast.LENGTH_LONG).show();
+                Toast.makeText(WebSitActivity.this, "js返回:" + data, Toast.LENGTH_LONG).show();
                 //Android返回给JS的消息
-                function.onCallBack("1234"+SharedPreferencesUtil.getToken());
+                function.onCallBack("1234"+ SharedPreferencesUtil.getToken());
             }
         });
 
         web.setDefaultHandler(new DefaultHandler(){
             @Override
             public void handler(String data, CallBackFunction function) {
-                Toast.makeText(SendJbActivity.this, data, Toast.LENGTH_SHORT).show();
-                Gson gson = new Gson();
-                FBJBWebReturnBean addWalletBean = gson.fromJson(data,FBJBWebReturnBean.class);
-                if(addWalletBean.getCode() == Contants.GET_DATA_SUCCESS){
-                    ToastUtil.toastLongMessage("发布成功");
-                    finish();
-                }else{
-                    ToastUtil.toastLongMessage(addWalletBean.getMessage());
-                }
+                Toast.makeText(WebSitActivity.this, data, Toast.LENGTH_SHORT).show();
+//                if(data.equals(200)){
+//                    ToastUtil.toastLongMessage("发布成功");
+//                    finish();
+//                }
             }
         });
-        web.send(SharedPreferencesUtil.getToken(), new CallBackFunction() {
+        Map<String,String> map = new HashMap<>();
+        map.put("privateId","1");
+        map.put("token",SharedPreferencesUtil.getToken());
+        web.send(new Gson().toJson(map), new CallBackFunction() {
             @Override
             public void onCallBack(String data) {
 //                      接收js的回调数据
-                Toast.makeText(SendJbActivity.this, data, Toast.LENGTH_SHORT).show();
+                Toast.makeText(WebSitActivity.this, data, Toast.LENGTH_SHORT).show();
             }
         });
     }

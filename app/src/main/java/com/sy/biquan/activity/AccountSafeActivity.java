@@ -13,8 +13,6 @@ import com.sy.biquan.R;
 
 public class AccountSafeActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +29,13 @@ public class AccountSafeActivity extends AppCompatActivity {
         deal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AccountSafeActivity.this,SetDealPwdActivity.class));
+                startActivity(new Intent(AccountSafeActivity.this,SetDealPwdActivity.class).putExtra("type",0));
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AccountSafeActivity.this,SetDealPwdActivity.class));
+                startActivity(new Intent(AccountSafeActivity.this,SetDealPwdActivity.class).putExtra("type",1));
             }
         });
     }
