@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sy.biquan.Contants;
 import com.sy.biquan.MainActivity;
 import com.sy.biquan.R;
+import com.sy.biquan.bean.BindUserBean;
 import com.sy.biquan.bean.RegisterBean;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
@@ -188,41 +189,17 @@ public class FindPwdActivity extends AppCompatActivity implements View.OnClickLi
                 params.put("password", MD5.md5Password(etPwd.getText().toString()));
                 params.put("code",etYzm.getText().toString());
 
-                HttpProxy.obtain().post(Contants.URL + Contants.REGISTER, params, new HttpCallback<RegisterBean>() {
+                HttpProxy.obtain().post(Contants.URL + Contants.RESET, params, new HttpCallback<BindUserBean>() {
                     @Override
                     public void onFailure(String e) {
-                        Log.e(TAG, "onFailure: " + e);
+
                     }
 
                     @Override
-                    public void onSuccess(RegisterBean registerBean) {
+                    public void onSuccess(BindUserBean bindUserBean) {
+                        ToastUtil.toastLongMessage("设置成功");
 
-                        if(registerBean.getCode() == Contants.GET_DATA_SUCCESS){
-//                            Gson gson = new Gson();
-//                            String jsonUserInfo = gson.toJson(registerBean);
-//                            SharedPreferencesUtil.userInfoPutString(RegisterActivity.this,Contants.USERINFO,jsonUserInfo);
-                            SharedPreferencesUtil.setLoginUserInfo(registerBean);
-                            TUIKit.login(registerBean.getData().getUserImCode(), registerBean.getData().getUserSig(), new IUIKitCallBack() {
-                                @Override
-                                public void onError(String module, final int code, final String desc) {
-                                    runOnUiThread(new Runnable() {
-                                        public void run() {
-                                            ToastUtil.toastLongMessage("登录失败, errCode = " + code + ", errInfo = " + desc);
-
-                                        }
-                                    });
-                                }
-
-                                @Override
-                                public void onSuccess(Object data) {
-
-                                }
-                            });
-                            startActivity(new Intent(FindPwdActivity.this, MainActivity.class));
-                        }else {//显示错误信息
-                            ToastUtil.toastLongMessage(registerBean.getMsg());
-                        }
-
+                        finish();
                     }
                 });
             }else {

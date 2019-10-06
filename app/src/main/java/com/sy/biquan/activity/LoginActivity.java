@@ -139,6 +139,7 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
         }
         else if(view == tvForgetPwd){
 //            mPresenter.goToFindPwd(LoginActivity.this);
+            startActivity(new Intent(LoginActivity.this,FindPwdActivity.class));
         }else if(view == tvRegister){
 //            mPresenter.goToRegister(LoginActivity.this);
             startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
