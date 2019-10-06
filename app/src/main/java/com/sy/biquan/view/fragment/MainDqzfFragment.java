@@ -21,6 +21,7 @@ import com.sy.biquan.adapter.CFMMAdapter1;
 import com.sy.biquan.adapter.JBFragmentAdapter;
 import com.sy.biquan.bean.MainListData;
 import com.sy.biquan.bean.RegisterBean;
+import com.sy.biquan.bean.UserInfo;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.SharedPreferencesUtil;
@@ -37,7 +38,7 @@ public class MainDqzfFragment extends Fragment {
     private RecyclerView recyclerView;
     private JBFragmentAdapter adapter;
 
-    RegisterBean registerBean = null;
+    UserInfo userInfo = null;
 
     public MainDqzfFragment(){
 
@@ -73,7 +74,7 @@ public class MainDqzfFragment extends Fragment {
     private void getData(){
 
         Map<String,String> params = new HashMap<>();
-        if(registerBean != null && !"".equals(registerBean.toString().trim())){
+        if(userInfo != null && !"".equals(userInfo.toString().trim())){
             params.put("token", SharedPreferencesUtil.getToken());
         }else{
             params.put("token", "");
@@ -93,8 +94,8 @@ public class MainDqzfFragment extends Fragment {
                 adapter.setOnItemClickListener(new JBFragmentAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int position) {
-                        registerBean = SharedPreferencesUtil.getUserInfo();
-                        if(registerBean == null ){
+                        userInfo = SharedPreferencesUtil.newGetUserInfo();
+                        if(userInfo == null ){
                             startActivity(new Intent(MyApplication.instance(), LoginActivity.class));
                             return;
                         }

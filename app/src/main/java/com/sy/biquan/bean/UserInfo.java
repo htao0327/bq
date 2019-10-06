@@ -17,7 +17,7 @@ public class UserInfo {
     private String userType;//用户类型：1. 普通用户 2.KOL 3 项目方
     private int fansCount;//粉丝数
     private int followCount;//关注数
-    private int qbNumber;//Q豆数
+    private double qbNumber;//Q豆数
 
     public String getUserAlias() {
         return userAlias;
@@ -139,11 +139,11 @@ public class UserInfo {
         this.followCount = followCount;
     }
 
-    public int getQbNumber() {
+    public double getQbNumber() {
         return qbNumber;
     }
 
-    public void setQbNumber(int qbNumber) {
+    public void setQbNumber(double qbNumber) {
         this.qbNumber = qbNumber;
     }
 }

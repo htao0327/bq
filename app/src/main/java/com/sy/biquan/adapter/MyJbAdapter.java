@@ -53,9 +53,9 @@ public class MyJbAdapter extends RecyclerView.Adapter<MyJbAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.t1.setText(data.getData().get(position).getTitle());
         holder.t2.setText(data.getData().get(position).getEndTime());
-        holder.dqzf.setText(data.getData().get(position).getNowRise());
-        holder.yqzf.setText(data.getData().get(position).getExpectedRise());
-        holder.jys.setText(data.getData().get(position).getBourse().get(0));
+        holder.dqzf.setText(String.valueOf(data.getData().get(position).getNowRise()));
+        holder.yqzf.setText(String.valueOf(data.getData().get(position).getExpectedRise()));
+        holder.jys.setText(data.getData().get(position).getBourse());
         holder.ddCount.setText(data.getData().get(position).getQbNumber()+"");
         holder.time1.setText(data.getData().get(position).getStartTime());
         holder.time2.setText(data.getData().get(position).getEndTime());

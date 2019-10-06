@@ -1,5 +1,7 @@
 package com.tencent.qcloud.tim.uikit.modules.chat;
 
+import android.content.Intent;
+
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMConversationType;
 import com.tencent.imsdk.TIMElem;
@@ -187,6 +189,7 @@ public class GroupChatManagerKit extends ChatManagerKit {
                     for (int j = 0; j < mCurrentGroupMembers.size(); j++) {
                         if (mCurrentGroupMembers.get(i).getAccount().equals(memberInfo.getUser())) {
                             mCurrentGroupMembers.remove(i);
+
                             break;
                         }
                     }

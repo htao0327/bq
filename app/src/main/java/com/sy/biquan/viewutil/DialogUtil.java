@@ -4,6 +4,8 @@ package com.sy.biquan.viewutil;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -15,13 +17,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.sy.biquan.Contants;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
+import com.sy.biquan.activity.RedPacDetail;
 import com.sy.biquan.adapter.JysAdapter;
+import com.sy.biquan.bean.GetRedC2CBean;
+import com.sy.biquan.bean.GetRedCheck;
 import com.sy.biquan.bean.JbDetailBean;
 import com.sy.biquan.chat.ChatActivity;
+import com.sy.biquan.proxy.HttpCallback;
+import com.sy.biquan.proxy.HttpProxy;
+import com.sy.biquan.util.SharedPreferencesUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DialogUtil {
     private static AlertDialog dialog;
@@ -235,6 +248,94 @@ public class DialogUtil {
         dialog.setCanceledOnTouchOutside(true);   //失去焦点dismiss
         dialog.show();
     }
+
+    /**
+     *
+     * @param context
+     */
+    public static void showRedEnvelopesDialog2(final String id, final GetRedCheck getRedCheck,
+                                               Context context){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = LayoutInflater.from(MyApplication.instance()).inflate(R.layout.red_envelope_dialog, null);
+        builder.setView(view);
+        TextView text = view.findViewById(R.id.tv_text);
+        TextView look_more = view.findViewById(R.id.tv_look_more);
+        TextView tips = view.findViewById(R.id.tv_tips);
+        Button get = view.findViewById(R.id.btn_click_red_envelope);
+        look_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EventBus.getDefault().postSticky(getRedCheck);
+                MyApplication.instance().startActivity(
+                        new Intent(MyApplication.instance(), RedPacDetail.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
+        if(getRedCheck.getData().getIsExpire() == 1){//过期
+            get.setVisibility(View.GONE);
+            tips.setVisibility(View.VISIBLE);
+            text.setVisibility(View.GONE);
+            if(getRedCheck.getData().getIsMe() == 1){//是本人
+                look_more.setVisibility(View.VISIBLE);
+            }else{
+                look_more.setVisibility(View.GONE);
+            }
+        }else{//未过期
+            if(getRedCheck.getData().getHasReceived() == 1){//领过，进入详情页
+                EventBus.getDefault().postSticky(getRedCheck);
+                MyApplication.instance().startActivity(
+                        new Intent(MyApplication.instance(), RedPacDetail.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }else{//未领过
+                get.setVisibility(View.VISIBLE);
+                tips.setVisibility(View.GONE);
+                text.setVisibility(View.VISIBLE);
+            }
+
+        }
+        get.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("showRedEnvelopesDialog2","get.setOnClickListener");
+                Map<String,String> params = new HashMap<>();
+                params.put("token", SharedPreferencesUtil.getToken());
+                params.put("id",getRedCheck.getData().getRedPacketId());
+                Log.e("showRedEnvelopesDialog2","Map:"+params.toString());
+                HttpProxy.obtain().post(Contants.URL + Contants.GET_RED_C2C, params, new HttpCallback<GetRedC2CBean>() {
+                    @Override
+                    public void onFailure(String e) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(GetRedC2CBean getRedC2CBean) {
+                        EventBus.getDefault().postSticky(getRedC2CBean);
+                        MyApplication.instance().startActivity(
+                                new Intent(MyApplication.instance(), RedPacDetail.class)
+                                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    }
+                });
+            }
+        });
+
+//
+//        if(!isMe&&hasRedPack){
+//            look_more.setVisibility(View.GONE);
+//        }else {
+//            look_more.setVisibility(View.VISIBLE);
+//        }
+//        if(isExpire){
+//            get.setVisibility(View.GONE);
+//            tips.setVisibility(View.VISIBLE);
+//        }
+        dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);//去掉圆角背景背后的棱角
+        dialog.setCanceledOnTouchOutside(true);   //失去焦点dismiss
+        dialog.show();
+    }
+
+
 
     public static void showJysDialog(Context context, List<JbDetailBean.DataBean.BourseListBean> bourseList){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.shehuan.niv.NiceImageView;
 import com.sy.biquan.Contants;
+import com.sy.biquan.MainActivity;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.AccountSafeActivity;
@@ -47,7 +48,7 @@ public class MineFragment extends Fragment {
     private TextView qd;//Q豆
     private TextView bj;//编辑
     private Button exit;//编辑
-    private NiceImageView userImg;//用户头像
+    private CircleImageView userImg;//用户头像
     private MineDataBean mMineDataBean;
     @Nullable
     @Override
@@ -81,7 +82,9 @@ public class MineFragment extends Fragment {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                android.os.Process.killProcess(android.os.Process.myPid());
+//                android.os.Process.killProcess(android.os.Process.myPid());
+            SharedPreferencesUtil.clearData(MyApplication.instance());
+            MyApplication.instance().startActivity(new Intent(MyApplication.instance(),MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
         ll_my_jb.setOnClickListener(new View.OnClickListener() {

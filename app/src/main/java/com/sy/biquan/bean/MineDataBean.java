@@ -63,7 +63,7 @@ public class MineDataBean {
         private String userAvatar;
         private String id;
         private String slogan;
-        private int qbNumber;
+        private double qbNumber;
         private String userPhone;
         private String authStatus;
         private String deal_password;
@@ -129,11 +129,11 @@ public class MineDataBean {
             this.slogan = slogan;
         }
 
-        public int getQbNumber() {
+        public double getQbNumber() {
             return qbNumber;
         }
 
-        public void setQbNumber(int qbNumber) {
+        public void setQbNumber(double qbNumber) {
             this.qbNumber = qbNumber;
         }
 

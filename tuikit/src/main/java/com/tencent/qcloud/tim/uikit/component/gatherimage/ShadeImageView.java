@@ -28,7 +28,7 @@ public class ShadeImageView extends ImageView {
     private static SparseArray<Bitmap> sRoundBitmapArray = new SparseArray();
 
 
-    private int radius = ScreenUtil.getPxByDp(5);
+    private int radius = ScreenUtil.getPxByDp(25);
 
     public ShadeImageView(Context context) {
         super(context);
@@ -46,6 +46,7 @@ public class ShadeImageView extends ImageView {
 
     private void init(AttributeSet attrs) {
         setLayerType(LAYER_TYPE_HARDWARE, null);
+        setScaleType(ScaleType.CENTER_CROP);
     }
 
     @Override

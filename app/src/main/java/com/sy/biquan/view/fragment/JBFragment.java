@@ -22,6 +22,7 @@ import com.sy.biquan.adapter.CFMMAdapter1;
 import com.sy.biquan.adapter.JBFragmentAdapter;
 import com.sy.biquan.bean.MainListData;
 import com.sy.biquan.bean.RegisterBean;
+import com.sy.biquan.bean.UserInfo;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.SharedPreferencesUtil;
@@ -37,7 +38,7 @@ public class JBFragment extends Fragment {
     private View mTestView;
     private RecyclerView recyclerView;
     private JBFragmentAdapter adapter;
-    RegisterBean registerBean = null;
+    UserInfo userInfo = null;
     public JBFragment(){
 
     }
@@ -72,8 +73,8 @@ public class JBFragment extends Fragment {
     private void getData(){
 
         Map<String,String> params = new HashMap<>();
-        registerBean = SharedPreferencesUtil.getUserInfo();
-        if(registerBean != null && !"".equals(registerBean.toString().trim())){
+        userInfo = SharedPreferencesUtil.newGetUserInfo();
+        if(userInfo != null && !"".equals(userInfo.toString().trim())){
             params.put("token", SharedPreferencesUtil.getToken());
         }else{
             params.put("token", "");
@@ -81,10 +82,11 @@ public class JBFragment extends Fragment {
 
         params.put("pageNum","1");
         params.put("pageSize","10");
-        HttpProxy.obtain().post(Contants.URL + Contants.HOME_LIST, params, new HttpCallback<MainListData>() {
+        params.put("tag","all");
+        HttpProxy.obtain().post(Contants.URL + Contants.HOME_JB_LIST, params, new HttpCallback<MainListData>() {
             @Override
             public void onFailure(String e) {
-
+                Log.e("","onFailure---------------------"+e);
             }
 
             @Override
@@ -93,16 +95,17 @@ public class JBFragment extends Fragment {
                 adapter.setOnItemClickListener(new JBFragmentAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int position) {
-                        registerBean = SharedPreferencesUtil.getUserInfo();
-                        Log.e("JBFragment","registerBean------------"+registerBean);
-                        if(registerBean == null ){
-                            startActivity(new Intent(MyApplication.instance(), LoginActivity.class));
-                            return;
-                        }
+//                        registerBean = SharedPreferencesUtil.getUserInfo();
+//                        Log.e("JBFragment","registerBean------------"+registerBean);
+//                        if(registerBean == null ){
+//                            startActivity(new Intent(MyApplication.instance(), LoginActivity.class));
+//                            return;
+//                        }
                         startActivity(new Intent(getActivity(), JBDetailActivity.class)
                                 .putExtra(JBDetailActivity.ORDER_ID,mainListData.getData().get(position).getId()));
                     }
                 });
+                Log.e("","size---------------------"+mainListData.getData().size());
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 recyclerView.setNestedScrollingEnabled(false);
                 recyclerView.setAdapter(adapter);

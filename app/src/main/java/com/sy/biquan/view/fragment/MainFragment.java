@@ -23,6 +23,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
@@ -110,9 +111,17 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     // 图片数据，包括图片标题、图片链接、数据、点击要打开的网站（点击打开的网页或一些提示指令）
     private List<ImageInfo> imageInfoList;
+    FragmentActivity f;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+       f = (FragmentActivity) context;
+
+    }
 
 
-//    private MainBean allData;
+    //    private MainBean allData;
 //    List<MainBean.DataBean.ChannelListBean> channelListBeanList;//大模块列表 财富密码等
 //    List<MainBean.DataBean.BannerListBean> bannerList;//轮播图列表
 //    List<MainBean.DataBean.OrderCategoryListBean> orderCategoryListBeanList;//标题列表  最热等
@@ -124,6 +133,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
     private Map<String,String> params = new HashMap<>();
+
 
     public MainFragment() {
     }
@@ -143,7 +153,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 //        if(registerBean != null && !"".equals(registerBean.toString())) {
 //            imCode = registerBean.getData().getUserImCode();
 //        }
-        mTabTitles.add("全新");
+        mTabTitles.add("全部");
         mTabTitles.add("最新");
         mTabTitles.add("最热");
         mTabTitles.add("当前涨幅");
@@ -158,7 +168,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         mFragments.add(hotFragment);
         mFragments.add(dqzfFragment);
         mFragments.add(mainYqzfFragment);
-        titleViewPager.setAdapter(new JBAdapter(getActivity().getSupportFragmentManager(),mFragments,mTabTitles));
+        titleViewPager.setAdapter(new JBAdapter(f.getSupportFragmentManager(),mFragments,mTabTitles));
         TabLayoutUtil.setTabLayoutIndicator(mTabLayout);
         TabLayoutUtil.setTabLayoutIndicator(mTabLayout2);
         mTabLayout.setupWithViewPager(titleViewPager);
@@ -232,31 +242,31 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(!SharedPreferencesUtil.isLogin()){
-            startActivity(new Intent(getActivity(), LoginActivity.class));
+            startActivity(new Intent(f, LoginActivity.class));
             return;
         }
         switch (view.getId()){
             case R.id.iv_more:
-//                startActivity(new Intent(getActivity(), SendJbActivity.class));
-                startActivity(new Intent(getActivity(), WebSitActivity.class));
+//                startActivity(new Intent(f, SendJbActivity.class));
+                startActivity(new Intent(f, WebSitActivity.class));
                 break;
             case R.id.et_search:
-                startActivity(new Intent(getActivity(), SearchActivity.class));
+                startActivity(new Intent(f, SearchActivity.class));
                 break;
             case R.id.ll_remen:
-                startActivity(new Intent(getActivity(), RemenActivity.class));
+                startActivity(new Intent(f, RemenActivity.class));
                 break;
             case R.id.ll_cfmm:
-                startActivity(new Intent(getActivity(), CFMMActivity.class));
+                startActivity(new Intent(f, CFMMActivity.class));
                 break;
             case R.id.ll_xm:
-                startActivity(new Intent(getActivity(), XMActivity.class));
+                startActivity(new Intent(f, XMActivity.class));
                 break;
             case R.id.ll_kt:
-                startActivity(new Intent(getActivity(), KTActivity.class));
+                startActivity(new Intent(f, KTActivity.class));
                 break;
             case R.id.ll_jb:
-                startActivity(new Intent(getActivity(), JBActivity.class));
+                startActivity(new Intent(f, JBActivity.class));
                 break;
         }
     }
@@ -293,11 +303,11 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
         for (int i = 0; i < imageInfoList.size(); i++) {
             titles[i] = imageInfoList.get(i).getTitle();
-            SimpleDraweeView simpleDraweeView = new SimpleDraweeView(getActivity());
+            SimpleDraweeView simpleDraweeView = new SimpleDraweeView(f);
             simpleDraweeView.setAspectRatio(1.78f);
             // 设置一张默认的图片
-            GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(getActivity().getResources())
-                    .setPlaceholderImage(ContextCompat.getDrawable(getActivity(), R.drawable.defult), ScalingUtils.ScaleType.CENTER_CROP).build();
+            GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(f.getResources())
+                    .setPlaceholderImage(ContextCompat.getDrawable(f, R.drawable.defult), ScalingUtils.ScaleType.CENTER_CROP).build();
             simpleDraweeView.setHierarchy(hierarchy);
             simpleDraweeView.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT));
 
@@ -325,9 +335,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
         }
 
-        dots = addDots(mLineLayoutDot, fromResToDrawable(getActivity(), R.drawable.ic_dot_focused), simpleDraweeViewList.size());
+        dots = addDots(mLineLayoutDot, fromResToDrawable(f, R.drawable.ic_dot_focused), simpleDraweeViewList.size());
 //        dots = addDots(mLineLayoutDot, fromResToDrawable(this, R.drawable.index_bg), simpleDraweeViewList.size());
-        imageCarousel = new ImageCarousel(getActivity(), mViewPager,  dots, 5000);
+        imageCarousel = new ImageCarousel(f, mViewPager,  dots, 5000);
         imageCarousel.init(simpleDraweeViewList, titles)
                 .startAutoPlay();
         imageCarousel.start();
@@ -342,7 +352,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
      * @return 小点的Id
      */
     private int addDot(final LinearLayout linearLayout, Drawable backgount) {
-        final View dot = new View(getActivity());
+        final View dot = new View(f);
         LinearLayout.LayoutParams dotParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         dotParams.width = 16;
@@ -351,7 +361,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         dot.setLayoutParams(dotParams);
         dot.setBackground(backgount);
         dot.setId(View.generateViewId());
-        (getActivity()).runOnUiThread(new Runnable() {
+        (f).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 linearLayout.addView(dot);

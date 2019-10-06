@@ -43,23 +43,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private List<Fragment> fragments;
     private int lastIndex;
     private int isExit;//0已登录  其他表示退出登录
-//    private String imCode = "";
+
+    //    private String imCode = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        if (fragments != null && fragments.size() > 0) {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            for (Fragment f : fragments) {
+                fragmentTransaction.remove(f);
+            }
+            fragmentTransaction.commitAllowingStateLoss();
+        }
         initView();
-        isExit = getIntent().getIntExtra(EXIT,0);
+        isExit = getIntent().getIntExtra(EXIT, 0);
         initData();
         initBottomNavigation();
 
 
-        if(SharedPreferencesUtil.isLogin()){
+        if (SharedPreferencesUtil.isLogin()) {
             String imCode = SharedPreferencesUtil.newGetUserInfo().getUserImCode();
 
             String userSig = GenerateTestUserSig.genTestUserSig(imCode);
 
-            Log.e("token","token------------>"+ SharedPreferencesUtil.getToken());
+            Log.e("token", "token------------>" + SharedPreferencesUtil.getToken());
             TUIKit.login(imCode, userSig, new IUIKitCallBack() {
                 @Override
                 public void onError(String module, final int code, final String desc) {
@@ -69,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     });
                 }
+
                 @Override
                 public void onSuccess(Object data) {
                     ToastUtil.toastLongMessage("登录成功");
@@ -82,11 +92,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void initView(){
+    private void initView() {
         bottomNavigationView = findViewById(R.id.main_bottom_navigation);
     }
 
-    private void initData(){
+    private void initData() {
         fragments = new ArrayList<>();
         fragments.add(new ChatFragment());
         fragments.add(new MainFragment());
@@ -126,21 +136,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         setFragmentPosition(0);
                         break;
                     case R.id.navigation_cus:
-                        if(!SharedPreferencesUtil.isLogin()){
+                        if (!SharedPreferencesUtil.isLogin()) {
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             break;
                         }
                         setFragmentPosition(2);
                         break;
                     case R.id.navigation_task:
-                        if(!SharedPreferencesUtil.isLogin()){
+                        if (!SharedPreferencesUtil.isLogin()) {
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             break;
                         }
                         setFragmentPosition(3);
                         break;
                     case R.id.navigation_user:
-                        if(!SharedPreferencesUtil.isLogin()){
+                        if (!SharedPreferencesUtil.isLogin()) {
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
                             break;
                         }
@@ -158,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        if(!SharedPreferencesUtil.isLogin()){
+        if (!SharedPreferencesUtil.isLogin()) {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             return;
         }

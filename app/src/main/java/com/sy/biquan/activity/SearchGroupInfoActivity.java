@@ -18,6 +18,7 @@ import com.sy.biquan.Contants;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.bean.RegisterBean;
+import com.sy.biquan.bean.UserInfo;
 import com.sy.biquan.chat.ChatActivity;
 import com.sy.biquan.util.SharedPreferencesUtil;
 import com.sy.biquan.viewutil.CircleImageView;
@@ -71,8 +72,8 @@ public class SearchGroupInfoActivity extends AppCompatActivity {
         qzName = findViewById(R.id.tv_qz_name);
         t1 = findViewById(R.id.t1);
 
-        RegisterBean registerBean = SharedPreferencesUtil.getUserInfo();
-        String id = registerBean.getData().getId();
+        UserInfo userInfo = SharedPreferencesUtil.newGetUserInfo();
+        String id = userInfo.getUserId();
 
 
         qzName.setText(getIntent().getStringExtra(GROUP_QZ_NAME));

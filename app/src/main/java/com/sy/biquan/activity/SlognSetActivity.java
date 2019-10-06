@@ -18,6 +18,7 @@ import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.bean.AddWalletBean;
 import com.sy.biquan.bean.MineDataBean;
+import com.sy.biquan.bean.UserInfo;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.SharedPreferencesUtil;
@@ -82,11 +83,11 @@ public class SlognSetActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(AddWalletBean addWalletBean) {
                             if(addWalletBean.getCode() == Contants.GET_DATA_SUCCESS){
-                                MineDataBean mineDataBean = SharedPreferencesUtil.getUserInfo2();
-                                mineDataBean.getData().setSlogan(et.getText().toString().trim());
+                                UserInfo userInfo = SharedPreferencesUtil.newGetUserInfo();
+                                userInfo.setSlogan(et.getText().toString().trim());
                                 Gson gson = new Gson();
-                                String jsonUserInfo = gson.toJson(mineDataBean);
-                                SharedPreferencesUtil.userInfoPutString(MyApplication.instance(),Contants.USERINFO2,jsonUserInfo);
+                                String jsonUserInfo = gson.toJson(userInfo);
+                                SharedPreferencesUtil.userInfoPutString(MyApplication.instance(),Contants.USERINFO,jsonUserInfo);
                                 ToastUtil.toastLongMessage("修改完成");
                                 finish();
                             }

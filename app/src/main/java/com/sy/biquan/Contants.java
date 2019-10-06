@@ -44,7 +44,8 @@ public class Contants {
     public final static int SDKAppID = 1400253555;
     public final static String SECRETKEY = "bc042dfa5db7c057d7d2baf1d3e06514e3ab13e6af5486a111e27c86cb4a84d4";
     public final static String MYURL = "http://192.168.1.17:9000";
-    public final static String URL = "http://121.40.245.108:9000";
+//    public final static String URL = "http://121.40.245.108:9000";
+    public final static String URL = "http://192.168.1.31:9000";
     public final static String HOME_DATA = "/landscape-service-provider-content/home";//首页
     public final static String LOGIN = "/landscape-service-user/user/login";//登录
     public final static String REGISTER = "/landscape-service-user/user/reg/register";//注册
@@ -94,5 +95,6 @@ public class Contants {
     public final static String BIND_USER = "/landscape-service-user/user//bind-user";//设置邀请人
     public final static String RESET = "/landscape-service-user/user/reset";//重置密码
     public final static String DEAL_PWD = "/landscape-service-user/user/set-trans-password";//设置交易密码
+    public final static String GET_RED_C2C = "/landscape-service-im/red_packet/o2o-receive";//1:1抢红包
 
 }

@@ -51,15 +51,14 @@ public class MyJbActivity extends AppCompatActivity {
             }
         });
 
-
         dealReceived.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(btn != 1){
+                if(btn != 2){
                     dealLaunch.setBackground(null);
                     dealReceived.setBackground(getResources().getDrawable(R.drawable.jy_btn_selected_bg));
                     gz.setBackground(null);
-                    btn = 1;
+                    btn = 2;
                     dealLaunch.setTextColor(getResources().getColor(R.color.colorLoginBtn));
                     gz.setTextColor(getResources().getColor(R.color.colorLoginBtn));
                     dealReceived.setTextColor(getResources().getColor(R.color.white));
@@ -100,11 +99,11 @@ public class MyJbActivity extends AppCompatActivity {
         dealLaunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(btn != 2){
+                if(btn != 1){
                     gz.setBackground(null);
                     dealReceived.setBackground(null);
                     dealLaunch.setBackground(getResources().getDrawable(R.drawable.jy_btn_selected_bg));
-                    btn = 2;
+                    btn = 1;
                     dealReceived.setTextColor(getResources().getColor(R.color.colorLoginBtn));
                     gz.setTextColor(getResources().getColor(R.color.colorLoginBtn));
                     dealLaunch.setTextColor(getResources().getColor(R.color.white));

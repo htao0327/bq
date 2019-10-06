@@ -53,46 +53,46 @@ public class MyJb1Bean {
          * qbNumber : 0
          */
 
-        private List<String> bourse;
-        private int nowRise;
-        private int expectedRise;
-        private Object orderId;
+        private String bourse;
+        private double nowRise;
+        private double expectedRise;
+        private String orderId;
         private String currency;
         private String startTime;
         private String endTime;
-        private Object currencyId;
+        private String currencyId;
         private String title;
         private int qbNumber;
 
-        public List<String> getBourse() {
+        public String getBourse() {
             return bourse;
         }
 
-        public void setBourse(List<String> bourse) {
+        public void setBourse(String bourse) {
             this.bourse = bourse;
         }
 
-        public int getNowRise() {
+        public double getNowRise() {
             return nowRise;
         }
 
-        public void setNowRise(int nowRise) {
+        public void setNowRise(double nowRise) {
             this.nowRise = nowRise;
         }
 
-        public int getExpectedRise() {
+        public double getExpectedRise() {
             return expectedRise;
         }
 
-        public void setExpectedRise(int expectedRise) {
+        public void setExpectedRise(double expectedRise) {
             this.expectedRise = expectedRise;
         }
 
-        public Object getOrderId() {
+        public String getOrderId() {
             return orderId;
         }
 
-        public void setOrderId(Object orderId) {
+        public void setOrderId(String orderId) {
             this.orderId = orderId;
         }
 
@@ -120,11 +120,11 @@ public class MyJb1Bean {
             this.endTime = endTime;
         }
 
-        public Object getCurrencyId() {
+        public String getCurrencyId() {
             return currencyId;
         }
 
-        public void setCurrencyId(Object currencyId) {
+        public void setCurrencyId(String currencyId) {
             this.currencyId = currencyId;
         }
 

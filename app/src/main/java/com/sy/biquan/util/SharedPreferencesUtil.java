@@ -12,6 +12,9 @@ import com.sy.biquan.bean.LoginBean;
 import com.sy.biquan.bean.MineDataBean;
 import com.sy.biquan.bean.RegisterBean;
 import com.sy.biquan.bean.UserInfo;
+import com.tencent.imsdk.TIMCallBack;
+import com.tencent.imsdk.TIMManager;
+import com.tencent.qcloud.tim.uikit.TUIKit;
 
 public class SharedPreferencesUtil {
 
@@ -21,8 +24,26 @@ public class SharedPreferencesUtil {
     public static final int TYPE_BOOLEAN = 4;
     public static final int TYPE_FLOAT = 5;
     private static final String USERINFO = "userInfo";//登录注册时存的用户信息
-//    private static final String USERINFO2 = "userInfo2";//刷新个人信息时存的，只做存取一些个人头像等随时改变的数据用
 
+
+    public static void clearData(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(USERINFO, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.commit();
+        TIMManager.getInstance().logout(new TIMCallBack() {
+            @Override
+            public void onError(int i, String s) {
+
+            }
+
+            @Override
+            public void onSuccess() {
+                Log.e("","IM退出成功");
+            }
+        });
+
+    }
 
     public static void setUserinfo(UserInfo userinfo){
         Gson gson = new Gson();
@@ -128,17 +149,17 @@ public class SharedPreferencesUtil {
         SharedPreferences sharedPreferences = context.getSharedPreferences(USERINFO, Context.MODE_PRIVATE);//
         return sharedPreferences.getString(key, null);
     }
-
-    public static RegisterBean getUserInfo(){
-        Gson gson = new Gson();
-        String userInfoString = userInfoGetString(MyApplication.instance(), Contants.USERINFO);
-        return gson.fromJson(userInfoString,RegisterBean.class);
-    }
-    public static MineDataBean getUserInfo2(){
-        Gson gson = new Gson();
-        String userInfoString = userInfoGetString(MyApplication.instance(), Contants.USERINFO2);
-        return gson.fromJson(userInfoString,MineDataBean.class);
-    }
+//
+//    public static RegisterBean getUserInfo(){
+//        Gson gson = new Gson();
+//        String userInfoString = userInfoGetString(MyApplication.instance(), Contants.USERINFO);
+//        return gson.fromJson(userInfoString,RegisterBean.class);
+//    }
+//    public static MineDataBean getUserInfo2(){
+//        Gson gson = new Gson();
+//        String userInfoString = userInfoGetString(MyApplication.instance(), Contants.USERINFO2);
+//        return gson.fromJson(userInfoString,MineDataBean.class);
+//    }
 
     public static boolean userInfoPutString(Context context,String key,String value){
         SharedPreferences sharedPreferences = context.getSharedPreferences(USERINFO, Context.MODE_PRIVATE);//

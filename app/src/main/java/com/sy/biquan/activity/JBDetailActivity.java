@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.sy.biquan.bean.AddWalletBean;
 import com.sy.biquan.bean.JbDetailBean;
 import com.sy.biquan.bean.MainListData;
 import com.sy.biquan.bean.RegisterBean;
+import com.sy.biquan.bean.UserInfo;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.SharedPreferencesUtil;
@@ -53,12 +55,14 @@ public class JBDetailActivity extends AppCompatActivity {
     private int isFollow;//1 已关注  0 未关注
     private String userID = "";
     private String orderId = "";
+    private LinearLayout ll_tjjb;
     List<JbDetailBean.DataBean.BourseListBean> bourseList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jb_detail);
         initView();
+//        rec.setNestedScrollingEnabled(false);
         getData();
         rlBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +76,9 @@ public class JBDetailActivity extends AppCompatActivity {
                 if("".equals(orderId)){
                     ToastUtil.toastLongMessage("找不到该订单");
                 }else {
-                    RegisterBean registerBean = SharedPreferencesUtil.getUserInfo();
-                    int qdCounts = registerBean.getData().getAllScore();
+//                    RegisterBean registerBean = SharedPreferencesUtil.getUserInfo();
+                    UserInfo userInfo = SharedPreferencesUtil.newGetUserInfo();
+                    double qdCounts = userInfo.getQbNumber();
                     if (qdCounts < qdPrice) {//提示去充值
 
                     } else {//提示确认购买

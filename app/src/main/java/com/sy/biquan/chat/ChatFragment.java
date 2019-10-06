@@ -64,14 +64,14 @@ public class ChatFragment extends BaseFragment {
         //从布局文件中获取聊天面板组件
         mChatLayout = mBaseView.findViewById(R.id.chat_layout);
 //        EventBus.getDefault().post(mChatLayout);
-//        MessageLayout messageLayout = mChatLayout.getMessageLayout();
+        MessageLayout messageLayout = mChatLayout.getMessageLayout();
         // 设置自己聊天气泡的背景
 //        messageLayout.setRightBubble(MyApplication.instance().getResources().getDrawable(R.drawable.chat_bg_right));
         // 设置朋友聊天气泡的背景
 //        messageLayout.setLeftBubble(MyApplication.instance().getResources().getDrawable(R.drawable.chat_bg_left));
 
         // 设置头像圆角，不设置则默认不做圆角处理
-//        messageLayout.setAvatarRadius(50);
+        messageLayout.setAvatarRadius(25);
         // 设置头像大小
 //        messageLayout.setAvatarSize(new int[]{35, 35});
 

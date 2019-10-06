@@ -16,7 +16,7 @@
     <string name="register_input_pwd">请输入6-20位密码</string>
     <string name="register_next">下一步</string>
     <string name="register_go_login">已有账号登录</string>
-    <string name="register_server_protocol">《币车车平台注册服务协议》</string>
+    <string name="register_server_protocol">《币圈儿平台注册服务协议》</string>
     <string name="register_server_protocol_left">注册表示同意</string>
 
     <string name="main_cfmm">财富密码</string>

@@ -72,9 +72,9 @@ public class RegisterBean {
         private int followCount;
         private int fansCount;
         private int peak;
-        private int taskScore;
-        private int remainScore;
-        private int allScore;
+        private double taskScore;
+        private double remainScore;
+        private double allScore;
         private String userImCode;
         private String slogan;
         private int deal_password;
@@ -183,27 +183,27 @@ public class RegisterBean {
             this.peak = peak;
         }
 
-        public int getTaskScore() {
+        public double getTaskScore() {
             return taskScore;
         }
 
-        public void setTaskScore(int taskScore) {
+        public void setTaskScore(double taskScore) {
             this.taskScore = taskScore;
         }
 
-        public int getRemainScore() {
+        public double getRemainScore() {
             return remainScore;
         }
 
-        public void setRemainScore(int remainScore) {
+        public void setRemainScore(double remainScore) {
             this.remainScore = remainScore;
         }
 
-        public int getAllScore() {
+        public double getAllScore() {
             return allScore;
         }
 
-        public void setAllScore(int allScore) {
+        public void setAllScore(double allScore) {
             this.allScore = allScore;
         }
 

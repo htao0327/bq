@@ -56,5 +56,6 @@ dependencies {
 //    implementation project(':tuikit')
 
     implementation 'com.github.lzyzsd:jsbridge:1.0.4'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.3@aar'
 
 }

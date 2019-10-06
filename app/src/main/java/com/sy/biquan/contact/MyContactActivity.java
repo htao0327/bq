@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.sy.biquan.R;
 
 public class MyContactActivity extends AppCompatActivity {
+
     private ContactFragment contactFragment;
 
     @Override

@@ -120,6 +120,7 @@
         <activity android:name=".activity.GiveRedEnevlopeC2C"/>
         <activity android:name=".activity.CodeActivity"/>
         <activity android:name=".activity.RedPacDetail"/>
+        <activity android:name=".activity.FindPwdActivity"/>
 
     </application>
 

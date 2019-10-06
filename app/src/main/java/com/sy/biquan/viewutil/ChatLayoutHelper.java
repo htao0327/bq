@@ -16,6 +16,7 @@ import com.sy.biquan.R;
 import com.sy.biquan.activity.GiveRedEnevlopeC2C;
 import com.sy.biquan.activity.GiveRedEnvelope;
 import com.sy.biquan.activity.LaunchDealActivity;
+import com.sy.biquan.activity.RedPacDetail;
 import com.sy.biquan.bean.DealBean;
 import com.sy.biquan.bean.DealCheckBean;
 import com.sy.biquan.bean.GetRedCheck;
@@ -33,6 +34,8 @@ import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.ICustomMe
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.IOnCustomMessageDrawListener;
 import com.tencent.qcloud.tim.uikit.modules.message.MessageInfo;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,7 +44,7 @@ public class ChatLayoutHelper {
     private static final String TAG = ChatLayoutHelper.class.getSimpleName();
     public static Context context;
     private TIMConversationType type;
-    private String userId;
+    public static String userId;
     public ChatLayoutHelper(Context context, TIMConversationType type,String userId){
         this.context = context;
         this.type = type;
@@ -236,7 +239,7 @@ public class ChatLayoutHelper {
     }
 
     /**
-     * 自定义消息的bean实体，用来与json的相互转化
+     * 自定义消息红包的bean实体
      */
     public static class CustomMessageData {
         private int type = 1;
@@ -499,11 +502,14 @@ public class ChatLayoutHelper {
                         @Override
                         public void onSuccess(GetRedCheck getRedCheck) {
                             if(getRedCheck.getCode() == Contants.GET_DATA_SUCCESS){
-                                boolean isMe;
                                 if(getRedCheck.getData().getIsMe() == 1){
-                                    isMe = true;
+                                    EventBus.getDefault().postSticky(getRedCheck);
+                                    MyApplication.instance().startActivity(
+                                            new Intent(MyApplication.instance(), RedPacDetail.class)
+                                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                                 }else{
-                                    isMe = false;
+                                    DialogUtil.showRedEnvelopesDialog2(userId,getRedCheck,context
+                                           );
                                 }
 //
 //                                boolean hasRedPack = getRedCheck.getData().isHasRedPack();

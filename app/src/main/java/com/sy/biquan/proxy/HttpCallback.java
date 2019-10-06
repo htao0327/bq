@@ -12,7 +12,7 @@ public abstract class HttpCallback<Result> implements ICallBack{
     public void onSuccess(String result) {
         Gson gson = new Gson();
         Class<?> cls = HttpHelper.analysisClazzInfo(this);
-
+//        try{}
         Result objResult = (Result) gson.fromJson(result,cls);
         onSuccess(objResult);
     }
