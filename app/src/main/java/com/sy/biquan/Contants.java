@@ -98,5 +98,6 @@ public class Contants {
     public final static String GET_RED_C2C = "/landscape-service-im/red_packet/o2o-receive";//1:1抢红包
     public final static String TASK_LIST = "/landscape-service-provider-content/task/list";//任务列表
     public final static String QD_DETAIL = "/landscape-service-provider-content/order/detail/money";//Q豆明细
+    public final static String DEAL_LSIT = "/landscape-service-im/im/transaction/transcationList";//交易列表
 
 }

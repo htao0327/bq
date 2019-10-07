@@ -51,6 +51,7 @@ public class BaseActivity extends AppCompatActivity {
         return mCurrentActivity;
     }
 
+
 //    private void initStatusBar() {
 //        if (statusBarView == null) {
 //            int identifier = getResources().getIdentifier("statusBarBackground", "id", "android");

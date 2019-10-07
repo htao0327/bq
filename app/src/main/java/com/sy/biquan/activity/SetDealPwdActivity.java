@@ -19,6 +19,7 @@ import com.sy.biquan.bean.RegisterBean;
 import com.sy.biquan.bean.UserInfo;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
+import com.sy.biquan.util.MD5;
 import com.sy.biquan.util.SharedPreferencesUtil;
 import com.tencent.openqq.protocol.imsdk.msgcomm;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
@@ -127,7 +128,7 @@ public class SetDealPwdActivity extends AppCompatActivity {
                         params.put("token", SharedPreferencesUtil.getToken());
                         params.put("phone",phone.getText().toString());
                         params.put("code",yzm.getText().toString());
-                        params.put("dealPassword",pwd.getText().toString());
+                        params.put("dealPassword", MD5.md5Password(pwd.getText().toString()));
                         HttpProxy.obtain().post(Contants.URL + Contants.DEAL_PWD, params, new HttpCallback<BindUserBean>() {
                             @Override
                             public void onFailure(String e) {

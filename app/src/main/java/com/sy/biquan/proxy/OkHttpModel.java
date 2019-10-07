@@ -65,13 +65,12 @@ public class OkHttpModel implements IHttp {
         }
         body=formEncodingBuilder.build();
         return body;
-
-
     }
 
     @Override
     //真正干活的地方，服务提供方法
     public void post(String url, Map<String, String> params,final ICallBack callback) {
+
 //        RequestBody body=setRequestBody(params);
         //2 构造Request
 //        DialogUtil.showNetDialog(BaseActivity.getCurrentActivity());

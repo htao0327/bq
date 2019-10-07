@@ -54,7 +54,7 @@ public class MineFragment extends Fragment {
     private TextView bj;//编辑
     private Button exit;//编辑
     private CircleImageView userImg;//用户头像
-    private MineDataBean mMineDataBean;
+//    private MineDataBean mMineDataBean;
     private SlideButton slideButton;
     @Nullable
     @Override

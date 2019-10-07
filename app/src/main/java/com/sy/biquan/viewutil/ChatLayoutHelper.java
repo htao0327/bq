@@ -16,7 +16,10 @@ import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.GiveRedEnevlopeC2C;
 import com.sy.biquan.activity.GiveRedEnvelope;
+import com.sy.biquan.activity.LaunchDealActivity;
 import com.sy.biquan.activity.RedPacDetail;
+import com.sy.biquan.bean.DealBean;
+import com.sy.biquan.bean.DealCheckBean;
 import com.sy.biquan.bean.GetRedCheck;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
@@ -51,49 +54,49 @@ public class ChatLayoutHelper {
 
     }
 
-//    public void dealCharLayout(final ChatLayout layout){
-//        MessageLayout messageLayout = layout.getMessageLayout();
-//        messageLayout.setOnCustomMessageDrawListener(new DealMessageDraw());
-//        InputLayout inputLayout = layout.getInputLayout();
-//        InputMoreActionUnit unit = new InputMoreActionUnit();
-//        unit.setIconResId(R.drawable.deal_icon);
-//        unit.setTitleId(R.string.custom_message_jy);
-//        unit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Gson gson = new Gson();
-////                CustomMessageData customMessageData = new CustomMessageData();
-////                String data = gson.toJson(customMessageData);
-////                MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
-////                layout.sendMessage(info, false);
-////                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnvelope.class));
-//                Map<String,String> params = new HashMap<>();
-//                params.put("token",SharedPreferencesUtil.getToken());
-//                HttpProxy.obtain().post(Contants.URL + Contants.DEAL_CHECK, params, new HttpCallback<DealCheckBean>() {
-//                    @Override
-//                    public void onFailure(String e) {
-//                        Log.e("ChatLayoutHelper","onFailure"+e);
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(DealCheckBean dealCheckBean) {
-//                        Log.e("ChatLayoutHelper","onSuccess"+dealCheckBean);
-//                        if("n".equals(dealCheckBean.getData().getBullet_box())){//不弹窗，表示点击交易是在允许的时间内（9:00-18:00客服上班时间）
-////                            if("y".equals(dealCheckBean.getData().getChecked_type()) && "y".equals(dealCheckBean.getData().getEth_address_type())){
-////                            if("y".equals(dealCheckBean.getData().getEth_address_type())){
-//                            if(type == TIMConversationType.C2C){}
-//                                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), LaunchDealActivity.class));
-////                            }else {
-////                                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), CheckDealInfoActivity.class).putExtra(CheckDealInfoActivity.IDCARD_TYPE,dealCheckBean.getData().getChecked_type()).putExtra(CheckDealInfoActivity.WALLET_TYPE,dealCheckBean.getData().getEth_address_type()));
-////                            }
-//                        }
-//                    }
-//                });
-//
-//            }
-//        });
-//        inputLayout.addAction(unit);
-//    }
+    public void dealCharLayout(final ChatLayout layout){
+        MessageLayout messageLayout = layout.getMessageLayout();
+        messageLayout.setOnCustomMessageDrawListener(new DealMessageDraw());
+        InputLayout inputLayout = layout.getInputLayout();
+        InputMoreActionUnit unit = new InputMoreActionUnit();
+        unit.setIconResId(R.drawable.deal_icon);
+        unit.setTitleId(R.string.custom_message_jy);
+        unit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Gson gson = new Gson();
+//                CustomMessageData customMessageData = new CustomMessageData();
+//                String data = gson.toJson(customMessageData);
+//                MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
+//                layout.sendMessage(info, false);
+//                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnvelope.class));
+                Map<String,String> params = new HashMap<>();
+                params.put("token",SharedPreferencesUtil.getToken());
+                HttpProxy.obtain().post(Contants.URL + Contants.DEAL_CHECK, params, new HttpCallback<DealCheckBean>() {
+                    @Override
+                    public void onFailure(String e) {
+                        Log.e("ChatLayoutHelper","onFailure"+e);
+                    }
+
+                    @Override
+                    public void onSuccess(DealCheckBean dealCheckBean) {
+                        Log.e("ChatLayoutHelper","onSuccess"+dealCheckBean);
+                        if("n".equals(dealCheckBean.getData().getBullet_box())){//不弹窗，表示点击交易是在允许的时间内（9:00-18:00客服上班时间）
+//                            if("y".equals(dealCheckBean.getData().getChecked_type()) && "y".equals(dealCheckBean.getData().getEth_address_type())){
+//                            if("y".equals(dealCheckBean.getData().getEth_address_type())){
+                            if(type == TIMConversationType.C2C){}
+                                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), LaunchDealActivity.class));
+//                            }else {
+//                                MyApplication.instance().startActivity(new Intent(MyApplication.instance(), CheckDealInfoActivity.class).putExtra(CheckDealInfoActivity.IDCARD_TYPE,dealCheckBean.getData().getChecked_type()).putExtra(CheckDealInfoActivity.WALLET_TYPE,dealCheckBean.getData().getEth_address_type()));
+//                            }
+                        }
+                    }
+                });
+
+            }
+        });
+        inputLayout.addAction(unit);
+    }
 
     public void customizeChatLayout(final ChatLayout layout) {
 //        Log.e(TAG,"context==="+context);
@@ -231,8 +234,6 @@ public class ChatLayoutHelper {
                 } else {
                     MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnvelope.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
-
-
             }
         });
         inputLayout.addAction(unit);
@@ -435,23 +436,23 @@ public class ChatLayoutHelper {
             }
         }
     }
-//
-//    public static class DealMessageDraw implements  IOnCustomMessageDrawListener{
-//
-//        @Override
-//        public void onDraw(ICustomMessageViewGroup parent, MessageInfo info) {
-//            TIMCustomElem elem = (TIMCustomElem) info.getTIMMessage().getElement(0);
-//            final DealBean dealBean = new Gson().fromJson(new String(elem.getData()),DealBean.class);
-//            if(dealBean == null){
-//                return;
-//            }
-//            // 把自定义消息view添加到TUIKit内部的父容器里
-//            View view = LayoutInflater.from(MyApplication.instance()).inflate(R.layout.deal_message, null, false);
-//            parent.addMessageContentView(view);
-//
-//
-//        }
-//    }
+
+    public static class DealMessageDraw implements  IOnCustomMessageDrawListener{
+
+        @Override
+        public void onDraw(ICustomMessageViewGroup parent, MessageInfo info) {
+            TIMCustomElem elem = (TIMCustomElem) info.getTIMMessage().getElement(0);
+            final DealBean dealBean = new Gson().fromJson(new String(elem.getData()),DealBean.class);
+            if(dealBean == null){
+                return;
+            }
+            // 把自定义消息view添加到TUIKit内部的父容器里
+            View view = LayoutInflater.from(MyApplication.instance()).inflate(R.layout.deal_message, null, false);
+            parent.addMessageContentView(view);
+
+
+        }
+    }
 
     public static class CustomMessageDraw implements IOnCustomMessageDrawListener {
         private static AlertDialog dialog;

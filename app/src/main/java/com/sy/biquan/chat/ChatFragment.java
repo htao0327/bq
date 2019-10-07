@@ -79,10 +79,7 @@ public class ChatFragment extends BaseFragment {
         mChatLayout.initDefault();
 
         // TODO 通过api设置ChatLayout各种属性的样例
-        ChatLayoutHelper helper = new ChatLayoutHelper(getActivity(),mChatInfo.getType(),mChatInfo.getId());
-        helper.customizeChatLayout(mChatLayout);
-//        helper.dealCharLayout(mChatLayout);
-//        ChatLayoutHelper.customizeChatLayout(getActivity(), mChatLayout);
+
 
         /*
          * 需要聊天的基本信息
@@ -106,6 +103,10 @@ public class ChatFragment extends BaseFragment {
         });
 
         if (mChatInfo.getType() == TIMConversationType.C2C) {
+            ChatLayoutHelper helper = new ChatLayoutHelper(getActivity(),mChatInfo.getType(),mChatInfo.getId());
+            helper.customizeChatLayout(mChatLayout);
+//        helper.dealCharLayout(mChatLayout);
+//        ChatLayoutHelper.customizeChatLayout(getActivity(), mChatLayout);
             mTitleBar.setOnRightClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -116,6 +117,10 @@ public class ChatFragment extends BaseFragment {
                 }
             });
         }else if(mChatInfo.getType() == TIMConversationType.Group){
+            ChatLayoutHelper helper = new ChatLayoutHelper(getActivity(),mChatInfo.getType(),mChatInfo.getId());
+            helper.customizeChatLayout(mChatLayout);
+            ChatLayoutHelper helper2 = new ChatLayoutHelper(getActivity(),mChatInfo.getType(),mChatInfo.getId());
+            helper2.customizeChatLayout(mChatLayout);
             mTitleBar.setOnRightClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -193,15 +198,15 @@ public class ChatFragment extends BaseFragment {
         Log.e("ChatFragment","data--->"+data);
         mChatLayout.sendMessage(info, false);
     }
-//
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void sendDeal(DealBean dealBean){
-//        Gson gson = new Gson();
-//        String data = gson.toJson(dealBean);
-//        MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
-//        Log.e("ChatFragment","data--->"+data);
-//        mChatLayout.sendMessage(info, false);
-//    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void sendDeal(DealBean dealBean){
+        Gson gson = new Gson();
+        String data = gson.toJson(dealBean);
+        MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
+        Log.e("ChatFragment","data--->"+data);
+        mChatLayout.sendMessage(info, false);
+    }
 
 
 

@@ -328,6 +328,7 @@ public class DialogUtil {
                         MyApplication.instance().startActivity(
                                 new Intent(MyApplication.instance(), RedPacDetail.class)
                                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        dialog.dismiss();
                     }
                 });
             }

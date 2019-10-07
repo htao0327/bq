@@ -283,6 +283,7 @@ public class BaseSetActivity extends AppCompatActivity implements View.OnClickLi
         }
         startActivityForResult(intent, CAMERA_REQUEST_CODE);
     }
+
     /**
      * 从相册获取图片
      */
