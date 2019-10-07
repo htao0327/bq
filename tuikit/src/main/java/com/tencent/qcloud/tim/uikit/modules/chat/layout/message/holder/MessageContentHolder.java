@@ -144,16 +144,31 @@ public abstract class MessageContentHolder extends MessageEmptyHolder {
 
         //// 聊天气泡设置
         if (msg.isSelf()) {
-            if (properties.getRightBubble() != null) {
-                msgContentLinear.setBackground(properties.getRightBubble());
+
+            // TODO: 2019/10/7 修改自定义消息时候的聊天气泡
+            if (msg.getMsgType() == MessageInfo.MSG_TYPE_CUSTOM) {
+                msgContentLinear.setBackground(null);
             } else {
-                msgContentLinear.setBackgroundResource(R.drawable.chat_bubble_myself);
+                //正常执行
+                if (properties.getRightBubble() != null) {
+                    msgContentLinear.setBackground(properties.getRightBubble());
+                } else {
+                    msgContentLinear.setBackgroundResource(R.drawable.chat_bubble_myself);
+                }
             }
+
         } else {
-            if (properties.getLeftBubble() != null) {
-                msgContentLinear.setBackground(properties.getLeftBubble());
+
+            // TODO: 2019/10/7 修改自定义消息时候的聊天气泡
+            if (msg.getMsgType() == MessageInfo.MSG_TYPE_CUSTOM) {
+                msgContentLinear.setBackground(null);
             } else {
-                msgContentLinear.setBackgroundResource(R.drawable.chat_other_bg);
+                //正常执行
+                if (properties.getLeftBubble() != null) {
+                    msgContentLinear.setBackground(properties.getLeftBubble());
+                } else {
+                    msgContentLinear.setBackgroundResource(R.drawable.chat_other_bg);
+                }
             }
         }
 

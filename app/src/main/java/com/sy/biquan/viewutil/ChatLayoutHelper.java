@@ -3,6 +3,7 @@ package com.sy.biquan.viewutil;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +16,8 @@ import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.GiveRedEnevlopeC2C;
 import com.sy.biquan.activity.GiveRedEnvelope;
-import com.sy.biquan.activity.LaunchDealActivity;
 import com.sy.biquan.activity.RedPacDetail;
-import com.sy.biquan.bean.DealBean;
-import com.sy.biquan.bean.DealCheckBean;
 import com.sy.biquan.bean.GetRedCheck;
-import com.sy.biquan.bean.RegisterBean;
 import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.SharedPreferencesUtil;
@@ -32,6 +29,7 @@ import com.tencent.qcloud.tim.uikit.modules.chat.layout.inputmore.InputMoreActio
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.MessageLayout;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.ICustomMessageViewGroup;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.IOnCustomMessageDrawListener;
+import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.MessageCustomHolder;
 import com.tencent.qcloud.tim.uikit.modules.message.MessageInfo;
 
 import org.greenrobot.eventbus.EventBus;
@@ -45,7 +43,8 @@ public class ChatLayoutHelper {
     public static Context context;
     private TIMConversationType type;
     public static String userId;
-    public ChatLayoutHelper(Context context, TIMConversationType type,String userId){
+
+    public ChatLayoutHelper(Context context, TIMConversationType type, String userId) {
         this.context = context;
         this.type = type;
         this.userId = userId;
@@ -132,6 +131,7 @@ public class ChatLayoutHelper {
 //        messageLayout.setRightBubble(new ColorDrawable(0xFFCCE4FC));
 //        // 设置朋友聊天气泡的背景
 //        messageLayout.setLeftBubble(new ColorDrawable(0xFFE4E7EB));
+
 //
 //        ////// 设置聊天内容 //////
 //        // 设置聊天内容字体字体大小，朋友和自己用一种字体大小
@@ -226,9 +226,9 @@ public class ChatLayoutHelper {
 //                MessageInfo info = MessageInfoUtil.buildCustomMessage(data);
 //                layout.sendMessage(info, false);
 //                EventBus.getDefault().post(layout);
-                if(type == TIMConversationType.C2C){
-                    MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnevlopeC2C.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(GiveRedEnevlopeC2C.USER_ID,userId));
-                }else{
+                if (type == TIMConversationType.C2C) {
+                    MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnevlopeC2C.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(GiveRedEnevlopeC2C.USER_ID, userId));
+                } else {
                     MyApplication.instance().startActivity(new Intent(MyApplication.instance(), GiveRedEnvelope.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
 
@@ -261,7 +261,7 @@ public class ChatLayoutHelper {
             this.type = type;
         }
 
-        private  int version = 1 ;
+        private int version = 1;
 //        String text = "欢迎加入云通信IM大家庭！";
 //        String link = "https://cloud.tencent.com/document/product/269/3794";
 
@@ -455,10 +455,12 @@ public class ChatLayoutHelper {
 
     public static class CustomMessageDraw implements IOnCustomMessageDrawListener {
         private static AlertDialog dialog;
+
         /**
          * 自定义消息渲染时，会调用该方法，本方法实现了自定义消息的创建，以及交互逻辑
+         *
          * @param parent 自定义消息显示的父View，需要把创建的自定义消息view添加到parent里
-         * @param info 消息的具体信息
+         * @param info   消息的具体信息
          */
         @Override
         public void onDraw(ICustomMessageViewGroup parent, MessageInfo info) {
@@ -477,22 +479,22 @@ public class ChatLayoutHelper {
 
             // 自定义消息view的实现，这里仅仅展示文本信息，并且实现超链接跳转
             TextView textView = view.findViewById(R.id.tv_text);
-            if(customMessageData.getData()!=null){
+            if (customMessageData.getData() != null) {
                 textView.setText(customMessageData.getData().getCongratulations());
             }
             view.setClickable(true);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.e(TAG,"---------------------------------点击了");
-                    Log.e(TAG,"context==="+context);
+                    Log.e(TAG, "---------------------------------点击了");
+                    Log.e(TAG, "context===" + context);
 //                    Gson gson = new Gson();
 //                    RegisterBean registerBean;
 //                    String gsonString = SharedPreferencesUtil.userInfoGetString(MyApplication.instance(),Contants.JSONUSERINFO);
 //                    registerBean = gson.fromJson(gsonString,RegisterBean.class);
-                    Map<String,String> map = new HashMap<>();
-                    map.put("token",SharedPreferencesUtil.getToken());
-                    map.put("id",customMessageData.getData().id);
+                    Map<String, String> map = new HashMap<>();
+                    map.put("token", SharedPreferencesUtil.getToken());
+                    map.put("id", customMessageData.getData().id);
                     HttpProxy.obtain().post(Contants.URL + Contants.RED_PAC_C2C_CLICK, map, new HttpCallback<GetRedCheck>() {
                         @Override
                         public void onFailure(String e) {
@@ -501,15 +503,15 @@ public class ChatLayoutHelper {
 
                         @Override
                         public void onSuccess(GetRedCheck getRedCheck) {
-                            if(getRedCheck.getCode() == Contants.GET_DATA_SUCCESS){
-                                if(getRedCheck.getData().getIsMe() == 1){
+                            if (getRedCheck.getCode() == Contants.GET_DATA_SUCCESS) {
+                                if (getRedCheck.getData().getIsMe() == 1) {
                                     EventBus.getDefault().postSticky(getRedCheck);
                                     MyApplication.instance().startActivity(
                                             new Intent(MyApplication.instance(), RedPacDetail.class)
                                                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                                }else{
-                                    DialogUtil.showRedEnvelopesDialog2(userId,getRedCheck,context
-                                           );
+                                } else {
+                                    DialogUtil.showRedEnvelopesDialog2(userId, getRedCheck, context
+                                    );
                                 }
 //
 //                                boolean hasRedPack = getRedCheck.getData().isHasRedPack();

@@ -2,20 +2,22 @@ package com.tencent.qcloud.tim.uikit.modules.chat.layout.message;
 
 //import android.support.annotation.NonNull;
 //import android.support.v7.widget.RecyclerView;
+
+import android.graphics.drawable.ColorDrawable;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tencent.qcloud.tim.uikit.modules.chat.interfaces.IChatProvider;
-import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.MessageContentHolder;
-import com.tencent.qcloud.tim.uikit.utils.BackgroundTasks;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.IOnCustomMessageDrawListener;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.MessageBaseHolder;
+import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.MessageContentHolder;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.MessageCustomHolder;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.MessageEmptyHolder;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.MessageHeaderHolder;
 import com.tencent.qcloud.tim.uikit.modules.message.MessageInfo;
+import com.tencent.qcloud.tim.uikit.utils.BackgroundTasks;
 import com.tencent.qcloud.tim.uikit.utils.TUIKitLog;
 
 import java.util.ArrayList;
@@ -74,6 +76,9 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             case MessageInfo.MSG_TYPE_CUSTOM_FACE:
             case MessageInfo.MSG_TYPE_AUDIO:
             case MessageInfo.MSG_TYPE_FILE:
+//                MessageCustomHolder base = (MessageCustomHolder) holder;
+//                base.properties.setRightBubble(new ColorDrawable(0x00000000));
+//                base.properties.setLeftBubble(new ColorDrawable(0x00000000));
                 break;
             default:
                 if (msg.getMsgType() < MessageInfo.MSG_TYPE_TIPS) {
@@ -101,7 +106,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     @Override
     public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
         if (holder instanceof MessageContentHolder) {
-            ((MessageContentHolder)holder).msgContentLinear.setBackground(null);
+            ((MessageContentHolder) holder).msgContentLinear.setBackground(null);
         }
     }
 

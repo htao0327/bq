@@ -4,11 +4,11 @@
     package="com.sy.biquan">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"
+    <uses-permission
+        android:name="android.permission.MANAGE_DOCUMENTS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.hardware.camera.autofocus" />
-
 
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -56,11 +56,11 @@
     <uses-permission android:name="com.tencent.qcloud.tim.tuikit.permission.C2D_MESSAGE" />
 
     <application
-        android:networkSecurityConfig="@xml/network_security_config"
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -71,57 +71,62 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity"/>
-<!--        <activity android:name=".MainActivity"/>-->
-        <activity android:name=".activity.RegisterActivity"/>
-        <activity android:name=".activity.ResetPwd"/>
-        <activity android:name=".activity.BaseActivity"/>
-        <activity android:name=".activity.SearchActivity"/>
-        <activity android:name=".chat.ChatActivity"/>
-        <activity android:name=".activity.AddMoreActivity"/>
-        <activity android:name=".activity.FriendProfileActivity"/>
-        <activity android:name=".activity.StartGroupChatActivity"/>
-        <activity android:name=".activity.RemenActivity"/>
-        <activity android:name=".activity.CFMMActivity"/>
-        <activity android:name=".activity.XMActivity"/>
-        <activity android:name=".activity.KTActivity"/>
-        <activity android:name=".activity.JBActivity"/>
-        <activity android:name=".activity.GiveRedEnvelope"/>
-        <activity android:name=".activity.ContactActivity"/>
-        <activity android:name=".activity.SearchFriendsActivity"/>
-        <activity android:name=".activity.CreateGroupActivity"/>
-        <activity android:name=".activity.CreateKOLGroupActivity"/>
-        <activity android:name=".activity.JYActivity"/>
-        <activity android:name=".activity.MyWalletActivity"/>
-        <activity android:name=".activity.CheckDealInfoActivity"/>
-        <activity android:name=".activity.CheckDealInfoAddWalletActivity"/>
-        <activity android:name=".activity.LaunchDealActivity"/>
-        <activity android:name=".activity.WalletAddress"/>
-        <activity android:name=".activity.KOLListActivity"/>
-        <activity android:name=".activity.BaseSetActivity"/>
-        <activity android:name=".activity.NameSetActivity"/>
-        <activity android:name=".activity.SlognSetActivity"/>
-        <activity android:name=".activity.DakaDetailActivity"/>
-        <activity android:name=".activity.JBDetailActivity"/>
-        <activity android:name=".activity.XMDetail"/>
-        <activity android:name=".activity.AddGLianActivity"/>
-        <activity android:name=".activity.MyGroupInfoActivity"/>
-        <activity android:name=".activity.ModifyGroupName"/>
-        <activity android:name=".activity.UserInfoActivity"/>
-        <activity android:name=".activity.SearchGroupInfoActivity"/>
-        <activity android:name=".contact.MyContactActivity"/>
-        <activity android:name=".activity.SendJbActivity"/>
-        <activity android:name=".activity.SetDealPwdActivity"/>
-        <activity android:name=".activity.MyJbActivity"/>
-        <activity android:name=".activity.SetInvitePersonActivity"/>
-        <activity android:name=".activity.AccountSafeActivity"/>
-        <activity android:name=".activity.AboutUs"/>
-        <activity android:name=".activity.WebSitActivity"/>
-        <activity android:name=".activity.GiveRedEnevlopeC2C"/>
-        <activity android:name=".activity.CodeActivity"/>
-        <activity android:name=".activity.RedPacDetail"/>
-        <activity android:name=".activity.FindPwdActivity"/>
+        <activity android:name=".activity.LoginActivity" />
+        <!--        <activity android:name=".MainActivity"/>-->
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.ResetPwd" />
+        <activity android:name=".activity.BaseActivity" />
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".chat.ChatActivity" />
+        <activity android:name=".activity.AddMoreActivity" />
+        <activity android:name=".activity.FriendProfileActivity" />
+        <activity android:name=".activity.StartGroupChatActivity" />
+        <activity android:name=".activity.RemenActivity" />
+        <activity android:name=".activity.CFMMActivity" />
+        <activity android:name=".activity.XMActivity" />
+        <activity android:name=".activity.KTActivity" />
+        <activity android:name=".activity.JBActivity" />
+        <activity android:name=".activity.GiveRedEnvelope" />
+        <activity android:name=".activity.ContactActivity" />
+        <activity android:name=".activity.SearchFriendsActivity" />
+        <activity android:name=".activity.CreateGroupActivity" />
+        <activity android:name=".activity.CreateKOLGroupActivity" />
+        <activity android:name=".activity.JYActivity" />
+        <activity android:name=".activity.MyWalletActivity" />
+        <activity android:name=".activity.CheckDealInfoActivity" />
+        <activity android:name=".activity.CheckDealInfoAddWalletActivity" />
+        <activity android:name=".activity.LaunchDealActivity" />
+        <activity android:name=".activity.WalletAddress" />
+        <activity android:name=".activity.KOLListActivity" />
+        <activity android:name=".activity.BaseSetActivity" />
+        <activity android:name=".activity.NameSetActivity" />
+        <activity android:name=".activity.SlognSetActivity" />
+        <activity android:name=".activity.DakaDetailActivity" />
+        <activity android:name=".activity.JBDetailActivity" />
+        <activity android:name=".activity.XMDetail" />
+        <activity android:name=".activity.AddGLianActivity" />
+        <activity android:name=".activity.MyGroupInfoActivity" />
+        <activity android:name=".activity.ModifyGroupName" />
+        <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.SearchGroupInfoActivity" />
+        <activity android:name=".contact.MyContactActivity" />
+        <activity android:name=".activity.SendJbActivity" />
+        <activity android:name=".activity.SetDealPwdActivity" />
+        <activity android:name=".activity.MyJbActivity" />
+        <activity android:name=".activity.SetInvitePersonActivity" />
+        <activity android:name=".activity.AccountSafeActivity" />
+        <activity android:name=".activity.AboutUs" />
+        <activity android:name=".activity.WebSitActivity" />
+        <activity android:name=".activity.GiveRedEnevlopeC2C" />
+        <activity android:name=".activity.CodeActivity" />
+        <activity android:name=".activity.RedPacDetail" />
+        <activity android:name=".activity.FindPwdActivity" />
 
+
+        <!-- 二维码扫描-->
+        <activity
+            android:name=".activity.scan.ScanActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

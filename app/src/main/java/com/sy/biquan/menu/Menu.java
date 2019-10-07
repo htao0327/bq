@@ -1,5 +1,6 @@
 package com.sy.biquan.menu;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -15,19 +16,24 @@ import android.widget.PopupWindow;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
 import com.sy.biquan.activity.AddMoreActivity;
-import com.sy.biquan.activity.ContactActivity;
 import com.sy.biquan.activity.CreateGroupActivity;
 import com.sy.biquan.activity.CreateKOLGroupActivity;
 import com.sy.biquan.activity.StartGroupChatActivity;
+import com.sy.biquan.activity.scan.ScanActivity;
 import com.sy.biquan.contact.MyContactActivity;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tencent.qcloud.tim.uikit.component.action.PopActionClickListener;
 import com.tencent.qcloud.tim.uikit.component.action.PopMenuAction;
 import com.tencent.qcloud.tim.uikit.component.action.PopMenuAdapter;
 import com.tencent.qcloud.tim.uikit.utils.ScreenUtil;
 import com.tencent.qcloud.tim.uikit.utils.TUIKitConstants;
+import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class Menu {
 
@@ -89,7 +95,7 @@ public class Menu {
                     mActivity.startActivity(intent);
                 }
 
-                if (TextUtils.equals(action.getActionName(),mActivity.getResources().getString(R.string.txl))) {
+                if (TextUtils.equals(action.getActionName(), mActivity.getResources().getString(R.string.txl))) {
                     Intent intent = new Intent(MyApplication.instance(), MyContactActivity.class);
 //                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                    intent.putExtra(TUIKitConstants.GroupType.TYPE, TUIKitConstants.GroupType.PRIVATE);
@@ -114,6 +120,42 @@ public class Menu {
                     intent.putExtra(TUIKitConstants.GroupType.TYPE, TUIKitConstants.GroupType.CHAT_ROOM);
                     mActivity.startActivity(intent);
                 }
+
+                // TODO: 2019/10/7 扫一扫
+                if (TextUtils.equals(action.getActionName(), mActivity.getResources().getString(R.string.sys))) {
+                    RxPermissions permissions = new RxPermissions(mActivity);
+                    permissions.request(Manifest.permission.CAMERA)
+                            .subscribe(new Observer<Boolean>() {
+                                @Override
+                                public void onSubscribe(Disposable d) {
+
+                                }
+
+                                @Override
+                                public void onNext(Boolean aBoolean) {
+                                    if (aBoolean) {
+
+                                        Intent intent = new Intent(MyApplication.instance(), ScanActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        mActivity.startActivity(intent);
+
+                                    } else {
+                                        ToastUtil.toastShortMessage("请打开照相机权限");
+                                    }
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    ToastUtil.toastShortMessage("请打开照相机权限");
+                                }
+
+                                @Override
+                                public void onComplete() {
+
+                                }
+                            });
+                }
+
                 mMenuWindow.dismiss();
             }
         };
@@ -173,7 +215,7 @@ public class Menu {
         action.setIconResId(R.drawable.m_group_icon);
         action.setActionClickListener(popActionClickListener);
         menuActions.add(action);
-        if(menuType == MENU_USER_TYPE_KOL){
+        if (menuType == MENU_USER_TYPE_KOL) {
             action = new PopMenuAction();
             action.setActionName(mActivity.getResources().getString(R.string.create_new_kol_group));
             action.setIconResId(R.drawable.m_group_icon);

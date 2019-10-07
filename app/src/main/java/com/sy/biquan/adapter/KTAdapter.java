@@ -17,8 +17,9 @@ import com.sy.biquan.viewutil.CircleImageView;
 public class KTAdapter extends RecyclerView.Adapter<KTAdapter.MyViewHolder> {
     private Context context;
     private KTListBean data;
-    public KTAdapter(Context context, KTListBean data){
-        this.context  = context;
+
+    public KTAdapter(Context context, KTListBean data) {
+        this.context = context;
         this.data = data;
     }
 
@@ -33,8 +34,8 @@ public class KTAdapter extends RecyclerView.Adapter<KTAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.content.setText(data.getData().get(position).getTitle());
-        holder.peopleCounts.setText(data.getData().get(position).getGroupNumber()+"人");
-        holder.redText.setText(data.getData().get(position).getRemainNumber()+"人");
+        holder.peopleCounts.setText(data.getData().get(position).getGroupNumber() + "人");
+        holder.redText.setText(data.getData().get(position).getRemainNumber() + "人");
         Glide.with(context)
                 .load(data.getData().get(position).getGroupFaceUrl())
                 .into(holder.userImg);
@@ -43,11 +44,11 @@ public class KTAdapter extends RecyclerView.Adapter<KTAdapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        return data.getData().size();
+        return data == null || data.getData() == null ? 0 : data.getData().size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView peopleCounts,content,redText;
+        private TextView peopleCounts, content, redText;
         private CircleImageView userImg;
 
         public MyViewHolder(@NonNull View itemView) {

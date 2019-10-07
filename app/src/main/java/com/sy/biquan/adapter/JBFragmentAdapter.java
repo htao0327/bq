@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,12 +20,13 @@ public class JBFragmentAdapter extends RecyclerView.Adapter<JBFragmentAdapter.My
 
     private MainListData data;
     private Context context;
-    public JBFragmentAdapter(Context context,MainListData data){
+
+    public JBFragmentAdapter(Context context, MainListData data) {
         this.context = context;
         this.data = data;
     }
 
-    public JBFragmentAdapter(Context context){
+    public JBFragmentAdapter(Context context) {
 
     }
 
@@ -41,7 +41,7 @@ public class JBFragmentAdapter extends RecyclerView.Adapter<JBFragmentAdapter.My
 
     //回调接口
     public interface OnItemClickListener {
-        void onItemClick(View v,  int position);
+        void onItemClick(View v, int position);
     }
 
     @NonNull
@@ -53,37 +53,37 @@ public class JBFragmentAdapter extends RecyclerView.Adapter<JBFragmentAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder,final int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.t1.setText(data.getData().get(position).getTitle());
         holder.t2.setText(data.getData().get(position).getStartTime());
-        holder.dqzf.setText(String.valueOf(data.getData().get(position).getNowRise())+"%");
-        if(data.getData().get(position).getBourse()!=null&&data.getData().get(position).getBourse().size()>0){
+        holder.dqzf.setText(String.valueOf(data.getData().get(position).getNowRise()) + "%");
+        if (data.getData().get(position).getBourse() != null && data.getData().get(position).getBourse().size() > 0) {
             StringBuffer sb = new StringBuffer();
             sb.append("交易所：");
-            for(int i=0;i<data.getData().get(position).getBourse().size();i++){
-                if(i==data.getData().get(position).getBourse().size()-1){
+            for (int i = 0; i < data.getData().get(position).getBourse().size(); i++) {
+                if (i == data.getData().get(position).getBourse().size() - 1) {
                     sb.append(data.getData().get(position).getBourse().get(i).getExchangeName());
-                }else {
-                    sb.append(data.getData().get(position).getBourse().get(i).getExchangeName()+"、");
+                } else {
+                    sb.append(data.getData().get(position).getBourse().get(i).getExchangeName() + "、");
                 }
-                if(i==1){
-                    i=data.getData().get(position).getBourse().size();
+                if (i == 1) {
+                    i = data.getData().get(position).getBourse().size();
                 }
             }
             holder.jys.setText(sb);
-        }else {
+        } else {
             holder.jys.setText("交易所:");
         }
 
-        holder.yqzf.setText(String.valueOf(data.getData().get(position).getExpectedRise())+"%");
+        holder.yqzf.setText(String.valueOf(data.getData().get(position).getExpectedRise()) + "%");
         holder.ddCount.setText(String.valueOf(data.getData().get(position).getQbNumer()));
         holder.userName.setText(data.getData().get(position).getUserName());
         holder.yqzfSuccess.setText(String.valueOf(data.getData().get(position).getExpectedSucRate()));
         holder.sy.setText(String.valueOf(data.getData().get(position).getAvgIncomeRate()));
-        if(data.getData().get(position).getIsLock() == 1){
+        if (data.getData().get(position).getIsLock() == 1) {
             holder.lock.setBackground(context.getResources().getDrawable(R.drawable.suo));
 
-        }else{
+        } else {
             holder.lock.setBackground(context.getResources().getDrawable(R.drawable.green_circle));
             holder.lock.setText(data.getData().get(position).getCurrency());
         }
@@ -94,7 +94,7 @@ public class JBFragmentAdapter extends RecyclerView.Adapter<JBFragmentAdapter.My
             @Override
             public void onClick(View v) {
                 if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(v,position);
+                    onItemClickListener.onItemClick(v, position);
                 }
             }
         });
@@ -102,11 +102,11 @@ public class JBFragmentAdapter extends RecyclerView.Adapter<JBFragmentAdapter.My
 
     @Override
     public int getItemCount() {
-        return data.getData().size();
+        return data == null || data.getData() == null ? 0 : data.getData().size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView t1,t2,dqzf,jys,yqzf,ddCount,userName,yqzfSuccess,sy;
+        private TextView t1, t2, dqzf, jys, yqzf, ddCount, userName, yqzfSuccess, sy;
         private CircleImageView user;
         private Button lock;
 
