@@ -46,7 +46,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class LoginActivity extends AppCompatActivity implements  View.OnClickListener {
+public class LoginActivity extends BaseActivity implements  View.OnClickListener {
     private EditText etPhone,etPwd;
     private ImageView ivClose;
     private Button btnLogin;

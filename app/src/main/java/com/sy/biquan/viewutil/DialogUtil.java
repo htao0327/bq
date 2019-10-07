@@ -39,6 +39,20 @@ import java.util.Map;
 public class DialogUtil {
     private static AlertDialog dialog;
 
+    public static void showNetDialog(Activity activity){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);//去掉圆角背景背后的棱角
+        dialog.setCanceledOnTouchOutside(false);   //失去焦点dismiss
+        dialog.show();
+    }
+    public static void dismissDialog(){
+        if(dialog.isShowing()){
+            dialog.dismiss();
+        }
+
+    }
+
     public static void createGroupAlertDialog(Activity activity,  String title1, String msg,
                                             String positiveText, String negativeText, boolean
                                                     cancelableTouchOut, final AlertDialogBtnClickListener

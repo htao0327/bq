@@ -191,10 +191,10 @@ public class BaseSetActivity extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.ll_invite:
-
+                startActivity(new Intent(BaseSetActivity.this, SetInvitePersonActivity.class));
                 break;
             case R.id.ll_id_card:
-
+                startActivity(new Intent(BaseSetActivity.this, SetIDCard.class));
                 break;
 
         }
@@ -272,6 +272,10 @@ public class BaseSetActivity extends AppCompatActivity implements View.OnClickLi
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {   //如果在Android7.0以上,使用FileProvider获取Uri
             intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             //创建文件夹
+            File file = new File("com.bq.photo");
+            if (!file.exists()) {
+                file.mkdir();
+            }
             Uri contentUri = FileProvider.getUriForFile(BaseSetActivity.this, "com.bq.photo", tempFile);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
         } else {    //否则使用Uri.fromFile(file)方法获取Uri

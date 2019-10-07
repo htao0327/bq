@@ -162,19 +162,19 @@ public class FindPwdActivity extends AppCompatActivity implements View.OnClickLi
 //                params.put("phone",etPhone.getText().toString().trim());
 //                params.put("captchaType",Contants.GET_YZM_REGISTER);
 
-                HttpProxy.obtain().get(Contants.URL + Contants.GETYZM+"?phone="+etPhone.getText().toString().trim()+"&captchaType="+Contants.GET_YZM_FIND_PWD,params, new HttpCallback<RegisterBean>() {
+                HttpProxy.obtain().get(Contants.URL + Contants.GETYZM+"?phone="+etPhone.getText().toString().trim()+"&captchaType="+Contants.GET_YZM_FIND_PWD,params, new HttpCallback<FindPwdBean>() {
                     @Override
                     public void onFailure(String e) {
                         Log.e(TAG, "onFailure: " + e);
                     }
 
                     @Override
-                    public void onSuccess(RegisterBean registerBean) {
+                    public void onSuccess(FindPwdBean registerBean) {
                         Log.e(TAG, "Network result：" + registerBean.toString());
 //                        if(registerBean.getCode() == Contants.GET_DATA_SUCCESS){
 
 //                        }else {//显示错误信息
-                        ToastUtil.toastLongMessage(registerBean.getMsg());
+                        ToastUtil.toastLongMessage(registerBean.getMessage());
 //                        }
                     }
                 });
@@ -189,14 +189,14 @@ public class FindPwdActivity extends AppCompatActivity implements View.OnClickLi
                 params.put("password", MD5.md5Password(etPwd.getText().toString()));
                 params.put("code",etYzm.getText().toString());
 
-                HttpProxy.obtain().post(Contants.URL + Contants.RESET, params, new HttpCallback<BindUserBean>() {
+                HttpProxy.obtain().post(Contants.URL + Contants.RESET, params, new HttpCallback<FindPwdBean>() {
                     @Override
                     public void onFailure(String e) {
 
                     }
 
                     @Override
-                    public void onSuccess(BindUserBean bindUserBean) {
+                    public void onSuccess(FindPwdBean bindUserBean) {
                         ToastUtil.toastLongMessage("设置成功");
 
                         finish();

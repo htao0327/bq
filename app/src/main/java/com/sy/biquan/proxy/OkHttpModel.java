@@ -1,10 +1,14 @@
 package com.sy.biquan.proxy;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.sy.biquan.MyApplication;
+import com.sy.biquan.activity.BaseActivity;
+import com.sy.biquan.viewutil.DialogUtil;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -44,6 +48,8 @@ public class OkHttpModel implements IHttp {
      * @return
      */
     private RequestBody setRequestBody(Map<String, String> BodyParams){
+
+//
         Gson gson = new Gson();
 
         RequestBody body=null;
@@ -68,6 +74,7 @@ public class OkHttpModel implements IHttp {
     public void post(String url, Map<String, String> params,final ICallBack callback) {
 //        RequestBody body=setRequestBody(params);
         //2 构造Request
+//        DialogUtil.showNetDialog(BaseActivity.getCurrentActivity());
         Request.Builder requestBuilder = new Request.Builder();
 //        Request request = requestBuilder.post(body).addHeader("Content-Type","application/json").url(url).build();
         Gson gson = new Gson();
@@ -80,11 +87,13 @@ public class OkHttpModel implements IHttp {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                DialogUtil.dismissDialog();
                 callback.onFailure(e.toString());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+//                DialogUtil.dismissDialog();
                 if (response.isSuccessful()) {
                     final String result = response.body().string();
                     myHandler.post(new Runnable() {

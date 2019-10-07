@@ -149,14 +149,14 @@ public class SetDealPwdActivity extends AppCompatActivity {
                         params.put("phone",phone.getText().toString());
                         params.put("code",yzm.getText().toString());
                         params.put("password",pwd.getText().toString());
-                        HttpProxy.obtain().post(Contants.URL + Contants.RESET, params, new HttpCallback<BindUserBean>() {
+                        HttpProxy.obtain().post(Contants.URL + Contants.RESET, params, new HttpCallback<FindPwdBean>() {
                             @Override
                             public void onFailure(String e) {
 
                             }
 
                             @Override
-                            public void onSuccess(BindUserBean bindUserBean) {
+                            public void onSuccess(FindPwdBean bindUserBean) {
                                 ToastUtil.toastLongMessage("设置成功");
 
                                 finish();

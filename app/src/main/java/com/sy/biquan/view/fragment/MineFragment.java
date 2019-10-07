@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.sy.biquan.Contants;
 import com.sy.biquan.MainActivity;
 import com.sy.biquan.MyApplication;
 import com.sy.biquan.R;
+import com.sy.biquan.activity.AboutUs;
 import com.sy.biquan.activity.AccountSafeActivity;
 import com.sy.biquan.activity.BaseSetActivity;
 import com.sy.biquan.activity.JYActivity;
@@ -33,14 +35,17 @@ import com.sy.biquan.proxy.HttpCallback;
 import com.sy.biquan.proxy.HttpProxy;
 import com.sy.biquan.util.SharedPreferencesUtil;
 import com.sy.biquan.viewutil.CircleImageView;
+import com.sy.biquan.viewutil.SlideButton;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.graphics.Color.parseColor;
+
 public class MineFragment extends Fragment {
 
     private View rootView;
-    private LinearLayout ll_my_deal,ll_my_jb,ll_qb,ll_set,ll_register,ll_aq;
+    private LinearLayout ll_my_deal,ll_my_jb,ll_qb,ll_set,ll_register,ll_aq,ll_about;
     private TextView name;//用户姓名
     private TextView userMsg;//用户slogan
     private TextView gz;//关注
@@ -50,6 +55,7 @@ public class MineFragment extends Fragment {
     private Button exit;//编辑
     private CircleImageView userImg;//用户头像
     private MineDataBean mMineDataBean;
+    private SlideButton slideButton;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -120,10 +126,17 @@ public class MineFragment extends Fragment {
                 startActivity(new Intent(getActivity(), SetInvitePersonActivity.class));
             }
         });
+        ll_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), AboutUs.class));
+            }
+        });
     }
 
     private void initView(){
         ll_my_deal = rootView.findViewById(R.id.ll_my_deal);
+        ll_about = rootView.findViewById(R.id.ll_about);
         ll_my_jb = rootView.findViewById(R.id.ll_my_jb);
         ll_qb = rootView.findViewById(R.id.ll_qb);
         name = rootView.findViewById(R.id.tv_user_name);
@@ -137,6 +150,14 @@ public class MineFragment extends Fragment {
         exit = rootView.findViewById(R.id.btn_exit);
         ll_register = rootView.findViewById(R.id.ll_register);
         ll_aq = rootView.findViewById(R.id.ll_aq);
+        slideButton = rootView.findViewById(R.id.slide_btn);
+        slideButton.setBigCircleModel(parseColor("#0CAF93"), parseColor("#0CAF93"), parseColor("#00ffffff"), parseColor("#ffffff"), parseColor("#0CAF93"));
+        slideButton.setOnCheckedListener(new SlideButton.SlideButtonOnCheckedListener() {
+            @Override
+            public void onCheckedChangeListener(boolean isChecked) {
+
+            }
+        });
 
     }
 
@@ -152,20 +173,6 @@ public class MineFragment extends Fragment {
             @Override
             public void onSuccess(MineDataBean mineDataBean) {
                 if(mineDataBean.getCode() == Contants.GET_DATA_SUCCESS){
-//                    RegisterBean registerBean = new RegisterBean();
-//                    registerBean.getData().setSlogan(mineDataBean.getData().getSlogan());
-//                    registerBean.getData().setFansCount(mineDataBean.getData().getFansCount());
-//                    registerBean.getData().setFollowCount(mineDataBean.getData().getFollowCount());
-//                    registerBean.getData().setUserAlias(mineDataBean.getData().getUserAlias());
-//                    registerBean.getData().setUserAvatar(mineDataBean.getData().getUserAvatar());
-//                    registerBean.getData().setAllScore(mineDataBean.getData().getQbNumber());
-//                    registerBean.getData().setUserPhone(mineDataBean.getData().getUserPhone());
-//                    registerBean.getData().setDeal_password(Integer.valueOf(mineDataBean.getData().getDeal_password()));
-//                    registerBean.getData().setSlogan(mineDataBean.getData().getSlogan());
-//                    mMineDataBean = mineDataBean;
-//                    Gson gson = new Gson();
-//                    String jsonUserInfo = gson.toJson(mineDataBean);
-//                    SharedPreferencesUtil.userInfoPutString(MyApplication.instance(),Contants.USERINFO2,jsonUserInfo);
                     SharedPreferencesUtil.setMineUserInfo(mineDataBean);
                 }
             }

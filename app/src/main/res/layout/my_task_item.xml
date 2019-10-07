@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    android:paddingTop="10dp"
+    android:background="@color/white"
+
+    >
+    <TextView
+        android:id="@+id/tv_task_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="新手操作练习界面"
+        android:textColor="#ff484848"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_qd"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/tv_task_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Q豆+1"
+        android:textColor="#ffff6367"
+        android:textSize="14sp"
+        />
+
+    <Button
+        android:layout_centerVertical="true"
+        android:id="@+id/btn"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="32dp"
+        android:minWidth="80dp"
+        android:text="去完成"
+        android:textColor="#ff008489"
+        android:textSize="14sp"
+        android:background="@drawable/btn_bg_gz"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"
+        android:background="@color/line"
+        android:layout_below="@id/tv_qd"
+        android:layout_marginTop="10dp"
+        />
+
+</RelativeLayout>

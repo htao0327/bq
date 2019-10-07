@@ -355,10 +355,10 @@
                     android:layout_weight="1"
                     android:layout_height="1dp"
                     />
-                <ImageView
-                    android:layout_width="11dp"
-                    android:layout_height="17dp"
-                    android:src="@drawable/right"
+                <com.sy.biquan.viewutil.SlideButton
+                    android:id="@+id/slide_btn"
+                    android:layout_width="46dp"
+                    android:layout_height="25dp"
                     android:scaleType="fitXY"
                     />
             </LinearLayout>
